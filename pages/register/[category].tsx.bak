@@ -1,0 +1,264 @@
+import Head from "next/head"
+import { useRouter } from "next/router"
+import { useCandidateRegistration } from "@/src/hooks/useCandidateRegistration"
+import {
+  countriesOptions,
+  employmentTypes,
+  englishLanguageLevelOptions,
+  genders,
+  japaneseLanguageLevelOptions,
+  prefecturesOptions,
+  visaStatusOptions,
+} from "@/src/lib"
+
+import { ComboSelect, Input, RadioGroup, Select } from "@/src/components/form"
+import { Layout } from "@/src/components/layout"
+import { Button, buttonVariants } from "@/src/components/ui/button"
+import { Separator } from "@/src/components/ui/separator"
+
+export default function RegisterPage() {
+  const router = useRouter()
+  const { register, watch, control, errors, handleSubmit, onSubmit } =
+    useCandidateRegistration()
+
+  const { category } = router.query
+
+  return (
+    <Layout>
+      <Head>
+        <title>Register candidate - Japan Recruitment Group</title>
+        <meta name="description" content="Japan Recruitment Group" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <section className="container items-center lg:my-6 py-6 lg:py-6 bg-white dark:bg-slate-900 lg:shadow lg:rounded-md">
+        <form onSubmit={handleSubmit(onSubmit)} className="w-full space-y-6">
+          <h1 className="scroll-m-20 text-3xl font-semibold tracking-tight transition-colors first:mt-0 dark:border-b-slate-700">
+            Register candidate - {category || null}
+          </h1>
+          <Separator />
+          <div>
+            <Input
+              type="text"
+              name="firstname"
+              id="firstname"
+              label={{ label: "First name", for: "firstname" }}
+              error={errors.firstName?.message as string}
+              aria-invalid={errors.firstName ? true : false}
+              {...register("firstName")}
+            />
+          </div>
+          <div>
+            <Input
+              type="text"
+              name="lastname"
+              id="lastname"
+              label={{ label: "Last name", for: "lastname" }}
+              error={errors.lastName?.message as string}
+              aria-invalid={errors.lastName ? true : false}
+              {...register("lastName")}
+            />
+          </div>
+          <div>
+            <Input
+              type="text"
+              name="firstnamekana"
+              id="firstnamekana"
+              label={{ label: "First name kana", for: "firstnamekana" }}
+              error={errors.firstNameKana?.message as string}
+              aria-invalid={errors.firstNameKana ? true : false}
+              {...register("firstNameKana")}
+            />
+          </div>
+          <div>
+            <Input
+              type="text"
+              name="lastnamekana"
+              id="lastnamekana"
+              label={{ label: "Last name kana", for: "lastnamekana" }}
+              error={errors.lastNameKana?.message as string}
+              aria-invalid={errors.lastNameKana ? true : false}
+              {...register("lastNameKana")}
+            />
+          </div>
+          <div>
+            <Input
+              type="text"
+              name="dob"
+              id="dob"
+              placeholder="YYYY/MM/DD"
+              label={{ label: "Date of birth", for: "dob" }}
+              error={errors.dob?.message as string}
+              aria-invalid={errors.dob ? true : false}
+              {...register("dob")}
+            />
+          </div>
+          <div>
+            <RadioGroup
+              register={register}
+              options={genders}
+              name="gender"
+              label={{ label: "Gender", for: "gender" }}
+              supportingText=""
+              error={errors.gender?.message as string}
+            />
+          </div>
+
+          <div>
+            <Input
+              type="email"
+              name="email"
+              id="email"
+              placeholder="taro@mail.com"
+              label={{ label: "Email", for: "email" }}
+              error={errors.email?.message as string}
+              aria-invalid={errors.email ? true : false}
+              {...register("email")}
+            />
+          </div>
+
+          <div>
+            <Input
+              type="email"
+              name="confirmEmail"
+              id="confirmEmail"
+              placeholder="taro@mail.com"
+              label={{ label: "Confirm email", for: "confirmEmail" }}
+              error={errors.confirmEmail?.message as string}
+              aria-invalid={errors.confirmEmail ? true : false}
+              {...register("confirmEmail")}
+            />
+          </div>
+
+          <div>
+            <Input
+              type="text"
+              name="mobile"
+              id="mobile"
+              placeholder="080-1234-5678"
+              label={{ label: "Mobile", for: "mobile" }}
+              error={errors.mobile?.message as string}
+              aria-invalid={errors.mobile ? true : false}
+              {...register("mobile")}
+              supportingText="A Japanese mobile number."
+            />
+          </div>
+          <div>
+            <Input
+              type="password"
+              name="password"
+              id="password"
+              placeholder=""
+              label={{ label: "Create a password", for: "password" }}
+              error={errors.password?.message as string}
+              aria-invalid={errors.password ? true : false}
+              {...register("password")}
+            />
+          </div>
+          <div>
+            <ComboSelect
+              name="nationality"
+              label={{ label: "Nationality", for: "nationality" }}
+              error={errors.nationality?.message as string}
+              options={countriesOptions()}
+              accessor={{ label: "value", value: "key" }}
+              control={control}
+              {...register("nationality")}
+            />
+          </div>
+          {watch("nationality") !== "JPN" && (
+            <>
+              <div>
+                <ComboSelect
+                  name="visa"
+                  label={{ label: "Current visa type", for: "visa" }}
+                  error={errors.visa?.message as string}
+                  options={visaStatusOptions}
+                  accessor={{ label: "english", value: "status" }}
+                  control={control}
+                  {...register("visa", { shouldUnregister: true })}
+                />
+              </div>
+              <div>
+                <Input
+                  type="text"
+                  name="visaExpiryDate"
+                  id="visaExpiryDate"
+                  placeholder="YYYY/MM/DD"
+                  label={{
+                    label: "Current visa expiry date",
+                    for: "visaExpiryDate",
+                  }}
+                  error={errors.visaExpiryDate?.message as string}
+                  aria-invalid={errors.visaExpiryDate ? true : false}
+                  {...register("visaExpiryDate", { shouldUnregister: true })}
+                />
+              </div>
+            </>
+          )}
+          <div>
+            <ComboSelect
+              name="desiredPrefecture"
+              label={{
+                label: "Desired work location (Prefecture)",
+                for: "desiredPrefecture",
+              }}
+              error={errors.desiredPrefecture?.message as string}
+              options={prefecturesOptions}
+              accessor={{ label: "english", value: "code" }}
+              control={control}
+              {...register("desiredPrefecture")}
+            />
+          </div>
+          <div>
+            <RadioGroup
+              options={employmentTypes}
+              register={register}
+              name="employmentType"
+              label={{ label: "Employment type", for: "employmentType" }}
+              supportingText=""
+              error={errors.employmentType?.message as string}
+            />
+          </div>
+          <div>
+            <Select
+              name="japaneseLanguageLevel"
+              label={{
+                label: "Japanese language level",
+                for: "japaneseLanguageLevel",
+              }}
+              error={errors.japaneseLanguageLevel?.message as string}
+              options={japaneseLanguageLevelOptions}
+              accessor={{ label: "english", value: "code" }}
+              control={control}
+              {...register("japaneseLanguageLevel")}
+            />
+          </div>
+          <div>
+            <Select
+              name="englishLanguageLevel"
+              label={{
+                label: "English language level",
+                for: "englishLanguageLevel",
+              }}
+              error={errors.englishLanguageLevel?.message as string}
+              options={englishLanguageLevelOptions}
+              accessor={{ label: "english", value: "code" }}
+              control={control}
+              {...register("englishLanguageLevel")}
+            />
+          </div>
+          <Separator />
+          <div className="flex gap-4">
+            <Button
+              type="submit"
+              className={buttonVariants({ variant: "primary", size: "lg" })}
+            >
+              Register
+            </Button>
+          </div>
+        </form>
+      </section>
+    </Layout>
+  )
+}
