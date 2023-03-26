@@ -10,72 +10,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Account {
-  id                 String    @id @default(cuid())
-  userId             String
-  providerType       String
-  providerId         String
-  providerAccountId  String
-  refreshToken       String?
-  accessToken        String?
-  accessTokenExpires DateTime?
-  role               Role      @default(user)
-  createdAt          DateTime  @default(now())
-  updatedAt          DateTime  @updatedAt
-  deletedAt          DateTime?
-  user               User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@unique([providerId, providerAccountId])
-}
-
-model Session {
-  id           String    @id @default(cuid())
-  userId       String
-  expires      DateTime
-  sessionToken String    @unique
-  accessToken  String    @unique
-  createdAt    DateTime  @default(now())
-  updatedAt    DateTime  @updatedAt
-  deletedAt    DateTime?
-  user         User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-}
-
-model User {
-  id             String    @id @default(cuid())
-  name           String?
-  email          String?   @unique
-  emailVerified  DateTime?
-  mobileVerified DateTime?
-  image          String?
-  firstName      String?
-  lastName       String?
-  firstNameKana  String?
-  lastNameKana   String?
-  dob            DateTime?
-  gender         Gender?
-  mobile         String?
-  password       String?
-  createdAt      DateTime  @default(now())
-  updatedAt      DateTime  @updatedAt
-  deletedAt      DateTime?
-  accounts       Account[]
-  sessions       Session[]
-}
-
-model VerificationRequest {
-  id         String         @id @default(cuid())
-  identifier String
-  type       IdentifierType
-  token      String         @unique
-  key        String         @default(uuid())
-  expires    DateTime
-  createdAt  DateTime       @default(now())
-  updatedAt  DateTime       @updatedAt
-  deletedAt  DateTime?
-
-  @@unique([identifier, token])
-}
-
 // ENUMS
 enum Gender {
   male
@@ -91,4 +25,48 @@ enum Role {
 enum IdentifierType {
   mobile
   email
+}
+
+model Session {
+  id           String    @id @default(cuid())
+  userId       String
+  expires      DateTime
+  sessionToken String    @unique
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  deletedAt    DateTime?
+  user         User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model User {
+  id                   String                @id @default(cuid())
+  name                 String?
+  email                String?               @unique
+  mobile               String?               @unique
+  emailVerified        DateTime?
+  mobileVerified       DateTime?
+  image                String?
+  password             String?
+  role                 Role                  @default(user)
+  createdAt            DateTime              @default(now())
+  updatedAt            DateTime              @updatedAt
+  deletedAt            DateTime?
+  sessions             Session[]
+  verificationRequests VerificationRequest[]
+}
+
+model VerificationRequest {
+  id         String         @id @default(cuid())
+  userId     String
+  identifier String
+  type       IdentifierType
+  token      String         @unique
+  key        String         @default(uuid())
+  expires    DateTime
+  createdAt  DateTime       @default(now())
+  updatedAt  DateTime       @updatedAt
+  deletedAt  DateTime?
+  user       User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([identifier, token])
 }

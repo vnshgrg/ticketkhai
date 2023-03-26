@@ -1,18 +1,11 @@
--- CreateTable
-CREATE TABLE "Account" (
-    "id" TEXT NOT NULL,
-    "userId" TEXT NOT NULL,
-    "providerType" TEXT NOT NULL,
-    "providerId" TEXT NOT NULL,
-    "providerAccountId" TEXT NOT NULL,
-    "refreshToken" TEXT,
-    "accessToken" TEXT,
-    "accessTokenExpires" TIMESTAMP(3),
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" TIMESTAMP(3) NOT NULL,
+-- CreateEnum
+CREATE TYPE "Gender" AS ENUM ('male', 'female', 'doNotDisclose');
 
-    CONSTRAINT "Account_pkey" PRIMARY KEY ("id")
-);
+-- CreateEnum
+CREATE TYPE "Role" AS ENUM ('user', 'admin');
+
+-- CreateEnum
+CREATE TYPE "IdentifierType" AS ENUM ('mobile', 'email');
 
 -- CreateTable
 CREATE TABLE "Session" (
@@ -20,9 +13,9 @@ CREATE TABLE "Session" (
     "userId" TEXT NOT NULL,
     "expires" TIMESTAMP(3) NOT NULL,
     "sessionToken" TEXT NOT NULL,
-    "accessToken" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
+    "deletedAt" TIMESTAMP(3),
 
     CONSTRAINT "Session_pkey" PRIMARY KEY ("id")
 );
@@ -32,10 +25,15 @@ CREATE TABLE "User" (
     "id" TEXT NOT NULL,
     "name" TEXT,
     "email" TEXT,
+    "mobile" TEXT,
     "emailVerified" TIMESTAMP(3),
+    "mobileVerified" TIMESTAMP(3),
     "image" TEXT,
+    "password" TEXT,
+    "role" "Role" NOT NULL DEFAULT 'user',
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
+    "deletedAt" TIMESTAMP(3),
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
@@ -43,26 +41,27 @@ CREATE TABLE "User" (
 -- CreateTable
 CREATE TABLE "VerificationRequest" (
     "id" TEXT NOT NULL,
+    "userId" TEXT NOT NULL,
     "identifier" TEXT NOT NULL,
+    "type" "IdentifierType" NOT NULL,
     "token" TEXT NOT NULL,
+    "key" TEXT NOT NULL,
     "expires" TIMESTAMP(3) NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
+    "deletedAt" TIMESTAMP(3),
 
     CONSTRAINT "VerificationRequest_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Account_providerId_providerAccountId_key" ON "Account"("providerId", "providerAccountId");
-
--- CreateIndex
 CREATE UNIQUE INDEX "Session_sessionToken_key" ON "Session"("sessionToken");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Session_accessToken_key" ON "Session"("accessToken");
+CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
+CREATE UNIQUE INDEX "User_mobile_key" ON "User"("mobile");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "VerificationRequest_token_key" ON "VerificationRequest"("token");
@@ -71,7 +70,7 @@ CREATE UNIQUE INDEX "VerificationRequest_token_key" ON "VerificationRequest"("to
 CREATE UNIQUE INDEX "VerificationRequest_identifier_token_key" ON "VerificationRequest"("identifier", "token");
 
 -- AddForeignKey
-ALTER TABLE "Account" ADD CONSTRAINT "Account_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Session" ADD CONSTRAINT "Session_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Session" ADD CONSTRAINT "Session_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "VerificationRequest" ADD CONSTRAINT "VerificationRequest_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
