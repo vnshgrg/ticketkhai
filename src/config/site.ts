@@ -1,6 +1,7 @@
 import { NavItem } from "@/src/types/nav"
 
 interface SiteConfig {
+  baseurl: string
   name: string
   description: string
   mainNav: NavItem[]
@@ -12,9 +13,9 @@ interface SiteConfig {
 }
 
 export const siteConfig: SiteConfig = {
-  name: "Japan Recruitment Group",
-  description:
-    "Recruitment and staffing service for foreigners living in Japan",
+  baseurl: process.env.NEXT_PUBLIC_SITE_URL,
+  name: process.env.NEXT_PUBLIC_SITENAME,
+  description: "buy tickets online",
   mainNav: [
     {
       title: "Home",

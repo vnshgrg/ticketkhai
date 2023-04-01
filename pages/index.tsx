@@ -3,6 +3,7 @@ import Link from "next/link"
 import moment from "moment"
 import { useSession } from "next-auth/react"
 
+import { siteConfig } from "@/src/config/site"
 import { Layout } from "@/src/components/layout"
 import { buttonVariants } from "@/src/components/ui/button"
 
@@ -43,19 +44,13 @@ export default function IndexPage() {
 
   return (
     <Layout>
-      <Head>
-        <title>Japan Recruitment Group</title>
-        <meta name="description" content="Japan Recruitment Group" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
       <section className="container grid items-center gap-6 pt-6 pb-8 md:gap-8 md:py-20">
         <div className="flex max-w-[980px] flex-col items-start gap-4 md:gap-6">
           <h1 className="text-3xl font-extrabold leading-tight tracking-tighter text-indigo-800 dark:text-indigo-200 sm:text-3xl md:text-5xl lg:text-6xl">
-            Japan Recruitment Group
+            {siteConfig.name}
           </h1>
           <p className="max-w-[700px] text-lg text-slate-700 dark:text-slate-400 sm:text-xl">
-            Recruitment and staffing service for foreigners living in Japan.
+            {siteConfig.description}
           </p>
         </div>
 

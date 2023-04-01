@@ -3,27 +3,16 @@ import type { NextApiRequest, NextApiResponse } from "next"
 import { encodePassword } from "@/src/utils/auth"
 import { DB } from "@/src/utils/db"
 import { randomNumber } from "@/src/utils/randomNumber"
-import { PublishCommand, SNSClient } from "@aws-sdk/client-sns"
-import { Gender } from "@prisma/client"
+import { sendSMS } from "@/src/utils/sms"
 import { parsePhoneNumber } from "libphonenumber-js"
 import moment from "moment"
 
 export interface UserCreateParams {
   email: string
   password: string
-  firstName: string
-  lastName: string
-  firstNameKana: string
-  lastNameKana: string
-  dob: string
-  gender: Gender
+  name: string
   mobile: string
 }
-
-const SNS = new SNSClient({
-  region: "ap-northeast-1",
-  apiVersion: "2010-03-31",
-})
 
 const registerHandler = async (
   req: NextApiRequest,
@@ -33,14 +22,7 @@ const registerHandler = async (
 
   switch (method) {
     case "POST":
-      const {
-        firstName,
-        lastName,
-        firstNameKana,
-        lastNameKana,
-        password,
-        mobile,
-      }: Partial<UserCreateParams> = body
+      const { name, password, mobile }: Partial<UserCreateParams> = body
       // check if user is already registered
       const existingUser = await DB.user.findFirst({
         where: {
@@ -56,17 +38,6 @@ const registerHandler = async (
         return
       }
 
-      // // check and parse DOB
-      // const dateOfBirth = moment(dob)
-      // if (!dateOfBirth.isValid()) {
-      //   res.status(400).json({
-      //     error: true,
-      //     code: "0002",
-      //     message: "Invalid date of birth.",
-      //   })
-      //   return
-      // }
-
       const parsedMobile = parsePhoneNumber(mobile, "JP")
 
       if (!parsedMobile.isValid()) {
@@ -81,49 +52,34 @@ const registerHandler = async (
       const providerAccountId = randomUUID()
 
       // Update or create data in your database
-      await DB.account.create({
+      const { id: newUserId, verificationRequests } = await DB.user.create({
         data: {
-          providerType: "credentials",
-          providerId: "jrg",
-          providerAccountId,
-          user: {
+          name,
+          mobile: parsedMobile.number,
+          password: encodePassword(password),
+          verificationRequests: {
             create: {
-              name: `${lastName} ${firstName}`,
-              firstName,
-              lastName,
-              firstNameKana,
-              lastNameKana,
-              mobile: parsedMobile.number,
-              password: encodePassword(password),
+              identifier: parsedMobile.number,
+              token: randomNumber(4),
+              type: "mobile",
+              expires: moment().add(24, "hours").toDate(),
             },
           },
         },
         select: {
           id: true,
+          verificationRequests: true,
         },
       })
 
-      // create
-      const { identifier, type, token, key } =
-        await DB.verificationRequest.create({
-          data: {
-            identifier: parsedMobile.number,
-            token: randomNumber(4),
-            type: "mobile",
-            expires: moment().add(24, "hours").toDate(),
-          },
-        })
-
-      // set sms to number
-      const smsCommand = new PublishCommand({
-        PhoneNumber: identifier,
-        Message: `Your JRG verification code is ${token}`,
-      })
+      const { token, identifier, type, key } = verificationRequests[0]
 
       try {
-        console.log(identifier)
-        const test = await SNS.send(smsCommand)
-        console.log(test)
+        await sendSMS({
+          provider: "twilio",
+          message: `${token} is your TicketKhai verification code.`,
+          to: identifier,
+        })
       } catch (error) {
         console.log(error)
       }

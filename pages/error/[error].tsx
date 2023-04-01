@@ -2,6 +2,8 @@ import { GetServerSideProps } from "next"
 import Head from "next/head"
 import { Layout } from "@/src/components"
 
+import { siteConfig } from "@/src/config/site"
+
 export type PageErrorTypes = "unauthorized" | "404"
 
 export interface ErrorPageProps {
@@ -26,7 +28,7 @@ const ErrorPage = ({ error }) => {
   return (
     <Layout>
       <Head>
-        <title>Error - Japan Recruitment Group</title>
+        <title>Error - {siteConfig.name}</title>
       </Head>
       <div className="flex flex-1 flex-col items-center justify-center">
         <h1>{errorMessage}</h1>
