@@ -32,7 +32,7 @@ export default function App({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <SessionProvider session={session}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <ThemeProvider attribute="class" defaultTheme="light">
           <Component {...pageProps} />
         </ThemeProvider>
       </SessionProvider>
