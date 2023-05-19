@@ -74,7 +74,7 @@ const buyTicketHandler = async (
         })
 
         const requestData = qs.stringify({
-          return_url: "http://localhost:3000",
+          return_url: `${siteConfig.baseurl}`,
           "line_items[][description]": `${ticket.title} ticket for ${event.title} (${event.subtitle})`,
           "line_items[][amount]": ticket.price,
           "line_items[][quantity]": noOfTickets,
@@ -82,9 +82,9 @@ const buyTicketHandler = async (
             "https://cdn-icons-png.flaticon.com/512/2067/2067179.png",
           currency: "JPY",
           "payment_data[external_order_num]": `${transaction.id}`,
-          "payment_data[user_id]": `TK_${user.id}`,
-          "payment_data[event_id]": `TK_${eventId}`,
-          "payment_data[ticket_id]": `TK_${ticket.id}`,
+          "payment_data[user_id]": `${user.id}`,
+          "payment_data[event_id]": `${eventId}`,
+          "payment_data[ticket_id]": `${ticket.id}`,
           default_locale: "en",
           payment_methods: [
             {
