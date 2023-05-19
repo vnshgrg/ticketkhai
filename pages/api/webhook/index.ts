@@ -2,8 +2,11 @@ import type { NextApiRequest, NextApiResponse } from "next"
 import { validateWebhook } from "@/src/lib"
 import { bodyFromRaw } from "@/src/utils"
 import { DB } from "@/src/utils/db"
+import { sendSMS } from "@/src/utils/sms"
 import { FaceSmileIcon } from "@heroicons/react/20/solid"
 import { KomojuStatus, TicketStatus } from "@prisma/client"
+
+import { siteConfig } from "@/src/config/site"
 
 export interface VerifyParams {
   page: number
@@ -132,9 +135,19 @@ const webhookHandler = async (
               where: { id: user.id },
               select: {
                 tickets: true,
+                mobile: true,
               },
             })
-            console.log(userTickets.tickets)
+
+            try {
+              await sendSMS({
+                provider: "twilio",
+                message: `Your ticket purchase is complete. Visit: ${siteConfig.baseurl}`,
+                to: userTickets.mobile,
+              })
+            } catch (error) {
+              console.log(error)
+            }
 
             res.status(200).json({ result: true, message: "Tickets issued." })
             return

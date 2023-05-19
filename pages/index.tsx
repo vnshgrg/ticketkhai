@@ -70,7 +70,6 @@ export default function IndexPage(props) {
 
 export async function getServerSideProps({ req, res }) {
   const session = await getServerSession(req, res, authOptions)
-  console.log(session)
   return {
     props: { sessionData: session, message: "hello" }, // will be passed to the page component as props
   }
