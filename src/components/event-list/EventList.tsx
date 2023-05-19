@@ -108,7 +108,11 @@ export const EventList = (): React.ReactElement => {
                   {formatJPY(event.tickets[0].price)}
                 </Button>
               </SheetTrigger>
-              <SheetContent position={"right"} size="content">
+              <SheetContent
+                position={"right"}
+                size="content"
+                className="max-h-screen overflow-y-scroll "
+              >
                 <SheetHeader>
                   <SheetTitle>Buy your tickets</SheetTitle>
                 </SheetHeader>
