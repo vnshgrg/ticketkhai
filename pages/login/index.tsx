@@ -4,6 +4,7 @@ import { AuthErrorTypes, Info, Input, Layout } from "@/src/components"
 import { useLogin } from "@/src/hooks"
 import { getServerSession } from "next-auth/next"
 
+import { siteConfig } from "@/src/config/site"
 import { authOptions } from "../api/auth/[...nextauth]"
 
 const LoginPage = () => {
@@ -11,34 +12,33 @@ const LoginPage = () => {
   const router = useRouter()
   const { error, info } = router.query
 
+  console.log(error, info)
+
   return (
     <Layout>
       <Head>
-        <title>Login - Japan Recruitment Group</title>
-        <meta name="description" content="Japan Recruitment Group" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
+        <title>Login - {siteConfig.name}</title>
       </Head>
-      <section className="flex flex-1 flex-col items-center justify-center bg-slate-50 dark:bg-slate-900  sm:px-6 lg:px-8 space-y-6">
-        <div className="w-full px-4 sm:px-0 sm:mx-auto sm:max-w-md">
+      <section className="flex flex-1 flex-col items-center justify-center space-y-6 bg-slate-50  dark:bg-slate-900 sm:px-6 lg:px-8">
+        <div className="w-full px-4 sm:mx-auto sm:max-w-md sm:px-0">
           <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-slate-700 dark:text-slate-200">
             Sign in to your account
           </h2>
         </div>
 
         {error && (
-          <div className="w-full px-4 sm:px-0 sm:mx-auto sm:max-w-md">
-            <Info error={error as AuthErrorTypes} />
+          <div className="w-full px-4 sm:mx-auto sm:max-w-md sm:px-0">
+            <Info error={error as string} />
           </div>
         )}
         {info && (
-          <div className="w-full px-4 sm:px-0 sm:mx-auto sm:max-w-md">
-            <Info info={info} />
+          <div className="w-full px-4 sm:mx-auto sm:max-w-md sm:px-0">
+            <Info info={info as string} />
           </div>
         )}
 
-        <div className="w-full px-4 sm:px-0 sm:mx-auto sm:max-w-md">
-          <div className="bg-white dark:bg-slate-900 py-8 px-4 shadow-2xl shadow-slate-200 dark:shadow-slate-800 border-2 border-slate-100 dark:border-slate-800 sm:rounded-lg sm:px-10">
+        <div className="w-full px-4 sm:mx-auto sm:max-w-md sm:px-0">
+          <div className="border-2 border-slate-100 bg-white py-8 px-4 shadow-2xl shadow-slate-200 dark:border-slate-800 dark:bg-slate-900 dark:shadow-slate-800 sm:rounded-lg sm:px-10">
             <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
               <div>
                 <Input
@@ -64,13 +64,13 @@ const LoginPage = () => {
                 />
               </div>
 
-              <div className="flex flex-col sm:flex-row items-center justify-between">
+              <div className="flex flex-col items-center justify-between sm:flex-row">
                 <div className="flex items-center">
                   <input
                     id="remember-me"
                     name="remember-me"
                     type="checkbox"
-                    className="h-4 w-4 rounded border-slate-300 text-slate-600 focus:ring-slate-600 dark:bg-slate-600 dark:text-slate-700 dark:ring-slate-700 dark:border-slate-700"
+                    className="h-4 w-4 rounded border-slate-300 text-slate-600 focus:ring-slate-600 dark:border-slate-700 dark:bg-slate-600 dark:text-slate-700 dark:ring-slate-700"
                   />
                   <label
                     htmlFor="remember-me"

@@ -30,14 +30,6 @@ const registerHandler = async (
           mobile: parsedMobile.number,
           deletedAt: null,
         },
-        include: {
-          accounts: {
-            select: {
-              id: true,
-              role: true,
-            },
-          },
-        },
       })
       if (!users || users.length === 0) {
         res
@@ -47,13 +39,11 @@ const registerHandler = async (
       }
 
       // CHECK PASSWORD
-      let authenticatedUser: User & { accountId: string; role: Role }
+      let authenticatedUser: User
 
       users.map((user) => {
         if (matchPassword(password, user.password)) {
-          const { id: accountId, role } = user.accounts[0]
-          delete user.accounts
-          authenticatedUser = { ...user, accountId, role }
+          authenticatedUser = user
         }
       })
       if (!authenticatedUser) {
@@ -90,7 +80,6 @@ const registerHandler = async (
           userId: authenticatedUser.id,
           expires: moment().add(30, "days").toDate(),
           sessionToken,
-          accessToken,
         },
       })
 
