@@ -27,7 +27,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
           )}
           <InputComponent
             ref={forwardedRef}
-            className={cn("w-full", error && errorInputClass)}
+            className={cn("w-full text-base", error && errorInputClass)}
             {...props}
           />
 

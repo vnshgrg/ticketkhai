@@ -1,4 +1,5 @@
 import Head from "next/head"
+import { useRouter } from "next/router"
 import { AuthErrorTypes, Info } from "@/src/components"
 import { useRegistration } from "@/src/hooks/useRegister"
 import { getServerSession } from "next-auth/next"
@@ -13,6 +14,7 @@ import { authOptions } from "../api/auth/[...nextauth]"
 export default function RegisterPage() {
   const { register, errors, handleSubmit, onSubmit, loading, apiError } =
     useRegistration()
+  const router = useRouter()
 
   return (
     <Layout>
@@ -79,7 +81,7 @@ export default function RegisterPage() {
                 />
               </div>
               <Separator />
-              <div className="flex gap-4">
+              <div>
                 <Button
                   type="submit"
                   className={buttonVariants({
@@ -89,6 +91,21 @@ export default function RegisterPage() {
                   disabled={loading}
                 >
                   Register
+                </Button>
+              </div>
+              <div>
+                <Button
+                  type="button"
+                  className={buttonVariants({
+                    variant: "subtle",
+                    width: "full",
+                  })}
+                  disabled={loading}
+                  onClick={() => {
+                    router.push("/login")
+                  }}
+                >
+                  Login
                 </Button>
               </div>
             </form>

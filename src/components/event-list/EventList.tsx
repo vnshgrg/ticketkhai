@@ -215,14 +215,26 @@ export const EventList = (): React.ReactElement => {
                         Confirm & pay
                       </Button>
                     ) : (
-                      <Button
-                        type="button"
-                        onClick={() => {
-                          router.push("/login")
-                        }}
-                      >
-                        Sign in
-                      </Button>
+                      <>
+                        <Button
+                          type="button"
+                          variant="subtle"
+                          className="mt-4 md:mt-0"
+                          onClick={() => {
+                            router.push("/register")
+                          }}
+                        >
+                          Register
+                        </Button>
+                        <Button
+                          type="button"
+                          onClick={() => {
+                            router.push("/login")
+                          }}
+                        >
+                          Sign in
+                        </Button>
+                      </>
                     )}
                   </SheetFooter>
                 )}

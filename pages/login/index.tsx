@@ -5,14 +5,13 @@ import { useLogin } from "@/src/hooks"
 import { getServerSession } from "next-auth/next"
 
 import { siteConfig } from "@/src/config/site"
+import { Button } from "@/src/components/ui/button"
 import { authOptions } from "../api/auth/[...nextauth]"
 
 const LoginPage = () => {
   const { register, errors, handleSubmit, onSubmit } = useLogin()
   const router = useRouter()
   const { error, info } = router.query
-
-  console.log(error, info)
 
   return (
     <Layout>
@@ -91,12 +90,21 @@ const LoginPage = () => {
               </div>
 
               <div>
-                <button
-                  type="submit"
-                  className="flex w-full justify-center rounded-md bg-indigo-600 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                <Button type="submit" width="full" variant="default">
+                  Login
+                </Button>
+              </div>
+              <div>
+                <Button
+                  type="button"
+                  variant="subtle"
+                  width="full"
+                  onClick={() => {
+                    router.push("/register")
+                  }}
                 >
-                  Sign in
-                </button>
+                  Register
+                </Button>
               </div>
             </form>
           </div>
