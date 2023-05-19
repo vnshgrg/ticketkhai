@@ -9,7 +9,7 @@ declare module "next-auth" {
       id: string
       role?: string
       username?: string
-      someExoticUserProperty?: string
+      mobile?: string
     } & DefaultSession["user"]
   }
 }

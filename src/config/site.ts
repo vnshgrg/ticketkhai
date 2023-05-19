@@ -10,6 +10,11 @@ interface SiteConfig {
     instagram: string
     linkedin: string
   }
+  fees: {
+    handlingFee: number | null
+    paymentFee: number | null
+    tax: number | null
+  }
 }
 
 export const siteConfig: SiteConfig = {
@@ -26,5 +31,10 @@ export const siteConfig: SiteConfig = {
     facebook: "#",
     instagram: "#",
     linkedin: "#",
+  },
+  fees: {
+    handlingFee: null,
+    paymentFee: null,
+    tax: null,
   },
 }

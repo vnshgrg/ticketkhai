@@ -10,6 +10,12 @@ export default withAuth(
         return NextResponse.redirect(new URL("/error/unauthorized", req.url))
       }
     }
+    if (req.nextUrl.pathname.startsWith("/user")) {
+      // check if user is authorized to make this request
+      if (!req.nextauth.token) {
+        return NextResponse.redirect(new URL("/error/unauthorized", req.url))
+      }
+    }
   },
   {
     callbacks: {
@@ -18,4 +24,4 @@ export default withAuth(
   }
 )
 
-export const config = { matcher: ["/admin/:path*"] }
+export const config = { matcher: ["/admin/:path*", "/user/:path*"] }

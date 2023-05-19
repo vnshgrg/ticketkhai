@@ -1,5 +1,7 @@
 import Head from "next/head"
 import Link from "next/link"
+import { EventList } from "@/src/components"
+import { useEvents } from "@/src/hooks"
 import moment from "moment"
 import { useSession } from "next-auth/react"
 
@@ -9,6 +11,7 @@ import { buttonVariants } from "@/src/components/ui/button"
 
 export default function IndexPage() {
   const { status, data } = useSession()
+
   let content = (
     <div className="flex gap-4">
       <Link
@@ -38,6 +41,9 @@ export default function IndexPage() {
         <p className="text-sm">
           Session expires {moment(data.expires).fromNow()}
         </p>
+        <Link href="/user/my-tickets">
+          <span className="font-bold">Go to My Page</span>
+        </Link>
       </div>
     )
   }
@@ -55,6 +61,8 @@ export default function IndexPage() {
         </div>
 
         {content}
+
+        <EventList />
       </section>
     </Layout>
   )

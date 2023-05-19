@@ -53,6 +53,8 @@ model User {
   deletedAt            DateTime?
   sessions             Session[]
   verificationRequests VerificationRequest[]
+  transactions         Transaction[]
+  tickets              Ticket[]
 }
 
 model VerificationRequest {
@@ -69,4 +71,72 @@ model VerificationRequest {
   user       User           @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([identifier, token])
+}
+
+enum KomojuStatus {
+  created
+  authorized
+  captured
+  expired
+  cancelled
+  failed
+}
+
+enum TicketStatus {
+  available
+  used
+  restricted
+}
+
+model Transaction {
+  id           String       @id @default(cuid())
+  userId       String
+  eventId      String
+  ticketTypeId String
+  unitPrice    Int
+  quantity     Int
+  discount     Int?         @default(0)
+  tax          Int?         @default(0)
+  handlingFee  Int?         @default(0)
+  totalPrice   Int
+  status       KomojuStatus @default(created)
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+  deletedAt    DateTime?
+  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tickets      Ticket[]
+}
+
+model Ticket {
+  id            String       @id @default(cuid())
+  userId        String
+  eventId       String
+  ticketTypeId  String
+  status        TicketStatus @default(available)
+  transactionId String
+  createdAt     DateTime     @default(now())
+  upatedAt      DateTime     @updatedAt
+  deletedAt     DateTime?
+
+  transaction Transaction @relation(fields: [transactionId], references: [id], onDelete: Cascade)
+  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Webhook {
+  id                     String    @id @default(cuid())
+  type                   String?
+  resource               String?
+  data                   Json?
+  created_at             String?
+  result                 Boolean?
+  result_message         String?
+  reason                 String?
+  komoju_session_id      String?
+  tk_user_id             String?
+  tk_transaction_id      String?
+  tk_webhook_response    Json?
+  tk_webhook_response_at DateTime?
+  createdAt              DateTime  @default(now())
+  updatedAt              DateTime  @updatedAt
+  deletedAt              DateTime?
 }
