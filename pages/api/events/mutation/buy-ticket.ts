@@ -3,10 +3,15 @@ import { DB } from "@/src/utils/db"
 import axios from "axios"
 import { getServerSession } from "next-auth/next"
 import qs from "qs"
+import Stripe from "stripe"
 
 import { demoEvents } from "@/src/config/events"
 import { siteConfig } from "@/src/config/site"
 import { authOptions } from "../../auth/[...nextauth]"
+
+const stripe = new Stripe(process.env.STRIPE_SK, {
+  apiVersion: "2022-11-15",
+})
 
 export interface BuyTicketParams {
   eventId: string
@@ -73,75 +78,36 @@ const buyTicketHandler = async (
           },
         })
 
-        const requestData = qs.stringify({
-          return_url: `${siteConfig.baseurl}`,
-          "line_items[][description]": `${ticket.title} ticket for ${event.title} (${event.subtitle})`,
-          "line_items[][amount]": ticket.price,
-          "line_items[][quantity]": noOfTickets,
-          "line_items[][image]":
-            "https://cdn-icons-png.flaticon.com/512/2067/2067179.png",
-          currency: "JPY",
-          "payment_data[external_order_num]": `${transaction.id}`,
-          "payment_data[user_id]": `${user.id}`,
-          "payment_data[event_id]": `${eventId}`,
-          "payment_data[ticket_id]": `${ticket.id}`,
-          default_locale: "en",
-          payment_methods: [
-            {
-              type: "credit_card",
-            },
-            {
-              type: "konbini",
-              brands: {
-                "seven-eleven": "/images/konbini/seven-eleven.svg",
-                lawson: "/images/konbini/lawson.svg",
-                "family-mart": "/images/konbini/family-mart.svg",
-                ministop: "/images/konbini/ministop.svg",
-                "daily-yamazaki": "/images/konbini/daily-yamazaki.svg",
-                seicomart: "/images/konbini/seicomart.svg",
-              },
-            },
-            {
-              type: "pay_easy",
-            },
-            {
-              type: "paypay",
-            },
-            {
-              type: "paidy",
-            },
-            {
-              type: "linepay",
-            },
-            {
-              type: "merpay",
-            },
-          ],
-        })
-
-        const headers = {
-          Authorization: `Basic ${Buffer.from(
-            process.env.KOMOJU_SK + ":"
-          ).toString("base64")}`,
-          "Content-Length": Buffer.byteLength(requestData),
-        }
-
         try {
-          const response = await axios({
-            method: "post",
-            data: requestData,
-            url: "https://komoju.com/api/v1/sessions",
-            headers,
-          })
-
-          const { data } = response
-
           // update transaction with komoju session
 
-          res.status(200).json({ result: true, message: "", data: data })
-          return
+          // Create Checkout Sessions from body params.
+          const session = await stripe.checkout.sessions.create({
+            line_items: [
+              {
+                // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
+                price: ticket.stripePriceId,
+                quantity: noOfTickets,
+              },
+            ],
+            mode: "payment",
+            success_url: `${process.env.NEXT_PUBLIC_SITE_URL}/payment/?result=success`,
+            cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL}/payment/?result=fail`,
+            automatic_tax: { enabled: true },
+            metadata: {
+              transactionId: transaction.id,
+            },
+          })
+          // res.redirect(303, session.url)
+          res.status(200).json({
+            result: true,
+            message: "",
+            data: { session_url: session.url },
+          })
+          // return
         } catch (error) {
-          console.log(error.response.data)
+          console.log(error.message)
+          console.log(error.response?.data)
           res.status(500).json({
             result: false,
             error:

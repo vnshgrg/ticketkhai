@@ -1,19 +1,23 @@
 import type { NextApiRequest, NextApiResponse } from "next"
-import { validateWebhook } from "@/src/lib"
-import { bodyFromRaw } from "@/src/utils"
 import { DB } from "@/src/utils/db"
 import { sendSMS } from "@/src/utils/sms"
 import { FaceSmileIcon } from "@heroicons/react/20/solid"
 import { KomojuStatus, TicketStatus } from "@prisma/client"
+import Stripe from "stripe"
 
 import { siteConfig } from "@/src/config/site"
+import { webhookPayloadParser } from "@/src/lib/stripe"
+
+const stripe = new Stripe(process.env.STRIPE_SK, {
+  apiVersion: "2022-11-15",
+})
 
 export interface VerifyParams {
   page: number
   filters: any
 }
 
-const webhookHandler = async (
+const stripeWebhookHandler = async (
   req: NextApiRequest,
   res: NextApiResponse<any>
 ) => {
@@ -23,24 +27,34 @@ const webhookHandler = async (
   switch (method) {
     case "POST":
       try {
-        const body = await validateWebhook(headers, req)
+        const body: string = await webhookPayloadParser(req)
+        const { headers } = req
+        const signature =
+          headers["stripe-signature"] || headers["Stripe-Signature"]
 
-        if (!body) {
-          throw new Error("Could not validate webhook signature.")
+        // verify webhook signature
+        const WHK = process.env.STRIPE_WHK
+
+        const hook: any = stripe.webhooks.constructEvent(body, signature, WHK)
+
+        if (
+          hook.type !== "checkout.session.completed" &&
+          hook.type !== "checkout.session.expired"
+        ) {
+          res.status(404).json({ result: false, message: "Not found" })
+          return
         }
 
-        const { type, resource, data, created_at, reason } = body
-
         // based on type switch case
-        switch (type) {
-          case "payment.captured":
+        switch (hook.type) {
+          case "checkout.session.completed":
             // check transaction for verification
-
-            const { external_order_num, amount } = data
+            const { amount_total: amount, metadata: completeMetadata } =
+              hook.data.object
 
             // get transaction
             const transaction = await DB.transaction.findUnique({
-              where: { id: external_order_num },
+              where: { id: completeMetadata.transactionId },
               include: {
                 user: {
                   select: { id: true },
@@ -63,11 +77,8 @@ const webhookHandler = async (
             ) {
               await DB.webhook.create({
                 data: {
-                  type,
-                  resource,
-                  data,
-                  created_at,
-                  reason,
+                  type: hook.type,
+                  data: hook,
                   result: false,
                   result_message: "Transaction status invalid.",
                 },
@@ -82,11 +93,8 @@ const webhookHandler = async (
             if (totalPrice !== amount) {
               await DB.webhook.create({
                 data: {
-                  type,
-                  resource,
-                  data,
-                  created_at,
-                  reason,
+                  type: hook.type,
+                  data: hook,
                   result: false,
                   result_message:
                     "Amount is mismatch. Something is fishy so declining this request.",
@@ -119,11 +127,8 @@ const webhookHandler = async (
               }),
               DB.webhook.create({
                 data: {
-                  type,
-                  resource,
-                  data,
-                  created_at,
-                  reason,
+                  type: hook.type,
+                  data: hook,
                   result: true,
                   result_message: "Tickets issued.",
                 },
@@ -153,6 +158,19 @@ const webhookHandler = async (
             return
             // respond good
             break
+
+          case "checkout.session.expired":
+            const { metadata: expiredMetadata } = hook.data.object
+            await DB.transaction.update({
+              where: { id: completeMetadata.transactionId },
+              data: {
+                status: KomojuStatus.expired,
+              },
+            })
+            res
+              .status(200)
+              .json({ result: true, message: "Transaction marked as expired." })
+            break
         }
 
         res.status(200).json({ result: true, message: "success" })
@@ -162,8 +180,6 @@ const webhookHandler = async (
           data: {
             result: false,
             result_message: error.message || "An unknown error occurred.",
-            komoju_session_id: (headers["X-Komoju-ID"] ||
-              headers["x-komoju-id"]) as string,
           },
         })
         res.status(500).json({
@@ -180,7 +196,7 @@ const webhookHandler = async (
   }
 }
 
-export default webhookHandler
+export default stripeWebhookHandler
 
 export const config = {
   api: {

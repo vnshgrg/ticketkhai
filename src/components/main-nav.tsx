@@ -55,7 +55,7 @@ export function MainNav({ items }: MainNavProps) {
               className="-ml-4 text-base hover:bg-transparent focus:ring-0 md:hidden"
             >
               <Icons.logo className="mr-2 h-4 w-4" />{" "}
-              <span className="font-bold">Menu</span>
+              <span className="font-bold">{siteConfig.name}</span>
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent
@@ -63,12 +63,6 @@ export function MainNav({ items }: MainNavProps) {
             sideOffset={24}
             className="w-[300px] overflow-scroll"
           >
-            <DropdownMenuLabel>
-              <Link href="/" className="flex items-center">
-                <Icons.logo className="mr-2 h-4 w-4" /> {siteConfig.name}
-              </Link>
-            </DropdownMenuLabel>
-            <DropdownMenuSeparator />
             {items?.map(
               (item, index) =>
                 item.href && (
