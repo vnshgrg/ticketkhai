@@ -86,7 +86,7 @@ export const demoEvents: Event[] = [
         description: "Early bird tickets at discounted price.",
         price: 3500,
         stripePriceId:
-          process.env.NODE_ENV === "production"
+          process.env.ENV === "production"
             ? "price_1NBJoABE6fqNwbho8fWyC7xX"
             : "price_1NCKQMBE6fqNwbhoNI0o4XA0",
         available: true,
@@ -100,7 +100,7 @@ export const demoEvents: Event[] = [
         description: "Standard price tickets",
         price: 4500,
         stripePriceId:
-          process.env.NODE_ENV === "production"
+          process.env.ENV === "production"
             ? "price_1NCKGHBE6fqNwbhon6th1MTg"
             : "price_1NCKQfBE6fqNwbhoH4kKvfSg",
         available: true,
@@ -113,7 +113,7 @@ export const demoEvents: Event[] = [
         description: "VIP price tickets",
         price: 10000,
         stripePriceId:
-          process.env.NODE_ENV === "production"
+          process.env.ENV === "production"
             ? "price_1NCKGeBE6fqNwbhoITSQZkOv"
             : "price_1NCKQuBE6fqNwbho4UOuNwIx",
         available: true,
