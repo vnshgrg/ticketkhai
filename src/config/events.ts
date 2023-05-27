@@ -41,6 +41,7 @@ export type Ticket = {
   title: string
   description: string
   price: number
+  stripePriceId: string
   available: boolean
   photo?: string[]
   color?: string
@@ -81,9 +82,13 @@ export const demoEvents: Event[] = [
     tickets: [
       {
         id: "ticket001",
-        title: "Early Bird",
+        title: "Early Birds Ticket",
         description: "Early bird tickets at discounted price.",
         price: 3500,
+        stripePriceId:
+          process.env.NODE_ENV === "production"
+            ? "price_1NBJoABE6fqNwbho8fWyC7xX"
+            : "price_1NCKQMBE6fqNwbhoNI0o4XA0",
         available: true,
         maximumNumberOfTicketsAvailable: 100,
         dateTicketSalesStart: 1682866800,
@@ -91,18 +96,26 @@ export const demoEvents: Event[] = [
       },
       {
         id: "ticket002",
-        title: "Standard",
+        title: "Standard Ticket",
         description: "Standard price tickets",
-        price: 5000,
+        price: 4500,
+        stripePriceId:
+          process.env.NODE_ENV === "production"
+            ? "price_1NCKGHBE6fqNwbhon6th1MTg"
+            : "price_1NCKQfBE6fqNwbhoH4kKvfSg",
         available: true,
         maximumNumberOfTicketsAvailable: 1000,
         dateTicketSalesStart: 1685545200,
       },
       {
         id: "ticket003",
-        title: "VIP",
+        title: "VIP Ticket",
         description: "VIP price tickets",
         price: 10000,
+        stripePriceId:
+          process.env.NODE_ENV === "production"
+            ? "price_1NCKGeBE6fqNwbhoITSQZkOv"
+            : "price_1NCKQuBE6fqNwbho4UOuNwIx",
         available: true,
         maximumNumberOfTicketsAvailable: 100,
         dateTicketSalesStart: 1685545200,

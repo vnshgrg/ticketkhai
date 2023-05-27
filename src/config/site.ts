@@ -26,6 +26,14 @@ export const siteConfig: SiteConfig = {
       title: "Home",
       href: "/",
     },
+    {
+      title: "My Page",
+      href: "/user/my-tickets",
+    },
+    {
+      title: "Commercial Disclosure",
+      href: "/compliance/special-commercial-transaction-act",
+    },
   ],
   links: {
     facebook: "#",
