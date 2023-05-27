@@ -87,11 +87,14 @@ export const EventList = (): React.ReactElement => {
             <div className="space-y-1 text-slate-800">
               <div>
                 <span className="font-medium">Date:</span>{" "}
-                {moment(event.dateStart * 1000).toLocaleString()}
+                {moment(event.dateStart * 1000).format("Do MMMM, YYYY")}{" "}
+                <span className="text-slate-400 italic">
+                  ({moment(event.dateStart * 1000).fromNow()})
+                </span>
               </div>
               <div>
                 <span className="font-medium">Time:</span>{" "}
-                {moment(event.dateStart * 1000).format("HH:mma")}
+                {moment(event.dateStart * 1000).format("h:mmA")}
               </div>
               <div>
                 <span className="font-medium">Venue:</span> {event.venue.title}

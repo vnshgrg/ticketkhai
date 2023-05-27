@@ -56,29 +56,28 @@ export type Ticket = {
 export const demoEvents: Event[] = [
   {
     id: "event001",
-    title: "Sabin Rai & The Pharaoh: Japan Tour",
-    subtitle: "Tokyo",
+    title: "Sabin Rai & The Pharaoh",
+    subtitle: "Tokyo show",
     description:
-      'Sabin Rai is a Nepali singer and lyricist who is called as the Bryan Adams of Nepal because of the voice. His first successful single was "Komal Tyo Timro" from the album Sataha. Although his song "Ekai Aakash Muni" was released before Sataha.',
+      "Our artist (Sabin Rai & The Pharaoh) for this event is one of the best Nepali bands of the current music scenario. With their back-to-back hit songs released, there is almost no Nepalese in the world who does not know about this band and their songs. They have performed concerts various countries. This is going to be their 1st time to perform in Japan as a band.",
     venue: {
       id: "venue001",
-      title: "GARDEN Shinkiba FACTORY",
-      description:
-        "Garden Shinkiba Factory is a vast studio for filming and photography that opened in May 2021, boasting a total floor space of over 1,300 square meters. The studio’s high ceilings and warehouse atmosphere make the space ideal for various events such as fashion shows and product exhibitions.",
+      title: "SHIBUYA STREAM HALL",
+      description: "",
       address: {
         id: "address001",
-        postalCode: "136-0082",
+        postalCode: "150-0002",
         prefecture: "Tokyo",
-        city: "Koto-ku",
-        addressLine1: "Shinkiba 2-8-2",
+        city: "Shibuya-ku",
+        addressLine1: "Shibuya ３-２１-３",
       },
-      access: "新木場駅（JR /りんかい線/有楽町線）より徒歩16分",
+      access: "1 minute walk from Shibuya Station",
     },
-    dateStart: 1688194800,
-    dateEnd: 1688216400,
-    dateGateOpen: 1688198400,
-    dateTicketSalesStart: 1682866800,
-    maximumNumberOfTicketsAvailable: 1500,
+    dateStart: 1689411600,
+    dateEnd: 1689426000,
+    dateGateOpen: 1689404400,
+    dateTicketSalesStart: 1685113200,
+    maximumNumberOfTicketsAvailable: 1000,
     tickets: [
       {
         id: "ticket001",
@@ -104,7 +103,7 @@ export const demoEvents: Event[] = [
             ? "price_1NCKGHBE6fqNwbhon6th1MTg"
             : "price_1NCKQfBE6fqNwbhoH4kKvfSg",
         available: true,
-        maximumNumberOfTicketsAvailable: 1000,
+        maximumNumberOfTicketsAvailable: 600,
         dateTicketSalesStart: 1685545200,
       },
       {
