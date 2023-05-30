@@ -1,3 +1,4 @@
+import { useRouter } from "next/router"
 import {
   Brush,
   Contact,
@@ -12,6 +13,7 @@ import {
 } from "lucide-react"
 import { signIn, signOut, useSession } from "next-auth/react"
 import { useTheme } from "next-themes"
+import useTranslation from "next-translate/useTranslation"
 
 import { Icons } from "@/src/components/icons"
 import { Button } from "@/src/components/ui/button"
@@ -29,16 +31,11 @@ import {
   DropdownMenuTrigger,
 } from "@/src/components/ui/dropdown-menu"
 
-{
-  /* <>
-Signed in as {session.user.email} <br />
-<button onClick={() => signOut()}>Sign out</button>
-</> */
-}
-
 export const LoginButton = () => {
   const { data: session } = useSession()
   const { setTheme } = useTheme()
+  const { t } = useTranslation("common")
+  const router = useRouter()
 
   if (session) {
     const { email, name } = session.user
@@ -46,22 +43,27 @@ export const LoginButton = () => {
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="ghost" size="sm">
-            <User className="mr-2 h-5 w-5" />
-            <span>{name}</span>
+            <User className="h-5 w-5 sm:mr-2" />
+            <span className="hidden sm:inline">{name}</span>
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-56" forceMount>
-          <DropdownMenuLabel>
+          {/* <DropdownMenuLabel>
             <div>My Account</div>
             <span className="text-xs font-normal">{email}</span>
           </DropdownMenuLabel>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem className="cursor-pointer">
+          <DropdownMenuSeparator /> */}
+          <DropdownMenuItem
+            className="cursor-pointer"
+            onClick={() => {
+              router.push("/user/my-tickets")
+            }}
+          >
             <Contact className="mr-2 h-4 w-4" />
-            <span>Profile</span>
-            <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
+            <span>{t("nav-mypage")}</span>
+            {/* <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut> */}
           </DropdownMenuItem>
-          <DropdownMenuItem className="cursor-pointer">
+          {/* <DropdownMenuItem className="cursor-pointer">
             <Settings className="mr-2 h-4 w-4" />
             <span>Settings</span>
             <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
@@ -97,14 +99,14 @@ export const LoginButton = () => {
                 </DropdownMenuItem>
               </DropdownMenuSubContent>
             </DropdownMenuPortal>
-          </DropdownMenuSub>
+          </DropdownMenuSub> */}
           <DropdownMenuSeparator />
           <DropdownMenuItem
             className="cursor-pointer"
             onClick={() => signOut()}
           >
             <LogOut className="mr-2 h-4 w-4" />
-            <span>Logout</span>
+            <span>{t("auth-logout")}</span>
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
@@ -114,7 +116,7 @@ export const LoginButton = () => {
     <>
       <Button variant="ghost" size="sm" onClick={() => signIn()}>
         <LogIn className="mr-2 h-5 w-5" />
-        <span>Sign in</span>
+        <span>{t("auth-login")}</span>
       </Button>
     </>
   )

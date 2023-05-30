@@ -4,6 +4,7 @@ import { useBuyTicket, useEvents } from "@/src/hooks"
 import { formatJPY, readableAddress } from "@/src/utils"
 import moment from "moment"
 import { useSession } from "next-auth/react"
+import useTranslation from "next-translate/useTranslation"
 
 import { Event } from "@/src/config/events"
 import { siteConfig } from "@/src/config/site"
@@ -35,9 +36,10 @@ export const EventList = (): React.ReactElement => {
     useEvents()
   const { register, errors, watch } = useBuyTicket()
   const router = useRouter()
+  const { t } = useTranslation("common")
 
   if (loading) {
-    return <div>Loading...</div>
+    return <div>{t("site-loading")}...</div>
   }
 
   if (error) {
@@ -86,45 +88,61 @@ export const EventList = (): React.ReactElement => {
             <div className="font-sm text-slate-800">{event.description}</div>
             <div className="space-y-1 text-slate-800">
               <div>
-                <span className="font-medium">Date:</span>{" "}
-                {moment(event.dateStart * 1000).format("Do MMMM, YYYY")}{" "}
-                <span className="text-slate-400 italic">
-                  ({moment(event.dateStart * 1000).fromNow()})
+                <span className="font-medium">{t("event-date")}:</span>{" "}
+                {moment(event.dateStart * 1000)
+                  .locale("ja")
+                  .format("Do MMMM, YYYY")}{" "}
+                <span className="italic text-slate-400">
+                  (
+                  {moment(event.dateStart * 1000)
+                    .locale("ja")
+                    .fromNow()}
+                  )
                 </span>
               </div>
               <div>
-                <span className="font-medium">Time:</span>{" "}
-                {moment(event.dateStart * 1000).format("h:mmA")}
+                <span className="font-medium">{t("event-gate-open")}:</span>{" "}
+                {moment(event.dateGateOpen * 1000)
+                  .locale("ja")
+                  .format("h:mmA")}
               </div>
               <div>
-                <span className="font-medium">Venue:</span> {event.venue.title}
+                <span className="font-medium">{t("event-time")}:</span>{" "}
+                {moment(event.dateStart * 1000)
+                  .locale("ja")
+                  .format("h:mmA")}
               </div>
               <div>
-                <span className="font-medium">Address:</span>{" "}
+                <span className="font-medium">{t("event-venue")}:</span>{" "}
+                {event.venue.title}
+              </div>
+              <div>
+                <span className="font-medium">{t("event-address")}:</span>{" "}
                 {readableAddress(event.venue.address)}
               </div>
             </div>
             <Sheet>
               <SheetTrigger asChild>
-                <Button className={buttonVariants({ variant: "subtle" })}>
-                  {event.tickets[0].title} now available at{" "}
-                  {formatJPY(event.tickets[0].price)}
+                <Button className={buttonVariants({ variant: "default" })}>
+                  {t("buy-tickets")}
                 </Button>
               </SheetTrigger>
               <SheetContent
                 position={"right"}
                 size="content"
-                className="max-h-screen overflow-y-scroll "
+                className="max-h-screen overflow-y-scroll"
               >
                 <SheetHeader>
-                  <SheetTitle>Buy your tickets</SheetTitle>
+                  <SheetTitle>{t("buy-tickets")}</SheetTitle>
                 </SheetHeader>
                 <div className="grid gap-5 py-4">
                   <div className="space-y-2">
                     <div className="text-xl font-semibold text-slate-800">
                       {event.title}
                     </div>
+                    <div>{event.subtitle}</div>
                     <div>{moment(event.dateStart * 1000).toLocaleString()}</div>
+                    <div>{event.venue.title}</div>
                     <div>{readableAddress(event.venue.address)}</div>
                   </div>
                   <Separator />
@@ -132,7 +150,7 @@ export const EventList = (): React.ReactElement => {
                     register={register}
                     options={ticketTypesRadioItem}
                     name="ticketType"
-                    label={{ label: "Ticket type", for: "ticketType" }}
+                    label={{ label: t("ticket-type"), for: "ticketType" }}
                     supportingText=""
                     error={errors.ticketType?.message as string}
                     disabled={ticketPurchaseLoading}
@@ -143,7 +161,10 @@ export const EventList = (): React.ReactElement => {
                     name="numberOfTickets"
                     id="numberOfTickets"
                     placeholder="1"
-                    label={{ label: "No. of tickets", for: "numberOfTickets" }}
+                    label={{
+                      label: t("ticket-no-of-tickets"),
+                      for: "numberOfTickets",
+                    }}
                     error={errors.numberOfTickets?.message as string}
                     aria-invalid={errors.numberOfTickets ? true : false}
                     disabled={ticketPurchaseLoading}
@@ -153,22 +174,22 @@ export const EventList = (): React.ReactElement => {
                   {currentTicketType && currentNoOfTickets && (
                     <div className="divide-y divide-slate-100 rounded-lg border border-slate-200 text-sm">
                       <div className="flex flex-row justify-between p-3">
-                        <div>Ticket Type</div>
+                        <div>{t("ticket-type")}</div>
                         <div>{currentTicketType}</div>
                       </div>
                       <div className="flex flex-row justify-between p-3">
-                        <div>Ticket Price</div>
+                        <div>{t("ticket-price")}</div>
                         <div>
                           {currentTicketPrice && formatJPY(currentTicketPrice)}
                         </div>
                       </div>
                       <div className="flex flex-row justify-between p-3">
-                        <div>No. of tickets</div>
+                        <div>{t("ticket-no-of-tickets")}No. of tickets</div>
                         <div>{currentNoOfTickets}</div>
                       </div>
                       <div className="flex flex-row justify-between p-3">
                         <div>
-                          Sub Total{" "}
+                          {t("subtotal")}{" "}
                           <span className="text-slate-500">
                             ({currentNoOfTickets} ×{" "}
                             {formatJPY(currentTicketPrice)})
@@ -179,23 +200,23 @@ export const EventList = (): React.ReactElement => {
                         </div>
                       </div>
                       <div className="flex flex-row justify-between p-3">
-                        <div>Handling fee</div>
+                        <div>{t("handling-fee")}</div>
                         <div>
                           {currentHandlingFee && formatJPY(currentHandlingFee)}
                         </div>
                       </div>
                       <div className="flex flex-row justify-between p-3">
-                        <div>Payment fee</div>
+                        <div>{t("payment-fee")}</div>
                         <div>
                           {currentPaymentFee && formatJPY(currentPaymentFee)}
                         </div>
                       </div>
                       <div className="flex flex-row justify-between p-3">
-                        <div>Tax</div>
+                        <div>{t("tax")}</div>
                         <div>{currentTax && formatJPY(currentTax)}</div>
                       </div>
                       <div className="flex flex-row justify-between p-3 font-bold">
-                        <div>Total</div>
+                        <div>{t("total")}</div>
                         <div>{formatJPY(currentTotal)}</div>
                       </div>
                     </div>
@@ -215,7 +236,7 @@ export const EventList = (): React.ReactElement => {
                         }}
                         disabled={ticketPurchaseLoading}
                       >
-                        Confirm & pay
+                        {t("confirm-and-pay")}
                       </Button>
                     ) : (
                       <>
@@ -227,7 +248,7 @@ export const EventList = (): React.ReactElement => {
                             router.push("/register")
                           }}
                         >
-                          Register
+                          {t("auth-register")}
                         </Button>
                         <Button
                           type="button"
@@ -235,7 +256,7 @@ export const EventList = (): React.ReactElement => {
                             router.push("/login")
                           }}
                         >
-                          Sign in
+                          {t("auth-login")}
                         </Button>
                       </>
                     )}

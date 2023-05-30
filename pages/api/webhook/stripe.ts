@@ -122,6 +122,12 @@ const stripeWebhookHandler = async (
             }
 
             await DB.$transaction([
+              DB.transaction.update({
+                where: { id: completeMetadata.transactionId },
+                data: {
+                  status: KomojuStatus.captured,
+                },
+              }),
               DB.ticket.createMany({
                 data: ticketsMetadata,
               }),
@@ -139,7 +145,7 @@ const stripeWebhookHandler = async (
             const userTickets = await DB.user.findUnique({
               where: { id: user.id },
               select: {
-                tickets: true,
+                // tickets: true,
                 mobile: true,
               },
             })
@@ -160,7 +166,6 @@ const stripeWebhookHandler = async (
             break
 
           case "checkout.session.expired":
-            const { metadata: expiredMetadata } = hook.data.object
             await DB.transaction.update({
               where: { id: completeMetadata.transactionId },
               data: {

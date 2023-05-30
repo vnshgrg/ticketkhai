@@ -3,6 +3,7 @@ import { useRouter } from "next/router"
 import { AuthErrorTypes, Info, Input, Layout } from "@/src/components"
 import { useLogin } from "@/src/hooks"
 import { getServerSession } from "next-auth/next"
+import useTranslation from "next-translate/useTranslation"
 
 import { siteConfig } from "@/src/config/site"
 import { Button } from "@/src/components/ui/button"
@@ -13,15 +14,19 @@ const LoginPage = () => {
   const router = useRouter()
   const { error, info } = router.query
 
+  const { t } = useTranslation("common")
+
   return (
     <Layout>
       <Head>
-        <title>Login - {siteConfig.name}</title>
+        <title>
+          {t("auth-login")} - {siteConfig.name}
+        </title>
       </Head>
       <section className="flex flex-1 flex-col items-center justify-center space-y-6 bg-slate-50  dark:bg-slate-900 sm:px-6 lg:px-8">
         <div className="w-full px-4 sm:mx-auto sm:max-w-md sm:px-0">
           <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-slate-700 dark:text-slate-200">
-            Sign in to your account
+            {t("auth-login-title")}
           </h2>
         </div>
 
@@ -44,7 +49,7 @@ const LoginPage = () => {
                   type="text"
                   name="username"
                   id="username"
-                  label={{ label: "Username", for: "username" }}
+                  label={{ label: t("auth-mobile"), for: "username" }}
                   error={errors.username?.message as string}
                   aria-invalid={errors.username ? true : false}
                   {...register("username")}
@@ -56,14 +61,14 @@ const LoginPage = () => {
                   type="password"
                   name="password"
                   id="password"
-                  label={{ label: "Password", for: "password" }}
+                  label={{ label: t("auth-password"), for: "password" }}
                   error={errors.password?.message as string}
                   aria-invalid={errors.password ? true : false}
                   {...register("password")}
                 />
               </div>
 
-              <div className="flex flex-col items-center justify-between sm:flex-row">
+              {/* <div className="flex flex-col items-center justify-between sm:flex-row">
                 <div className="flex items-center">
                   <input
                     id="remember-me"
@@ -87,11 +92,11 @@ const LoginPage = () => {
                     Forgot your password?
                   </a>
                 </div>
-              </div>
+              </div> */}
 
               <div>
                 <Button type="submit" width="full" variant="default">
-                  Login
+                  {t("auth-login")}
                 </Button>
               </div>
               <div>
@@ -103,7 +108,7 @@ const LoginPage = () => {
                     router.push("/register")
                   }}
                 >
-                  Register
+                  {t("auth-register")}
                 </Button>
               </div>
             </form>

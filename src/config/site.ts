@@ -24,15 +24,18 @@ export const siteConfig: SiteConfig = {
   mainNav: [
     {
       title: "Home",
+      key: "nav-home",
       href: "/",
     },
     {
       title: "My Page",
+      key: "nav-mypage",
       href: "/user/my-tickets",
     },
     {
-      title: "Commercial Disclosure",
-      href: "/compliance/special-commercial-transaction-act",
+      title: "Contact",
+      key: "nav-contact",
+      href: "/compliance/contact",
     },
   ],
   links: {

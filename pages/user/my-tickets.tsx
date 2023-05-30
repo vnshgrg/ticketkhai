@@ -1,18 +1,20 @@
 import Head from "next/head"
-import Link from "next/link"
-import { useRouter } from "next/router"
-import { Layout, UserLayout } from "@/src/components"
+import { Layout, Ticket, UserLayout } from "@/src/components"
 import { DB } from "@/src/utils/db"
+import { eventById, ticketById } from "@/src/utils/temp"
+import { KomojuStatus } from "@prisma/client"
+import _ from "lodash"
+import moment from "moment"
 import { getServerSession } from "next-auth/next"
 import { useSession } from "next-auth/react"
-import { useQRCode } from "next-qrcode"
+import useTranslation from "next-translate/useTranslation"
 
 import { siteConfig } from "@/src/config/site"
 import { authOptions } from "../api/auth/[...nextauth]"
 
-export default function MyTicketsPage({ tickets }) {
+export default function MyTicketsPage({ transactions }) {
   const { data } = useSession()
-  const { Canvas } = useQRCode()
+  const { t } = useTranslation("common")
   return (
     <Layout>
       <Head>
@@ -20,37 +22,20 @@ export default function MyTicketsPage({ tickets }) {
       </Head>
       <UserLayout>
         <div className="relative mx-auto max-w-4xl">
-          <h1 className="text-3xl font-bold tracking-tight text-slate-900">
-            Hello {data?.user?.name},
+          <h1 className="text-xl font-medium tracking-tight text-slate-900">
+            {t("ticket-your-tickets")}
           </h1>
-          <div className="mt-8">
-            {tickets.length > 0 ? (
-              <div>
-                {tickets.map((ticket) => {
+          <div className="mt-4 mb-6">
+            {transactions.length > 0 ? (
+              <div className="space-y-4">
+                {transactions.map((transaction) => {
                   return (
-                    <div key={ticket.id}>
-                      {ticket.id} - {ticket.eventId} - {ticket.ticketTypeId}
-                      <div>
-                        <Canvas
-                          text={ticket.id}
-                          options={{
-                            level: "M",
-                            margin: 3,
-                            scale: 4,
-                            width: 200,
-                            color: {
-                              dark: "#000000",
-                              light: "#ffffff",
-                            },
-                          }}
-                        />
-                      </div>
-                    </div>
+                    <Ticket key={transaction.id} transaction={transaction} />
                   )
                 })}
               </div>
             ) : (
-              <div>You dont have any tickets</div>
+              <div>You do not have any tickets</div>
             )}
           </div>
         </div>
@@ -62,22 +47,53 @@ export default function MyTicketsPage({ tickets }) {
 export async function getServerSideProps(context) {
   const session = await getServerSession(context.req, context.res, authOptions)
   const userId = session.user.id
-  const { tickets } = await DB.user.findUnique({
-    where: { id: userId },
+  const transactions = await DB.transaction.findMany({
+    where: { userId, status: KomojuStatus.captured },
     select: {
+      id: true,
+      eventId: true,
+      ticketTypeId: true,
+      unitPrice: true,
+      quantity: true,
+      totalPrice: true,
+      status: true,
+      createdAt: true,
+      updatedAt: true,
       tickets: {
         select: {
           id: true,
-          userId: true,
-          eventId: true,
-          ticketTypeId: true,
           status: true,
-          transactionId: true,
+          ticketTypeId: true,
+          createdAt: true,
+          upatedAt: true,
         },
       },
     },
+    orderBy: {
+      createdAt: "desc",
+    },
   })
+
+  const populatedTransactions = transactions.map((transaction) => {
+    return {
+      ...transaction,
+      event: eventById(transaction.eventId),
+      tickets: transaction.tickets.map((ticket) => {
+        return {
+          ...ticket,
+          ..._.omit(ticketById(transaction.eventId, ticket.ticketTypeId), [
+            "id",
+          ]),
+          createdAt: moment(ticket.createdAt).unix(),
+          upatedAt: moment(ticket.upatedAt).unix(),
+        }
+      }),
+      createdAt: moment(transaction.createdAt).unix(),
+      updatedAt: moment(transaction.updatedAt).unix(),
+    }
+  })
+
   return {
-    props: { tickets, session }, // will be passed to the page component as props
+    props: { transactions: populatedTransactions, session }, // will be passed to the page component as props
   }
 }

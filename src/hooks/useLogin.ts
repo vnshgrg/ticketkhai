@@ -5,7 +5,7 @@ import { SubmitHandler, useForm } from "react-hook-form"
 import { z } from "zod"
 
 const login = z.object({
-  username: z.string().min(1, { message: "Username is required." }),
+  username: z.string().min(1, { message: "Mobile number is required." }),
   password: z.string().min(1, { message: "password is required." }),
 })
 export type Login = z.infer<typeof login>

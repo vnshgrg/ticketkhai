@@ -3,6 +3,7 @@ import { useRouter } from "next/router"
 import { AuthErrorTypes, Info } from "@/src/components"
 import { useRegistration } from "@/src/hooks/useRegister"
 import { getServerSession } from "next-auth/next"
+import useTranslation from "next-translate/useTranslation"
 
 import { siteConfig } from "@/src/config/site"
 import { Input } from "@/src/components/form"
@@ -16,15 +17,20 @@ export default function RegisterPage() {
     useRegistration()
   const router = useRouter()
 
+  const { t } = useTranslation("common")
+
   return (
     <Layout>
       <Head>
-        <title>Register - {siteConfig.name}</title>
+        <title>
+          {" "}
+          {t("auth-register-title")} - {siteConfig.name}
+        </title>
       </Head>
       <section className="flex flex-1 flex-col items-center justify-center space-y-6 bg-slate-50  dark:bg-slate-900 sm:px-6 lg:px-8">
         <div className="w-full px-4 sm:mx-auto sm:max-w-md sm:px-0">
           <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-slate-700 dark:text-slate-200">
-            Register an account
+            {t("auth-register-title")}
           </h2>
         </div>
 
@@ -45,7 +51,7 @@ export default function RegisterPage() {
                   type="text"
                   name="name"
                   id="name"
-                  label={{ label: "Name", for: "name" }}
+                  label={{ label: t("auth-name"), for: "name" }}
                   error={errors.name?.message as string}
                   aria-invalid={errors.name ? true : false}
                   disabled={loading}
@@ -59,10 +65,10 @@ export default function RegisterPage() {
                   name="mobile"
                   id="mobile"
                   placeholder="080-1234-5678"
-                  label={{ label: "Mobile", for: "mobile" }}
+                  label={{ label: t("auth-mobile"), for: "mobile" }}
                   error={errors.mobile?.message as string}
                   aria-invalid={errors.mobile ? true : false}
-                  supportingText="A Japanese mobile number."
+                  supportingText={t("auth-japanese-number")}
                   disabled={loading}
                   {...register("mobile")}
                 />
@@ -73,7 +79,7 @@ export default function RegisterPage() {
                   name="password"
                   id="password"
                   placeholder=""
-                  label={{ label: "Create a password", for: "password" }}
+                  label={{ label: t("auth-password"), for: "password" }}
                   error={errors.password?.message as string}
                   aria-invalid={errors.password ? true : false}
                   disabled={loading}
@@ -85,12 +91,12 @@ export default function RegisterPage() {
                 <Button
                   type="submit"
                   className={buttonVariants({
-                    variant: "primary",
+                    variant: "default",
                     width: "full",
                   })}
                   disabled={loading}
                 >
-                  Register
+                  {t("auth-register")}
                 </Button>
               </div>
               <div>
@@ -105,7 +111,7 @@ export default function RegisterPage() {
                     router.push("/login")
                   }}
                 >
-                  Login
+                  {t("auth-login")}
                 </Button>
               </div>
             </form>
