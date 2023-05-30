@@ -10,10 +10,10 @@ import { useSession } from "next-auth/react"
 import useTranslation from "next-translate/useTranslation"
 
 import { siteConfig } from "@/src/config/site"
+import { Button } from "@/src/components/ui/button"
 import { authOptions } from "../api/auth/[...nextauth]"
 
 export default function MyTicketsPage({ transactions }) {
-  const { data } = useSession()
   const { t } = useTranslation("common")
   return (
     <Layout>
@@ -35,7 +35,10 @@ export default function MyTicketsPage({ transactions }) {
                 })}
               </div>
             ) : (
-              <div>You do not have any tickets</div>
+              <div className="space-y-5">
+                <p>{t("no-tickets")}</p>
+                <Button variant="subtle">{t("go-home")}</Button>
+              </div>
             )}
           </div>
         </div>
