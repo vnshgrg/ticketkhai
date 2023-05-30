@@ -53,5 +53,6 @@
   "purchase-fail": "支払いがキャンセルされました",
   "purchase-fail-message": "チケットの購入はまだ完了していません。 最初からやり直してください。",
   "go-home": "トップページに戻る",
-  "welcome": "ようこそ"
+  "welcome": "ようこそ",
+  "no-tickets": "利用可能なチケットがありません。"
 }
