@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next"
 import { encodePassword } from "@/src/utils/auth"
 import { DB } from "@/src/utils/db"
+import { eventById } from "@/src/utils/temp"
 import { IdentifierType } from "@prisma/client"
 import { parsePhoneNumber } from "libphonenumber-js"
 import moment from "moment"
@@ -22,24 +23,18 @@ const registerHandler = async (
       try {
         const { id }: Partial<VerifyParams> = body
 
-        const filteredDemoEvents = demoEvents.filter(
-          (event) => id === event.id
-        )[0]
+        const event = eventById(id)
 
-        if (filteredDemoEvents) {
-          res
-            .status(200)
-            .json({ result: true, message: "", data: filteredDemoEvents })
+        if (event) {
+          res.status(200).json({ result: true, message: "", data: event })
         } else {
           res.status(400).json({ result: false, message: "Event not found." })
         }
       } catch (error) {
-        res
-          .status(500)
-          .json({
-            result: false,
-            message: error.message || "An unknown error occurred.",
-          })
+        res.status(500).json({
+          result: false,
+          message: error.message || "An unknown error occurred.",
+        })
       }
 
       break

@@ -3,6 +3,7 @@ import { useRouter } from "next/router"
 import { EventList } from "@/src/components"
 import moment from "moment"
 import { getServerSession } from "next-auth/next"
+import useTranslation from "next-translate/useTranslation"
 
 import { siteConfig } from "@/src/config/site"
 import { Layout } from "@/src/components/layout"
@@ -12,6 +13,7 @@ import { authOptions } from "./api/auth/[...nextauth]"
 export default function IndexPage(props) {
   const { sessionData } = props
   const router = useRouter()
+  const { t } = useTranslation("common")
   let content = (
     <div className="flex gap-4">
       <Button
@@ -20,7 +22,7 @@ export default function IndexPage(props) {
         }}
         className={buttonVariants({ variant: "subtle", size: "lg" })}
       >
-        Login
+        {t("auth-login")}
       </Button>
       <Button
         onClick={() => {
@@ -28,7 +30,7 @@ export default function IndexPage(props) {
         }}
         className={buttonVariants({ variant: "subtle", size: "lg" })}
       >
-        Register
+        {t("auth-logout")}
       </Button>
     </div>
   )
@@ -38,12 +40,14 @@ export default function IndexPage(props) {
     const { name, mobile } = user
     content = (
       <div>
-        <p className="font-medium">Welcome {name},</p>
-        <p className="text-sm">Mobile: {mobile}</p>
-        <p className="text-sm">Session expires {moment(expires).fromNow()}</p>
-        <Link href="/user/my-tickets">
-          <span className="mt-4 block font-bold">Go to My Page</span>
-        </Link>
+        <p className="font-medium">
+          {t("welcome")} {name},
+        </p>
+        <p className="pt-4">
+          <Link href="/user/my-tickets">
+            <span className="mt-4 font-bold">{t("nav-mypage")}</span>
+          </Link>
+        </p>
       </div>
     )
   }
@@ -52,11 +56,11 @@ export default function IndexPage(props) {
     <Layout>
       <section className="container grid items-center gap-6 pt-6 pb-8 md:gap-8 md:py-20">
         <div className="flex max-w-[980px] flex-col items-start gap-3 md:gap-4">
-          <h1 className="text-3xl font-extrabold leading-tight tracking-tighter text-slate-800 dark:text-slate-200 sm:text-3xl md:text-5xl lg:text-6xl">
-            {siteConfig.name}
+          <h1 className="text-2xl font-extrabold leading-tight tracking-tighter text-slate-800 dark:text-slate-200 sm:text-3xl md:text-5xl lg:text-6xl">
+            {t("site-name")}
           </h1>
           <p className="max-w-[700px] text-lg text-slate-700 dark:text-slate-400 sm:text-xl">
-            {siteConfig.description}
+            {t("site-subtitle")}
           </p>
         </div>
 

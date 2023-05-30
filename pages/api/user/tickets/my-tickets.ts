@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next"
 import { DB } from "@/src/utils/db"
+import { eventById, ticketById } from "@/src/utils/temp"
 import axios from "axios"
 import { getServerSession } from "next-auth/next"
 import qs from "qs"
@@ -40,9 +41,17 @@ const myTicektsHandler = async (
           },
         })
 
+        const populatedTickets = tickets.map((ticket) => {
+          return {
+            ...ticket,
+            event: eventById(ticket.eventId),
+            ...ticketById(ticket.eventId, ticket.ticketTypeId),
+          }
+        })
+
         res
           .status(200)
-          .json({ result: true, message: "success", data: tickets })
+          .json({ result: true, message: "success", data: populatedTickets })
         return
       } catch (error) {
         res.status(500).json({

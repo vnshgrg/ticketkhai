@@ -16,25 +16,28 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline"
 import { Contact } from "lucide-react"
+import useTranslation from "next-translate/useTranslation"
 
 interface LayoutProps {
   children: React.ReactNode
 }
 
 const navigation = [
-  { name: "Home", href: "/", icon: HomeIcon, current: false },
+  { name: "home", href: "/", icon: HomeIcon, current: false },
   {
-    name: "Tickets",
+    name: "my-tickets",
     href: "/user/my-tickets",
     icon: BriefcaseIcon,
     current: false,
   },
-
-  { name: "Settings", href: "#", icon: CogIcon, current: true },
 ]
 const secondaryNavigation = [
-  { name: "Help", href: "#", icon: QuestionMarkCircleIcon },
-  { name: "Logout", href: "/api/auth/signout", icon: ArrowLeftOnRectangleIcon },
+  {
+    name: "help",
+    href: "mailto:info@ticketkhai.com",
+    icon: QuestionMarkCircleIcon,
+  },
+  { name: "logout", href: "/api/auth/signout", icon: ArrowLeftOnRectangleIcon },
 ]
 
 function classNames(...classes) {
@@ -46,6 +49,8 @@ export function UserLayout({ children }: LayoutProps) {
 
   const router = useRouter()
   const { pathname: currentPath } = router
+
+  const { t } = useTranslation("common")
 
   return (
     <>
@@ -133,7 +138,7 @@ export function UserLayout({ children }: LayoutProps) {
                               )}
                               aria-hidden="true"
                             />
-                            {item.name}
+                            {t(`nav-${item.name}`)}
                           </a>
                         ))}
                       </div>
@@ -148,7 +153,7 @@ export function UserLayout({ children }: LayoutProps) {
                               className="mr-4 h-6 w-6 text-slate-400 group-hover:text-slate-500"
                               aria-hidden="true"
                             />
-                            {item.name}
+                            {t(`nav-${item.name}`)}
                           </a>
                         ))}
                       </div>
@@ -193,7 +198,7 @@ export function UserLayout({ children }: LayoutProps) {
                         )}
                         aria-hidden="true"
                       />
-                      {item.name}
+                      {t(`nav-${item.name}`)}
                     </a>
                   ))}
                 </div>
@@ -209,7 +214,7 @@ export function UserLayout({ children }: LayoutProps) {
                       className="mr-3 h-6 w-6 text-slate-400 group-hover:text-slate-500"
                       aria-hidden="true"
                     />
-                    {item.name}
+                    {t(`nav-${item.name}`)}
                   </a>
                 ))}
               </div>
