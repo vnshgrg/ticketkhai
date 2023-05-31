@@ -30,7 +30,7 @@ export default function IndexPage(props) {
         }}
         className={buttonVariants({ variant: "subtle", size: "lg" })}
       >
-        {t("auth-logout")}
+        {t("auth-register")}
       </Button>
     </div>
   )
