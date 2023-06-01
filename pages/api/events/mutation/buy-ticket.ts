@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next"
+import { createCustomer, searchCustomer } from "@/src/lib"
 import { DB } from "@/src/utils/db"
 import axios from "axios"
 import { getServerSession } from "next-auth/next"
@@ -79,10 +80,22 @@ const buyTicketHandler = async (
         })
 
         try {
-          // update transaction with komoju session
+          const { id: userId, name, mobile } = user
+          // check if stripe customer exists
+          let customer = await searchCustomer(userId)
+
+          if (!customer) {
+            console.log("creating customer")
+            customer = await createCustomer(userId, {
+              name,
+              mobile,
+            })
+          }
+          console.log("customer", customer.id)
 
           // Create Checkout Sessions from body params.
           const session = await stripe.checkout.sessions.create({
+            customer: customer.id,
             line_items: [
               {
                 // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
@@ -91,6 +104,30 @@ const buyTicketHandler = async (
               },
             ],
             mode: "payment",
+            payment_method_types: [
+              "card",
+              "konbini",
+              "alipay",
+              "wechat_pay",
+              "customer_balance",
+              "link",
+            ],
+            payment_method_options: {
+              wechat_pay: {
+                client: "web",
+              },
+              customer_balance: {
+                funding_type: "bank_transfer",
+                bank_transfer: {
+                  type: "jp_bank_transfer",
+                },
+              },
+            },
+            customer_update: {
+              address: "auto",
+              shipping: "auto",
+              name: "auto",
+            },
             success_url: `${process.env.NEXT_PUBLIC_SITE_URL}/payment/?result=success`,
             cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL}/payment/?result=fail`,
             automatic_tax: { enabled: true },

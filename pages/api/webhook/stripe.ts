@@ -1,8 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next"
+import { issueTicket, sendSMS } from "@/src/utils"
 import { DB } from "@/src/utils/db"
-import { sendSMS } from "@/src/utils/sms"
-import { FaceSmileIcon } from "@heroicons/react/20/solid"
-import { KomojuStatus, TicketStatus } from "@prisma/client"
+import { KomojuStatus } from "@prisma/client"
 import Stripe from "stripe"
 
 import { siteConfig } from "@/src/config/site"
@@ -22,24 +21,30 @@ const stripeWebhookHandler = async (
   res: NextApiResponse<any>
 ) => {
   const { method, headers } = req
-  const duplicateRequest = req
 
   switch (method) {
     case "POST":
       try {
         const body: string = await webhookPayloadParser(req)
-        const { headers } = req
         const signature =
           headers["stripe-signature"] || headers["Stripe-Signature"]
 
         // verify webhook signature
         const WHK = process.env.STRIPE_WHK
 
-        const hook: any = stripe.webhooks.constructEvent(body, signature, WHK)
+        const hook = stripe.webhooks.constructEvent(
+          body,
+          signature,
+          WHK
+        ) as Stripe.DiscriminatedEvent
+
+        console.log(hook)
 
         if (
-          hook.type !== "checkout.session.completed" &&
-          hook.type !== "checkout.session.expired"
+          hook.type !== "checkout.session.async_payment_succeeded" &&
+          hook.type !== "checkout.session.async_payment_failed" &&
+          hook.type !== "checkout.session.expired" &&
+          hook.type !== "checkout.session.completed"
         ) {
           res.status(404).json({ result: false, message: "Not found" })
           return
@@ -47,20 +52,22 @@ const stripeWebhookHandler = async (
 
         // based on type switch case
         switch (hook.type) {
-          case "checkout.session.completed":
+          case "checkout.session.async_payment_succeeded":
+            const checkoutSession = hook.data.object
             // check transaction for verification
             const { amount_total: amount, metadata: completeMetadata } =
-              hook.data.object
+              checkoutSession
 
             // get transaction
             const transaction = await DB.transaction.findUnique({
               where: { id: completeMetadata.transactionId },
               include: {
                 user: {
-                  select: { id: true },
+                  select: { id: true, mobile: true },
                 },
               },
             })
+
             const {
               status,
               totalPrice,
@@ -94,87 +101,95 @@ const stripeWebhookHandler = async (
               await DB.webhook.create({
                 data: {
                   type: hook.type,
-                  data: hook,
+                  data: hook as any,
                   result: false,
                   result_message:
-                    "Amount is mismatch. Something is fishy so declining this request.",
+                    "Amount did not match. Something is fishy so declining this request.",
                 },
               })
               res.status(200).json({
                 result: false,
                 message:
-                  "Amount is mismatch. Something is fishy so declining this request.",
+                  "Amount did not match. Something is fishy so declining this request.",
               })
               return
             }
 
-            // issue tickets
-            // generate ticket metadata
-            let ticketsMetadata = []
-            for (let i = 1; i <= quantity; i++) {
-              ticketsMetadata.push({
-                eventId,
-                ticketTypeId,
-                status: TicketStatus.available,
-                transactionId: transaction.id,
-                userId: user.id,
-              })
-            }
+            // check if payment intent is complete
 
-            await DB.$transaction([
-              DB.transaction.update({
-                where: { id: completeMetadata.transactionId },
-                data: {
-                  status: KomojuStatus.captured,
-                },
-              }),
-              DB.ticket.createMany({
-                data: ticketsMetadata,
-              }),
-              DB.webhook.create({
-                data: {
-                  type: hook.type,
-                  data: hook,
-                  result: true,
-                  result_message: "Tickets issued.",
-                },
-              }),
-            ])
-
-            // TODO: remove below line for querying tickets
-            const userTickets = await DB.user.findUnique({
-              where: { id: user.id },
-              select: {
-                // tickets: true,
-                mobile: true,
-              },
+            // fulfill order
+            await issueTicket({
+              eventId,
+              ticketTypeId,
+              quantity,
+              transactionId: completeMetadata.transactionId,
+              user,
+              hook: checkoutSession as any,
             })
-
-            try {
-              await sendSMS({
-                provider: "twilio",
-                message: `Your ticket purchase is complete. Visit: ${siteConfig.baseurl}`,
-                to: userTickets.mobile,
-              })
-            } catch (error) {
-              console.log(error)
-            }
 
             res.status(200).json({ result: true, message: "Tickets issued." })
             return
             // respond good
             break
-
-          case "checkout.session.expired":
+          case "checkout.session.completed":
+            const checkoutCompleteSession = hook.data.object
+            const { transactionId } = checkoutCompleteSession.metadata
+            // update transaction
             await DB.transaction.update({
-              where: { id: completeMetadata.transactionId },
+              where: { id: transactionId },
               data: {
-                status: KomojuStatus.expired,
+                status: KomojuStatus.authorized,
+              },
+              select: {
+                user: {
+                  select: { id: true, mobile: true },
+                },
+              },
+            })
+            if (checkoutCompleteSession.payment_status !== "paid") {
+              try {
+                await sendSMS({
+                  provider: "twilio",
+                  message: `Your ticket purchase is await payment. Pay now by visiting ${siteConfig.baseurl}`,
+                  to: user.mobile,
+                })
+              } catch (error) {
+                console.log(error.message)
+              }
+            }
+
+            break
+
+          case "checkout.session.async_payment_failed":
+            const failedCheckoutSession = hook.data.object
+            await recordWebhook({
+              transactionId: failedCheckoutSession.metadata.transactionId,
+              transactionData: { status: KomojuStatus.failed },
+              webhookData: {
+                result: false,
+                result_message: "Checkout session payment failed.",
+                data: failedCheckoutSession,
               },
             })
             res
               .status(200)
-              .json({ result: true, message: "Transaction marked as expired." })
+              .json({ result: true, message: "Transaction expired." })
+            break
+
+          case "checkout.session.expired":
+            const expiredCheckoutSession = hook.data.object
+            await recordWebhook({
+              transactionId: expiredCheckoutSession.metadata.transactionId,
+              transactionData: { status: KomojuStatus.expired },
+              webhookData: {
+                result: false,
+                result_message: "Checkout session expired.",
+                data: expiredCheckoutSession,
+              },
+            })
+            res
+              .status(200)
+              .json({ result: true, message: "Transaction expired." })
             break
         }
 
@@ -207,4 +222,24 @@ export const config = {
   api: {
     bodyParser: false,
   },
+}
+
+const recordWebhook = async ({
+  transactionId,
+  transactionData,
+  webhookData,
+}: {
+  transactionId: string
+  transactionData: any
+  webhookData: any
+}): Promise<void> => {
+  await DB.$transaction([
+    DB.webhook.create({
+      data: webhookData,
+    }),
+    DB.transaction.update({
+      where: { id: transactionId },
+      data: transactionData,
+    }),
+  ])
 }

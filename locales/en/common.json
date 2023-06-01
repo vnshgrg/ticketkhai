@@ -53,5 +53,6 @@
   "purchase-fail": "Payment cancelled",
   "purchase-fail-message": "Your tickets purchase is not finished yet. Please start over from beginning.",
   "go-home": "Go to home",
-  "welcome": "Welcome"
+  "welcome": "Welcome",
+  "no-tickets": "You do not have any tickets available."
 }

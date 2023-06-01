@@ -184,7 +184,7 @@ export const EventList = (): React.ReactElement => {
                         </div>
                       </div>
                       <div className="flex flex-row justify-between p-3">
-                        <div>{t("ticket-no-of-tickets")}No. of tickets</div>
+                        <div>{t("ticket-no-of-tickets")}</div>
                         <div>{currentNoOfTickets}</div>
                       </div>
                       <div className="flex flex-row justify-between p-3">
