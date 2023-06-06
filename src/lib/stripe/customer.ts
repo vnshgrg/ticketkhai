@@ -31,6 +31,16 @@ export const createCustomer = async (userId, { name, mobile }) => {
     return customer
   } catch (error) {
     console.log(error)
-    throw new Error(error.message || "Error while searching customer.")
+    throw new Error(error.message || "Error while creating customer.")
+  }
+}
+
+export const getCustomerById = async (customerId: string) => {
+  try {
+    const customer = await stripe.customers.retrieve(customerId)
+    return customer
+  } catch (error) {
+    console.log(error)
+    throw new Error(error.message || "Error while retrieving customer.")
   }
 }

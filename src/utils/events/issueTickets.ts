@@ -56,7 +56,7 @@ export const issueTicket: IssueTicket = async ({
       }),
       DB.webhook.create({
         data: {
-          type: hook.type,
+          type: "completed",
           data: hook,
           result: true,
           result_message: "Tickets issued.",

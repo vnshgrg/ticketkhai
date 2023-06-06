@@ -344,6 +344,7 @@ declare module "stripe" {
         | "payment_intent.created"
         | "payment_intent.payment_failed"
         | "payment_intent.succeeded"
+        | "payment_intent.partially_funded"
       data: DiscriminatedEvent.Data<Stripe.PaymentIntent>
     }
 
