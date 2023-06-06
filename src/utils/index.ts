@@ -1,7 +1,2 @@
 export * from "./strings"
 export * from "./randomNumber"
-export * from "./events"
-export * from "./db"
-export * from "./auth"
-export * from "./sms"
-export * from "./temp"

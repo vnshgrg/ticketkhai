@@ -15,6 +15,14 @@ const nextConfig = nextTranslate({
     locales: ["jp", "en"],
     defaultLocale: "jp",
   },
+  webpack: (config) => {
+    config.resolve.fallback = {
+      ...config.resolve.fallback,
+      net: false,
+      os: false,
+    }
+    return config
+  },
 })
 
 export default nextConfig
