@@ -1,6 +1,5 @@
 import { useState } from "react"
 import Link from "next/link"
-import axios from "axios"
 import moment from "moment"
 import useTranslation from "next-translate/useTranslation"
 
