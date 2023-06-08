@@ -39,8 +39,6 @@ export const useEvents = () => {
   }
 
   const purchaseTicket = async ({ eventId, ticketId, noOfTickets }) => {
-    console.log({ eventId, ticketId, noOfTickets })
-
     try {
       setLoading(true)
       const response = await axios.post("/api/events/mutation/buy-ticket", {
@@ -49,14 +47,12 @@ export const useEvents = () => {
         noOfTickets,
       })
 
-      console.log(response)
       if (response?.data?.data?.session_url) {
         router.push(response?.data?.data?.session_url)
       } else {
         setError("An unknown error occurred. Please try again later.")
       }
     } catch (error) {
-      console.log(error)
       setError(
         error?.response?.data?.message ||
           error?.message ||
@@ -67,11 +63,16 @@ export const useEvents = () => {
     }
   }
 
+  const resetError = () => {
+    setError(null)
+  }
+
   return {
     loading,
     error,
     data,
     purchaseTicket,
     ticketPurchaseLoading,
+    resetError,
   }
 }

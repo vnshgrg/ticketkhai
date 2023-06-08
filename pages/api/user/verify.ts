@@ -40,8 +40,6 @@ const registerHandler = async (
           return
         }
 
-        console.log(existingUser)
-
         const verificationData = await DB.verificationRequest.findFirst({
           where: {
             identifier: mobile.trim(),

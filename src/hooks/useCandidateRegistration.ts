@@ -99,11 +99,8 @@ const basicRegistration = z
             message: "Please provide a valid Japanese mobile number.",
             path: ["mobile"],
           })
-        } else {
-          console.log(phoneNumber, phoneNumber.isValid())
         }
       } catch (error) {
-        console.log(error)
         ctx.addIssue({
           code: "custom",
           message: "Please provide a valid Japanese mobile number.",

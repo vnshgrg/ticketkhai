@@ -53,12 +53,10 @@ export const useVerify = ({ defaultValues, type }) => {
   const { errors } = formState
 
   const onSubmit: SubmitHandler<Verify> = async (formValues) => {
-    console.log("[onSubmit]:", formValues)
     const { mobile, code } = formValues
     try {
       // Delete unnecessary data
       // signIn("credentials", formValues)
-      console.log(formValues, type)
       setLoading(true)
       const { data } = await axios.post("/api/user/verify", {
         type,

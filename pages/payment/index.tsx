@@ -60,7 +60,6 @@ export default function IndexPage(props) {
 
 export async function getServerSideProps({ req, res, query }) {
   const session = await getServerSession(req, res, authOptions)
-  console.log(query)
   const { result } = query
   return {
     props: { sessionData: session, result }, // will be passed to the page component as props

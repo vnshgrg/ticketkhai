@@ -46,7 +46,6 @@ export const useRegistration = () => {
       }
       reset()
     } catch (error) {
-      console.log("Error:", error.response?.data?.message || error.message)
       setApiError(
         error.response?.data?.message || error.message || "An error occurred."
       )

@@ -22,7 +22,7 @@ export default function MyTicketsPage({ transactions }) {
       </Head>
       <UserLayout>
         <div className="relative mx-auto max-w-4xl">
-          <h1 className="text-xl font-medium tracking-tight text-slate-900">
+          <h1 className="flex items-center justify-between text-lg font-medium tracking-tight text-slate-900 sm:text-xl">
             {t("ticket-your-tickets")}
           </h1>
           <div className="mt-4 mb-6">
@@ -35,12 +35,30 @@ export default function MyTicketsPage({ transactions }) {
                 })}
               </div>
             ) : (
-              <div className="space-y-5">
-                <p>{t("no-tickets")}</p>
-                <Button variant="subtle">{t("go-home")}</Button>
-              </div>
+              <p>{t("no-tickets")}</p>
             )}
           </div>
+
+          {pending.filter((transaction) => transaction.status === "authorized")
+            .length > 0 && (
+            <div className="pt-4">
+              <h1 className="flex items-center justify-between text-lg font-medium tracking-tight text-slate-900 sm:text-xl">
+                {t("awaiting-payment")}
+              </h1>
+              <div className="mt-4 mb-6">
+                <div className="space-y-4">
+                  {pending.map((transaction) => {
+                    return (
+                      <AwaitingPayment
+                        key={transaction.id}
+                        transaction={transaction}
+                      />
+                    )
+                  })}
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </UserLayout>
     </Layout>

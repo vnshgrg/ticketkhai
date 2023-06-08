@@ -8,8 +8,6 @@ const client = twilio(
 export const sendSMS = async (number: string, message: string) => {
   try {
     if (process.env.DISABLE_SMS_SENDING) {
-      console.log("Send SMS using twilio:")
-      console.log({ to: number, message })
       return null
     } else {
       const result = client.messages.create({

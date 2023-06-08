@@ -28,12 +28,10 @@ export const useLogin = () => {
         redirect: false,
       })
 
-      console.log(ok, error, url)
       if (!ok) {
         router.replace({ pathname: "/login", query: { error } })
         return
       } else {
-        console.log("login successful")
         router.replace({ pathname: "/" })
         return
       }
