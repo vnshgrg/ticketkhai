@@ -8,6 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "preview": "next build && next start",
+    "schema:migrate": "npx prisma migrate dev",
+    "schema:deploy": "npx prisma deploy",
     "stripe:webhook": "/usr/local/bin/stripe listen --forward-to http://localhost:3000/api/webhook/stripe --forward-connect-to http://localhost:3000/api/webhook/stripe"
   },
   "dependencies": {
