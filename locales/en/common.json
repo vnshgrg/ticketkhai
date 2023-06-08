@@ -78,5 +78,7 @@
   "ts-failed": "Failed",
   "ts-cancelled": "Cancelled",
   "ts-created": "Pending",
-  "awaiting-payment": "Awaiting payment"
+  "awaiting-payment": "Awaiting payment",
+  "cancel-ticket": "Cancel ticket",
+  "cancel-ticket-confirm": "Are you sure you want to cancel your {{ticketType}} ticket for {{eventName}}?"
 }

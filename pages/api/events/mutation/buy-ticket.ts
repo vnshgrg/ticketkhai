@@ -1,9 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from "next"
 import { createCustomer, searchCustomer } from "@/src/lib"
 import { DB } from "@/src/utils/db"
-import axios from "axios"
+import { KomojuStatus } from "@prisma/client"
 import { getServerSession } from "next-auth/next"
-import qs from "qs"
 import Stripe from "stripe"
 
 import { demoEvents } from "@/src/config/events"
@@ -41,10 +40,41 @@ const buyTicketHandler = async (
 
         const { eventId, ticketId, noOfTickets }: Partial<BuyTicketParams> =
           body
-        // const { handlingFee, paymentFee, tax } = siteConfig.fees
+
+        const maxNoOfTicketsAllowedForSingleTransaction = 20
+
+        if (noOfTickets > maxNoOfTicketsAllowedForSingleTransaction) {
+          res.status(400).json({
+            result: false,
+            message: `Purchase of more than ${maxNoOfTicketsAllowedForSingleTransaction} tickets is not allowed.`,
+          })
+          return
+        }
 
         const event = demoEvents.find((event) => event.id === eventId)
         const ticket = event.tickets.find((ticket) => ticket.id === ticketId)
+
+        const soldTickets = await DB.transaction.aggregate({
+          _sum: {
+            quantity: true,
+          },
+          where: {
+            status: KomojuStatus.captured,
+            ticketTypeId: ticketId,
+            eventId,
+          },
+        })
+
+        if (
+          soldTickets._sum.quantity + noOfTickets >
+          ticket.maximumNumberOfTicketsAvailable
+        ) {
+          res.status(400).json({
+            result: false,
+            message: `${noOfTickets} ${ticket.title} for ${event.title} is currently unavailable.`,
+          })
+          return
+        }
 
         const subtotal = ticket.price * noOfTickets
         // const paymentFeeAmount = paymentFee ? subtotal * (paymentFee / 100) : 0
@@ -91,7 +121,6 @@ const buyTicketHandler = async (
               mobile,
             })
           }
-          console.log("customer", customer.id)
 
           // Create Checkout Sessions from body params.
           const session = await stripe.checkout.sessions.create({
@@ -146,7 +175,7 @@ const buyTicketHandler = async (
             message: "",
             data: { session_url: session.url },
           })
-          // return
+          return
         } catch (error) {
           console.log(error.message)
           console.log(error.response?.data)

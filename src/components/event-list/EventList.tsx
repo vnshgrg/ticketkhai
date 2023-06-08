@@ -32,8 +32,14 @@ type PaymentDetail = {
 
 export const EventList = (): React.ReactElement => {
   const { status } = useSession()
-  const { loading, error, data, purchaseTicket, ticketPurchaseLoading } =
-    useEvents()
+  const {
+    loading,
+    error,
+    data,
+    resetError,
+    purchaseTicket,
+    ticketPurchaseLoading,
+  } = useEvents()
   const { register, errors, watch } = useBuyTicket()
   const router = useRouter()
   const { t } = useTranslation("common")
@@ -43,7 +49,21 @@ export const EventList = (): React.ReactElement => {
   }
 
   if (error) {
-    return <div>{error}</div>
+    return (
+      <div>
+        <div className="mb-4 rounded bg-red-100 py-2 px-4 text-red-600">
+          {error}
+        </div>
+        <Button
+          variant="subtle"
+          onClick={() => {
+            resetError()
+          }}
+        >
+          Okay
+        </Button>
+      </div>
+    )
   }
 
   const events: Event[] = data?.data
@@ -87,7 +107,7 @@ export const EventList = (): React.ReactElement => {
               />
             </div>
             <div className="relative">
-              <div className="z-10 -mt-32 h-32 w-full  bg-gradient-to-b from-transparent to-80% to-white">
+              <div className="to-80% z-10 -mt-32 h-32  w-full bg-gradient-to-b from-transparent to-white">
                 &nbsp;
               </div>
               <div className="-mt-32 h-full w-full space-y-6 p-4 text-sm">
@@ -102,9 +122,9 @@ export const EventList = (): React.ReactElement => {
                 <div className="font-sm text-slate-800">
                   {event.description}
                 </div>
-                <div className="text-slate-800 grid gap-y-4 grid-cols-2 text-xs">
+                <div className="grid grid-cols-2 gap-y-4 text-xs text-slate-800">
                   <div>
-                    <div className="font-medium text-xs uppercase">
+                    <div className="text-xs font-medium uppercase">
                       {t("event-date")}
                     </div>
                     <div>
@@ -114,7 +134,7 @@ export const EventList = (): React.ReactElement => {
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="font-medium text-xs uppercase">
+                    <div className="text-xs font-medium uppercase">
                       {t("event-time")}
                     </div>
                     <div>
@@ -124,14 +144,14 @@ export const EventList = (): React.ReactElement => {
                     </div>
                   </div>
                   <div>
-                    <div className="font-medium text-xs uppercase">
+                    <div className="text-xs font-medium uppercase">
                       {t("event-venue")}
                     </div>
                     <div>{event.venue.title}</div>
                   </div>
 
                   <div className="text-right">
-                    <div className="font-medium text-xs uppercase">
+                    <div className="text-xs font-medium uppercase">
                       {t("event-gate-open")}
                     </div>
                     <div>
@@ -141,14 +161,17 @@ export const EventList = (): React.ReactElement => {
                     </div>
                   </div>
                   <div className="col-span-2">
-                    <div className="font-medium text-xs uppercase">
+                    <div className="text-xs font-medium uppercase">
                       {t("event-address")}
                     </div>
                     <div>{readableAddress(event.venue.address)}</div>
                   </div>
-                  {event.notices.map((notice) => {
+                  {event.notices.map((notice, index) => {
                     return (
-                      <div className="col-span-2 font-semibold text-sm text-white bg-red-600 py-2 px-3 rounded">
+                      <div
+                        key={index}
+                        className="col-span-2 rounded bg-red-600 py-2 px-3 text-sm font-semibold text-white"
+                      >
                         {notice}
                       </div>
                     )
