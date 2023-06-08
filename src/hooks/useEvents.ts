@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react"
 import { useRouter } from "next/router"
 import axios from "axios"
+import qs from "qs"
+
+import { demoEvents } from "../config/events"
+import { siteConfig } from "../config/site"
 
 export const useEvents = () => {
   const [loading, setLoading] = useState<boolean>(true)
