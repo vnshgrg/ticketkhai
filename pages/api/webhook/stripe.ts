@@ -106,6 +106,14 @@ const stripeWebhookHandler = async (
             .json({ result: true, message: "Transaction expired." })
         } else if (hook.type === "checkout.session.expired") {
           const expiredCheckoutSession = hook.data.object
+
+          await DB.transaction.update({
+            where: { id: expiredCheckoutSession.metadata.transactionId },
+            data: {
+              status: KomojuStatus.expired,
+            },
+          })
+
           await recordWebhook({
             transactionId: expiredCheckoutSession.metadata.transactionId,
             transactionData: { status: KomojuStatus.expired },
