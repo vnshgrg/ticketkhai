@@ -59,7 +59,7 @@ export const AwaitingPayment = ({ transaction }) => {
             {moment(transaction.updatedAt * 1000).format("Do MMMM, YYYY h:mmA")}
           </div>
         </div>
-        <div className="col-span-2 hidden space-y-2 flex-col text-center sm:col-span-1 sm:flex sm:text-right">
+        <div className="col-span-2 hidden flex-col space-y-2 text-center sm:col-span-1 sm:flex sm:text-right">
           <div>
             <div
               className={cn([
