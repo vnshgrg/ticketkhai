@@ -89,22 +89,23 @@ enum TicketStatus {
 }
 
 model Transaction {
-  id           String       @id @default(cuid())
-  userId       String
-  eventId      String
-  ticketTypeId String
-  unitPrice    Int
-  quantity     Int
-  discount     Int?         @default(0)
-  tax          Int?         @default(0)
-  handlingFee  Int?         @default(0)
-  totalPrice   Int
-  status       KomojuStatus @default(created)
-  createdAt    DateTime     @default(now())
-  updatedAt    DateTime     @updatedAt
-  deletedAt    DateTime?
-  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
-  tickets      Ticket[]
+  id              String       @id @default(cuid())
+  userId          String
+  eventId         String
+  ticketTypeId    String
+  stripeSessionId String?
+  unitPrice       Int
+  quantity        Int
+  discount        Int?         @default(0)
+  tax             Int?         @default(0)
+  handlingFee     Int?         @default(0)
+  totalPrice      Int
+  status          KomojuStatus @default(created)
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+  deletedAt       DateTime?
+  user            User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tickets         Ticket[]
 }
 
 model Ticket {

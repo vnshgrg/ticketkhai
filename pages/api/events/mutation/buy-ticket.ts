@@ -164,7 +164,12 @@ const buyTicketHandler = async (
               transactionId: transaction.id,
             },
           })
-          // res.redirect(303, session.url)
+
+          await DB.transaction.update({
+            where: { id: transaction.id },
+            data: { stripeSessionId: session.id },
+          })
+
           res.status(200).json({
             result: true,
             message: "",

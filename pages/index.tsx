@@ -54,12 +54,12 @@ export default function IndexPage(props) {
 
   return (
     <Layout>
-      <div className="mx-auto max-w-lg flex flex-col px-5 py-10 space-y-4">
+      <div className="mx-auto flex max-w-lg flex-col space-y-4 px-5 py-10">
         <h1 className="grow text-lg font-extrabold leading-tight tracking-tighter text-slate-800 dark:text-slate-200 sm:text-xl md:text-2xl lg:text-3xl">
           {t("site-name")}
         </h1>
         <p className="grow text-lg text-slate-700 dark:text-slate-400 sm:text-lg">
-          {t("site-subtitle")} aasdf
+          {t("site-subtitle")}
         </p>
         {content}
         <EventList />
@@ -71,6 +71,6 @@ export default function IndexPage(props) {
 export async function getServerSideProps({ req, res }) {
   const session = await getServerSession(req, res, authOptions)
   return {
-    props: { sessionData: session, message: "hello" }, // will be passed to the page component as props
+    props: { sessionData: session }, // will be passed to the page component as props
   }
 }

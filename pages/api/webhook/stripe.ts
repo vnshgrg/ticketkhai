@@ -63,7 +63,7 @@ const stripeWebhookHandler = async (
             try {
               await sendSMS({
                 provider: "twilio",
-                message: `Your ticket purchase is await payment. Pay now by visiting ${siteConfig.baseurl}`,
+                message: `Your ticket purchase is awaiting payment. Pay now: ${siteConfig.baseurl}`,
                 to: user.mobile,
               })
             } catch (error) {
