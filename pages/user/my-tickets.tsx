@@ -1,12 +1,11 @@
 import Head from "next/head"
-import { Layout, Ticket, UserLayout } from "@/src/components"
+import { AwaitingPayment, Layout, Ticket, UserLayout } from "@/src/components"
 import { listAvailableTickets, listPendingTransactions } from "@/src/utils/user"
 import _ from "lodash"
 import { getServerSession } from "next-auth/next"
 import useTranslation from "next-translate/useTranslation"
 
 import { siteConfig } from "@/src/config/site"
-import { AwaitingPayment } from "@/src/components/AwaitingPayment"
 import { Button } from "@/src/components/ui/button"
 import { authOptions } from "../api/auth/[...nextauth]"
 
