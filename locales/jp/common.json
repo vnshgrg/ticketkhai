@@ -76,5 +76,7 @@
   "ts-failed": "失敗しました",
   "ts-cancelled": "キャンセル",
   "ts-created": "保留中",
-  "awaiting-payment": "支払い待ち"
+  "awaiting-payment": "支払い待ち",
+  "cancel-ticket": "チケット購入をキャンセル",
+  "cancel-ticket-confirm": "{{eventName}} の {{ticketType}} チケットをキャンセルしてもよろしいですか?"
 }

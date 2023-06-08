@@ -1,5 +1,6 @@
 import { useState } from "react"
 import Link from "next/link"
+import axios from "axios"
 import moment from "moment"
 import useTranslation from "next-translate/useTranslation"
 
@@ -14,14 +15,24 @@ export const AwaitingPayment = ({ transaction }) => {
   return (
     <div className="space-y-2 divide-y-2 divide-slate-100 rounded-xl bg-white py-3 px-4 text-sm shadow-md shadow-slate-100">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-        <div className="space-y-2">
-          <h2 className="text-base">
+        <div className="flex flex-col-reverse sm:flex-row">
+          <h2 className="mt-2 text-base sm:mt-0">
             <span className="font-semibold">{transaction.event.title}</span>
             <span className="hidden sm:inline">
               {" "}
               - {transaction.event.subtitle}
             </span>
           </h2>
+          <div className="sm:ml-4">
+            <div
+              className={cn([
+                "inline-block rounded py-1 px-2 text-xs",
+                TransactionStatus[transaction.status].classNames,
+              ])}
+            >
+              {t(`ts-${transaction.status}`)}
+            </div>
+          </div>
         </div>
         <div className="mt-1 sm:mt-0 sm:text-right">
           <div className="hidden sm:block">{t("ticket-transaction-id")}</div>
@@ -61,16 +72,6 @@ export const AwaitingPayment = ({ transaction }) => {
         </div>
         <div className="col-span-2 hidden flex-col space-y-2 text-center sm:col-span-1 sm:flex sm:text-right">
           <div>
-            <div
-              className={cn([
-                "inline-block rounded py-1 px-2 text-xs",
-                TransactionStatus[transaction.status].classNames,
-              ])}
-            >
-              {t(`ts-${transaction.status}`)}
-            </div>
-          </div>
-          <div>
             {transaction.paymentDetails && (
               <Button
                 variant="subtle"
@@ -85,18 +86,8 @@ export const AwaitingPayment = ({ transaction }) => {
         </div>
       </div>
 
-      <div className="col-span-2 space-y-2 pt-2 text-center sm:col-span-1 sm:hidden sm:text-right">
-        <div
-          className={cn([
-            "inline-block rounded py-1 px-2 text-xs",
-            TransactionStatus[transaction.status].classNames,
-          ])}
-        >
-          {t(`ts-${transaction.status}`)}
-        </div>
-      </div>
       {transaction.paymentDetails && (
-        <div className="col-span-2 space-y-2 pt-3 text-center sm:col-span-1 sm:hidden sm:text-right">
+        <div className="col-span-2 space-y-2 pt-3 pb-1 text-center sm:col-span-1 sm:hidden sm:text-right">
           <Button
             variant="subtle"
             width="full"
@@ -188,16 +179,20 @@ export const AwaitingPayment = ({ transaction }) => {
               ))}
             </div>
           </div>
-          <div className={`py-4 text-center text-slate-600 sm:pb-2`}>
-            {t("pd-message", {
-              amount: new Intl.NumberFormat("ja-JP", {
-                style: "currency",
-                currency: "JPY",
-              }).format(
-                transaction.paymentDetails.display_bank_transfer_instructions
-                  .amount_remaining
-              ),
-            })}
+          <div
+            className={`flex items-center justify-center py-4 text-slate-600 sm:pb-2`}
+          >
+            <div className="">
+              {t("pd-message", {
+                amount: new Intl.NumberFormat("ja-JP", {
+                  style: "currency",
+                  currency: "JPY",
+                }).format(
+                  transaction.paymentDetails.display_bank_transfer_instructions
+                    .amount_remaining
+                ),
+              })}
+            </div>
           </div>
         </div>
       )}
