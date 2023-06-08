@@ -59,7 +59,7 @@ export default function IndexPage(props) {
           {t("site-name")}
         </h1>
         <p className="grow text-lg text-slate-700 dark:text-slate-400 sm:text-lg">
-          {t("site-subtitle")}
+          {t("site-subtitle")} aasdf
         </p>
         {content}
         <EventList />
@@ -71,6 +71,6 @@ export default function IndexPage(props) {
 export async function getServerSideProps({ req, res }) {
   const session = await getServerSession(req, res, authOptions)
   return {
-    props: { sessionData: session }, // will be passed to the page component as props
+    props: { sessionData: session, message: "hello" }, // will be passed to the page component as props
   }
 }
