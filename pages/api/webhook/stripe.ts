@@ -146,9 +146,14 @@ const stripeWebhookHandler = async (
             // send SMS
             const { amount_remaining } =
               next_action.display_bank_transfer_instructions
+
+            const parsedAmountRemaining = new Intl.NumberFormat("ja-JP", {
+              style: "currency",
+              currency: "JPY",
+            }).format(amount_remaining)
             const textMessage = {
               to: user.mobile,
-              message: `Partial payment received. Transfer ￥${amount_remaining} to complete payment.`,
+              message: `Partial payment received. Transfer ${parsedAmountRemaining} to complete payment.`,
             }
             try {
               await sendSMS({ provider: "twilio", ...textMessage })
@@ -172,7 +177,6 @@ const stripeWebhookHandler = async (
           return
         }
       } catch (error) {
-        console.log(error)
         await DB.webhook.create({
           data: {
             result: false,

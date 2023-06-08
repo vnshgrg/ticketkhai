@@ -157,7 +157,6 @@ const webhookHandler = async (
 
         res.status(200).json({ result: true, message: "success" })
       } catch (error) {
-        console.log(error)
         await DB.webhook.create({
           data: {
             result: false,
