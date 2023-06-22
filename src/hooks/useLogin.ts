@@ -23,11 +23,12 @@ export const useLogin = () => {
 
   const onSubmit: SubmitHandler<Login> = async (formValues) => {
     try {
+      debugger
       const { ok, error, url } = await signIn("credentials", {
         ...formValues,
         redirect: false,
       })
-
+      debugger
       if (!ok) {
         router.replace({ pathname: "/login", query: { error } })
         return
