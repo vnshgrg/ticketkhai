@@ -22,6 +22,7 @@ export const authOptions: NextAuthOptions = {
       async authorize(credentials, req) {
         try {
           const { username, password } = credentials
+          debugger
           const { data } = await axios.post(
             `${process.env.NEXT_PUBLIC_SITE_URL}/api/user/login`,
             {
@@ -29,6 +30,7 @@ export const authOptions: NextAuthOptions = {
               password,
             }
           )
+          debugger
           // If no error and we have user data, return it
           if (data) {
             const { accessToken, refreshToken, user } = data
@@ -81,6 +83,9 @@ export const authOptions: NextAuthOptions = {
       }
       return token
     },
+  },
+  session: {
+    strategy: "jwt",
   },
 }
 

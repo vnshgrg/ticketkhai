@@ -71,12 +71,12 @@ export const EventList = (): React.ReactElement => {
   return (
     <div className="">
       {events.map((event) => {
-        const ticketTypesRadioItem: RadioItem[] = event.tickets.map(
-          (ticket) => ({
+        const ticketTypesRadioItem: RadioItem[] = event.tickets
+          .filter((ticket) => ticket.available)
+          .map((ticket) => ({
             label: ticket.title,
             value: ticket.id,
-          })
-        )
+          }))
 
         const currentTicketType =
           event.tickets.find((ticket) => ticket.id === watch("ticketType"))

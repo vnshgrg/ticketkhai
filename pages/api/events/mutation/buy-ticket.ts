@@ -54,6 +54,14 @@ const buyTicketHandler = async (
         const event = demoEvents.find((event) => event.id === eventId)
         const ticket = event.tickets.find((ticket) => ticket.id === ticketId)
 
+        if (!ticket.available) {
+          res.status(400).json({
+            result: false,
+            message: `${ticket.title} tickets are not currently available for sale.`,
+          })
+          return
+        }
+
         const soldTickets = await DB.transaction.aggregate({
           _sum: {
             quantity: true,

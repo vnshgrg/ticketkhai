@@ -82,20 +82,20 @@ export const demoEvents: Event[] = [
     photo: "/images/sratp-tokyo.jpg",
     notices: ["Early birds ticket sold out!"],
     tickets: [
-      // {
-      //   id: "ticket001",
-      //   title: "Early Birds Ticket",
-      //   description: "Early bird tickets at discounted price.",
-      //   price: 3500,
-      //   stripePriceId:
-      //     process.env.ENV === "production"
-      //       ? "price_1NBJoABE6fqNwbho8fWyC7xX"
-      //       : "price_1NCKQMBE6fqNwbhoNI0o4XA0",
-      //   available: true,
-      //   maximumNumberOfTicketsAvailable: 100,
-      //   dateTicketSalesStart: 1682866800,
-      //   dateTicketSalesEnd: 1685545199,
-      // },
+      {
+        id: "ticket001",
+        title: "Early Birds Ticket",
+        description: "Early bird tickets at discounted price.",
+        price: 3500,
+        stripePriceId:
+          process.env.ENV === "production"
+            ? "price_1NBJoABE6fqNwbho8fWyC7xX"
+            : "price_1NCKQMBE6fqNwbhoNI0o4XA0",
+        available: false,
+        maximumNumberOfTicketsAvailable: 100,
+        dateTicketSalesStart: 1682866800,
+        dateTicketSalesEnd: 1685545199,
+      },
       {
         id: "ticket002",
         title: "Standard Ticket",
