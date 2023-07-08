@@ -1,4 +1,5 @@
-import React, { useState } from "react"
+/* eslint-disable @next/next/no-img-element */
+import React from "react"
 import { useRouter } from "next/router"
 import { useBuyTicket, useEvents } from "@/src/hooks"
 import { formatJPY, readableAddress } from "@/src/utils"
