@@ -11,3 +11,10 @@
     @apply flex flex-1 flex-col min-h-screen bg-gray-50 font-sans text-slate-900 antialiased dark:bg-slate-900 dark:text-slate-50;
   }
 }
+
+table#ticket-details tr {
+  @apply [&>*:first-child]:text-right [&>*:first-child]:font-medium;
+}
+table#ticket-details tr td {
+  @apply py-2 px-3;
+}

@@ -1,5 +1,5 @@
 import Head from "next/head"
-import { Layout } from "@/src/components"
+import { Layout, Scanner, UserLayout } from "@/src/components"
 
 import { siteConfig } from "@/src/config/site"
 
@@ -9,7 +9,11 @@ const AdminPage = () => {
       <Head>
         <title>Admin - {siteConfig.name}</title>
       </Head>
-      <h1>Ticket Scanner</h1>
+      <div className="mt-8 w-full">
+        <div className="mx-auto max-w-7xl">
+          <Scanner />
+        </div>
+      </div>
     </Layout>
   )
 }

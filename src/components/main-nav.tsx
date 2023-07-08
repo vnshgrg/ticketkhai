@@ -1,5 +1,6 @@
 import * as React from "react"
 import Link from "next/link"
+import { useSession } from "next-auth/react"
 import useTranslation from "next-translate/useTranslation"
 
 import { NavItem } from "@/src/types/nav"
@@ -11,8 +12,6 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/src/components/ui/dropdown-menu"
 
