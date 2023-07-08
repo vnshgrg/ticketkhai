@@ -116,7 +116,8 @@ model Ticket {
   status        TicketStatus @default(available)
   transactionId String
   createdAt     DateTime     @default(now())
-  upatedAt      DateTime     @updatedAt
+  upatedAt      DateTime
+  updatedAt     DateTime?
   deletedAt     DateTime?
 
   transaction Transaction @relation(fields: [transactionId], references: [id], onDelete: Cascade)

@@ -1,44 +1,27 @@
 import { useRouter } from "next/router"
-import {
-  Brush,
-  Contact,
-  LogIn,
-  LogOut,
-  Mail,
-  MessageSquare,
-  PlusCircle,
-  Settings,
-  User,
-  UserPlus,
-} from "lucide-react"
+import { Contact, LogIn, LogOut, ScanLine, User } from "lucide-react"
 import { signIn, signOut, useSession } from "next-auth/react"
 import { useTheme } from "next-themes"
 import useTranslation from "next-translate/useTranslation"
 
-import { Icons } from "@/src/components/icons"
 import { Button } from "@/src/components/ui/button"
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuPortal,
   DropdownMenuSeparator,
-  DropdownMenuShortcut,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/src/components/ui/dropdown-menu"
 
 export const LoginButton = () => {
-  const { data: session } = useSession()
+  const { data: session, status } = useSession()
   const { setTheme } = useTheme()
   const { t } = useTranslation("common")
   const router = useRouter()
 
   if (session) {
-    const { email, name } = session.user
+    const { mobile, name, role } = session.user
     return (
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
@@ -48,11 +31,11 @@ export const LoginButton = () => {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-56" forceMount>
-          {/* <DropdownMenuLabel>
+          <DropdownMenuLabel>
             <div>My Account</div>
-            <span className="text-xs font-normal">{email}</span>
+            <span className="text-xs font-normal text-slate-500">{mobile}</span>
           </DropdownMenuLabel>
-          <DropdownMenuSeparator /> */}
+          <DropdownMenuSeparator />
           <DropdownMenuItem
             className="cursor-pointer"
             onClick={() => {
@@ -63,43 +46,26 @@ export const LoginButton = () => {
             <span>{t("nav-mypage")}</span>
             {/* <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut> */}
           </DropdownMenuItem>
-          {/* <DropdownMenuItem className="cursor-pointer">
-            <Settings className="mr-2 h-4 w-4" />
-            <span>Settings</span>
-            <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
-          </DropdownMenuItem>
-          <DropdownMenuSeparator />
-          <DropdownMenuSub>
-            <DropdownMenuSubTrigger>
-              <Brush className="mr-2 h-4 w-4" />
-              <span>Appearance</span>
-            </DropdownMenuSubTrigger>
-            <DropdownMenuPortal>
-              <DropdownMenuSubContent>
-                <DropdownMenuItem
-                  className="cursor-pointer"
-                  onClick={() => setTheme("light")}
-                >
-                  <Icons.sun className="mr-2 h-4 w-4" />
-                  <span>Light</span>
-                </DropdownMenuItem>
-                <DropdownMenuItem
-                  className="cursor-pointer"
-                  onClick={() => setTheme("dark")}
-                >
-                  <Icons.moon className="mr-2 h-4 w-4" />
-                  <span>Dark</span>
-                </DropdownMenuItem>
-                <DropdownMenuItem
-                  className="cursor-pointer"
-                  onClick={() => setTheme("system")}
-                >
-                  <Icons.laptop className="mr-2 h-4 w-4" />
-                  <span>System</span>
-                </DropdownMenuItem>
-              </DropdownMenuSubContent>
-            </DropdownMenuPortal>
-          </DropdownMenuSub> */}
+
+          {role === "admin" && (
+            <>
+              <DropdownMenuSeparator />
+              <DropdownMenuLabel>
+                <div>Admin</div>
+                {/* <span className="text-xs font-normal">{email}</span> */}
+              </DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem
+                className="cursor-pointer"
+                onClick={() => {
+                  router.push("/admin/scanner")
+                }}
+              >
+                <ScanLine className="mr-2 h-4 w-4" />
+                <span>Scanner</span>
+              </DropdownMenuItem>
+            </>
+          )}
           <DropdownMenuSeparator />
           <DropdownMenuItem
             className="cursor-pointer"

@@ -1,12 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from "next"
 import { DB } from "@/src/utils/db"
 import { eventById, ticketById } from "@/src/utils/temp"
-import axios from "axios"
 import { getServerSession } from "next-auth/next"
-import qs from "qs"
 
-import { demoEvents } from "@/src/config/events"
-import { siteConfig } from "@/src/config/site"
 import { authOptions } from "../../auth/[...nextauth]"
 
 export interface BuyTicketParams {
