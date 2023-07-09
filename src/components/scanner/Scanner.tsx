@@ -45,6 +45,9 @@ export const Scanner = (): React.ReactElement => {
           data: { result, data },
         } = await axios.get(`/api/admin/ticket?id=${currentScanResult}`)
         if (result) {
+          data.status === "available"
+            ? playAudio(scanSuccessAudio)
+            : playAudio(errorAudio)
           setTicket(data)
         }
       } catch (err) {
@@ -65,7 +68,6 @@ export const Scanner = (): React.ReactElement => {
     // handle the scanned code as you like, for example:
     if (!currentScanResult) {
       setCurrentScanResult(decodedText)
-      playAudio(scanSuccessAudio)
       scanner.pause()
     }
   }
