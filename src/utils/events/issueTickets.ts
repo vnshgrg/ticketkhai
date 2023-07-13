@@ -41,6 +41,7 @@ export const issueTicket: IssueTicket = async ({
         userId: user.id,
         status: TicketStatus.available,
         transactionId,
+        upatedAt: new Date(),
       })
     }
 
@@ -63,6 +64,7 @@ export const issueTicket: IssueTicket = async ({
         },
       }),
     ])
+
     try {
       await sendSMS({
         provider: "twilio",
@@ -71,6 +73,9 @@ export const issueTicket: IssueTicket = async ({
       })
     } catch (error) {
       console.log(error)
+      throw error
     }
-  } catch (error) {}
+  } catch (error) {
+    console.log(error)
+  }
 }

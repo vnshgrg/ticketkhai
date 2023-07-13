@@ -5,7 +5,7 @@ const nextConfig = nextTranslate({
   reactStrictMode: true,
   experimental: {},
   i18n: {
-    locales: ["jp", "en"],
+    locales: ["en", "jp"],
     defaultLocale: "en",
   },
   webpack: (config) => {
