@@ -41,6 +41,11 @@ const myTicektsHandler = async (
           include: { user: true, transaction: true },
         })
 
+        if (!ticket) {
+          res.status(404).json({ result: false, message: "Ticket not found!" })
+          return
+        }
+
         const populatedTickets = {
           ...ticket,
           event: eventById(ticket.eventId),
