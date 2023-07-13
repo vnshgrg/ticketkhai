@@ -51,9 +51,9 @@ export const Scanner = (): React.ReactElement => {
           setTicket(data)
         }
       } catch (err) {
-        const error = err as AxiosError<{ result: boolean; error: string }>
+        const error = err as AxiosError<{ result: boolean; message: string }>
         console.log(error.response)
-        setError(error.response?.data?.error || "An error occurred.")
+        setError(error.response?.data?.message || "An error occurred.")
         playAudio(errorAudio)
       } finally {
         setLoading(false)
@@ -106,9 +106,9 @@ export const Scanner = (): React.ReactElement => {
         playAudio(successAudio)
       }
     } catch (err) {
-      const error = err as AxiosError<{ result: boolean; error: string }>
+      const error = err as AxiosError<{ result: boolean; message: string }>
       console.log(error.response)
-      setError(error.response?.data?.error || "An error occurred.")
+      setError(error.response?.data?.message || "An error occurred.")
       playAudio(errorAudio)
     } finally {
       setLoading(false)
