@@ -50,7 +50,6 @@ export const authOptions: NextAuthOptions = {
       const { account } = data
       // run signIn Callback for each providers
       if (account.provider === "credentials" && account.providerAccountId) {
-        // console.log(data)
         return true
       }
       return false

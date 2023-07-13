@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { TicketStatus } from "@prisma/client"
 import moment from "moment"
 import { useQRCode } from "next-qrcode"
 import useTranslation from "next-translate/useTranslation"
@@ -9,8 +10,19 @@ export const Ticket = ({ transaction }) => {
   const [isShown, setIsShown] = useState(false)
   const { Canvas } = useQRCode()
   const { t } = useTranslation("common")
+
+  const ticketStatusClass = (status: TicketStatus): string => {
+    if (status === TicketStatus.available) {
+      return "bg-green-100 text-green-600"
+    } else if (status === TicketStatus.used) {
+      return "bg-slate-100 text-slate-600"
+    } else if (status === TicketStatus.restricted) {
+      return "bg-red-100 text-red-600"
+    }
+  }
+
   return (
-    <div className="space-y-2 divide-y-2 divide-slate-100 rounded-xl bg-white py-3 px-4 text-sm shadow-md shadow-slate-100">
+    <div className="space-y-2 divide-y-2 divide-slate-100 rounded-xl bg-white px-4 py-3 text-sm shadow-md shadow-slate-100">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h2 className="text-base">
@@ -28,7 +40,7 @@ export const Ticket = ({ transaction }) => {
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-2 gap-y-4 pt-4 pb-2 sm:grid-cols-4 sm:gap-y-0">
+      <div className="grid grid-cols-2 gap-y-4 pb-2 pt-4 sm:grid-cols-4 sm:gap-y-0">
         <div>
           <div className="text-xs uppercase text-slate-500">
             {t("ticket-price")}
@@ -137,11 +149,9 @@ export const Ticket = ({ transaction }) => {
                       {t("ticket-status")}
                     </div>
                     <div
-                      className={`${
-                        ticket.status === "available"
-                          ? "text-green-600"
-                          : "text-slate-500"
-                      }`}
+                      className={`inline-block rounded-full px-2 py-0.5 text-xs uppercase ${ticketStatusClass(
+                        ticket.status
+                      )}`}
                     >
                       {t(`ticket-status-${ticket.status}`)}
                     </div>
