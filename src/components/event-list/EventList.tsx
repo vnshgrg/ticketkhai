@@ -52,7 +52,7 @@ export const EventList = (): React.ReactElement => {
   if (error) {
     return (
       <div>
-        <div className="mb-4 rounded bg-red-100 py-2 px-4 text-red-600">
+        <div className="mb-4 rounded bg-red-100 px-4 py-2 text-red-600">
           {error}
         </div>
         <Button
@@ -108,7 +108,7 @@ export const EventList = (): React.ReactElement => {
               />
             </div>
             <div className="relative">
-              <div className="to-80% z-10 -mt-32 h-32  w-full bg-gradient-to-b from-transparent to-white">
+              <div className="z-10 -mt-32 h-32 w-full  bg-gradient-to-b from-transparent to-white to-80%">
                 &nbsp;
               </div>
               <div className="-mt-32 h-full w-full space-y-6 p-4 text-sm">
@@ -171,7 +171,7 @@ export const EventList = (): React.ReactElement => {
                     return (
                       <div
                         key={index}
-                        className="col-span-2 rounded bg-red-600 py-2 px-3 text-sm font-semibold text-white"
+                        className="col-span-2 rounded bg-red-600 px-3 py-2 text-sm font-semibold text-white"
                       >
                         {notice}
                       </div>
@@ -180,9 +180,9 @@ export const EventList = (): React.ReactElement => {
                 </div>
                 <Sheet>
                   <SheetTrigger asChild>
-                    <Button className={buttonVariants({ variant: "default" })}>
+                    {/* <Button className={buttonVariants({ variant: "default" })}>
                       {t("buy-tickets")}
-                    </Button>
+                    </Button> */}
                   </SheetTrigger>
                   <SheetContent
                     position={"right"}

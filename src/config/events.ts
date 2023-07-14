@@ -80,7 +80,7 @@ export const demoEvents: Event[] = [
     dateTicketSalesStart: 1685113200,
     maximumNumberOfTicketsAvailable: 1000,
     photo: "/images/sratp-tokyo.jpg",
-    notices: ["Early birds ticket sold out!"],
+    notices: ["Ticket sales are closed."],
     tickets: [
       {
         id: "ticket001",
