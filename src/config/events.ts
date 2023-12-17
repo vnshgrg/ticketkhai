@@ -56,31 +56,32 @@ export type Ticket = {
 
 export const demoEvents: Event[] = [
   {
-    id: "event001",
-    title: "Sabin Rai & The Pharaoh",
+    id: "event002",
+    title: "DONG live in Tokyo",
     subtitle: "Tokyo",
     description:
-      "Our artist (Sabin Rai & The Pharaoh) for this event is one of the best Nepali bands of the current music scenario. With their back-to-back hit songs released, there is almost no Nepalese in the world who does not know about this band and their songs. They have performed concerts various countries. This is going to be their 1st time to perform in Japan as a band.",
+      "Gazzab entertainment presents DONG live in Tokyo. Let's celebrate the start of the year with one of the most successful rapper of Nepal.",
     venue: {
-      id: "venue001",
-      title: "SHIBUYA STREAM HALL",
+      id: "venue002",
+      title: "Nightclub WARP SHINJUKU",
       description: "",
+
       address: {
         id: "address001",
-        postalCode: "150-0002",
+        postalCode: "160-0021",
         prefecture: "Tokyo",
-        city: "Shibuya-ku",
-        addressLine1: "Shibuya ３-２１-３",
+        city: "Shinjuku-ku",
+        addressLine1: "Kabukicho 1 Chome−21−1 B1",
       },
-      access: "1 minute walk from Shibuya Station",
+      access: "5 minute walk from Shinjuku Station",
     },
-    dateStart: 1689411600,
-    dateEnd: 1689426000,
-    dateGateOpen: 1689404400,
-    dateTicketSalesStart: 1685113200,
+    dateStart: 1704528000,
+    dateEnd: 1704546000,
+    dateGateOpen: 1704524400,
+    dateTicketSalesStart: 1702833550,
     maximumNumberOfTicketsAvailable: 1000,
-    photo: "/images/sratp-tokyo.jpg",
-    notices: ["Ticket sales are closed."],
+    photo: "/images/dong-tokyo.jpg",
+    notices: [],
     tickets: [
       {
         id: "ticket001",
@@ -89,38 +90,51 @@ export const demoEvents: Event[] = [
         price: 3500,
         stripePriceId:
           process.env.ENV === "production"
-            ? "price_1NBJoABE6fqNwbho8fWyC7xX"
-            : "price_1NCKQMBE6fqNwbhoNI0o4XA0",
-        available: false,
+            ? "price_1OONu3BE6fqNwbhoAabhkksw"
+            : "price_1OOO0kBE6fqNwbho7G3Af08U",
+        available: true,
         maximumNumberOfTicketsAvailable: 100,
-        dateTicketSalesStart: 1682866800,
-        dateTicketSalesEnd: 1685545199,
+        dateTicketSalesStart: 1702833421,
+        dateTicketSalesEnd: 1704553200,
       },
       {
         id: "ticket002",
-        title: "Standard Ticket",
-        description: "Standard price tickets",
-        price: 4500,
+        title: "General Ticket",
+        description: "General price tickets",
+        price: 4000,
         stripePriceId:
           process.env.ENV === "production"
-            ? "price_1NCKGHBE6fqNwbhon6th1MTg"
-            : "price_1NCKQfBE6fqNwbhoH4kKvfSg",
+            ? "price_1OONuqBE6fqNwbhoWM4fz4YR"
+            : "price_1OOO11BE6fqNwbhoaUEG0oe0",
         available: true,
-        maximumNumberOfTicketsAvailable: 600,
-        dateTicketSalesStart: 1685545200,
+        maximumNumberOfTicketsAvailable: 200,
+        dateTicketSalesStart: 1702833421,
       },
       {
         id: "ticket003",
+        title: "Standard Ticket",
+        description: "Standard tickets",
+        price: 5000,
+        stripePriceId:
+          process.env.ENV === "production"
+            ? "price_1OONvpBE6fqNwbhowIcEn7S9"
+            : "price_1OOO1eBE6fqNwbhoQaOmwDsd",
+        available: true,
+        maximumNumberOfTicketsAvailable: 200,
+        dateTicketSalesStart: 1702833421,
+      },
+      {
+        id: "ticket004",
         title: "VIP Ticket",
-        description: "VIP price tickets",
+        description: "VIP tickets",
         price: 10000,
         stripePriceId:
           process.env.ENV === "production"
-            ? "price_1NCKGeBE6fqNwbhoITSQZkOv"
-            : "price_1NCKQuBE6fqNwbho4UOuNwIx",
+            ? "price_1OONx9BE6fqNwbhos4ppPM3u"
+            : "price_1OOO25BE6fqNwbho11NofRzq",
         available: true,
         maximumNumberOfTicketsAvailable: 100,
-        dateTicketSalesStart: 1685545200,
+        dateTicketSalesStart: 1702833421,
       },
     ],
   },

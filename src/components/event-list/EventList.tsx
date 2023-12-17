@@ -180,9 +180,9 @@ export const EventList = (): React.ReactElement => {
                 </div>
                 <Sheet>
                   <SheetTrigger asChild>
-                    {/* <Button className={buttonVariants({ variant: "default" })}>
+                    <Button className={buttonVariants({ variant: "default" })}>
                       {t("buy-tickets")}
-                    </Button> */}
+                    </Button>
                   </SheetTrigger>
                   <SheetContent
                     position={"right"}
