@@ -3,6 +3,7 @@ import { DB } from "@/src/utils/db"
 import { eventById, ticketById } from "@/src/utils/temp"
 import { getServerSession } from "next-auth/next"
 
+import { demoEvents } from "@/src/config/events"
 import { authOptions } from "../../auth/[...nextauth]"
 
 export interface BuyTicketParams {
@@ -29,7 +30,10 @@ const myTicektsHandler = async (
         }
 
         const { user } = session
-        // update transaction with komoju session
+        const activeEvents = demoEvents.map(({ id }) => id)
+
+        console.log({ activeEvents })
+
         const { tickets } = await DB.user.findUnique({
           where: { id: user.id },
           select: {
@@ -37,13 +41,15 @@ const myTicektsHandler = async (
           },
         })
 
-        const populatedTickets = tickets.map((ticket) => {
-          return {
-            ...ticket,
-            event: eventById(ticket.eventId),
-            ...ticketById(ticket.eventId, ticket.ticketTypeId),
-          }
-        })
+        const populatedTickets = tickets
+          .filter(({ eventId }) => activeEvents.includes(eventId))
+          .map((ticket) => {
+            return {
+              ...ticket,
+              event: eventById(ticket.eventId),
+              ...ticketById(ticket.eventId, ticket.ticketTypeId),
+            }
+          })
 
         res
           .status(200)

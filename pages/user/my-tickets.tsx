@@ -22,7 +22,7 @@ export default function MyTicketsPage({ tickets, pending }) {
             {t("ticket-your-tickets")}
             <Button variant="subtle">{t("go-home")}</Button>
           </h1>
-          <div className="mt-4 mb-6">
+          <div className="mb-6 mt-4">
             {tickets.length > 0 ? (
               <div className="space-y-4">
                 {tickets.map((transaction) => {
@@ -42,7 +42,7 @@ export default function MyTicketsPage({ tickets, pending }) {
               <h1 className="flex items-center justify-between text-lg font-medium tracking-tight text-slate-900 sm:text-xl">
                 {t("awaiting-payment")}
               </h1>
-              <div className="mt-4 mb-6">
+              <div className="mb-6 mt-4">
                 <div className="space-y-4">
                   {pending.map((transaction) => {
                     return (

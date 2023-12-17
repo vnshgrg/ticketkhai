@@ -3,13 +3,22 @@ import { KomojuStatus } from "@prisma/client"
 import _ from "lodash"
 import moment from "moment"
 
+import { demoEvents } from "@/src/config/events"
 import { DB } from "../db"
 import { eventById, ticketById } from "../temp"
 
 export const listPendingTransactions = async (userId) => {
+  const activeEvents = demoEvents.map(({ id }) => id)
+
   try {
     const transactions = await DB.transaction.findMany({
-      where: { AND: [{ userId }, { NOT: { status: KomojuStatus.captured } }] },
+      where: {
+        AND: [
+          { userId },
+          { NOT: { status: KomojuStatus.captured } },
+          { OR: activeEvents.map((id) => ({ eventId: id })) },
+        ],
+      },
       select: {
         id: true,
         eventId: true,

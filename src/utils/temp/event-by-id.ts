@@ -6,7 +6,8 @@ export const eventById = (eventId: string): Event => {
       (event) => eventId === event.id
     )[0]
     if (!filteredDemoEvent) {
-      throw new Error("No even found")
+      // throw new Error("No even found")
+      return null
     }
     return filteredDemoEvent
   } catch (error) {
