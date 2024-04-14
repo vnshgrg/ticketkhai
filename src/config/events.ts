@@ -83,7 +83,7 @@ export const demoEvents: Event[] = [
     dateGateOpen: getTimestamp('2024-04-29  17:00:00'),
     dateTicketSalesStart: getTimestamp('2024-04-14  00:00:00'),
     maximumNumberOfTicketsAvailable: 1000,
-    photo: "/images/dong-tokyo.jpg",
+    photo: "/images/degree-maila.jpg",
     notices: [],
     tickets: [
       {

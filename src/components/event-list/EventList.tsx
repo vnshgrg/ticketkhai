@@ -116,7 +116,7 @@ export const EventList = (): React.ReactElement => {
                   {event.title}
                 </div>
                 <div className="flex items-center justify-center">
-                  <h3 className="inline-block font-bold uppercase text-white">
+                  <h3 className="inline-block font-bold uppercase text-red-600">
                     {event.subtitle}
                   </h3>
                 </div>
