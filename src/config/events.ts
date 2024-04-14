@@ -1,5 +1,6 @@
-import moment from "moment"
-import { MomentInput, MomentLongDateFormat } from "moment"
+import moment from "moment-timezone"
+import { MomentInput } from "moment"
+
 
 export type Event = {
   id: string
@@ -117,5 +118,5 @@ export const demoEvents: Event[] = [
 ]
 
 function getTimestamp(date: MomentInput) {
-  return moment(date).unix();
+  return moment.tz(date, 'Asia/Tokyo').unix();
 }
