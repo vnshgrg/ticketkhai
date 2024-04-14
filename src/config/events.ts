@@ -1,3 +1,6 @@
+import moment from "moment"
+import { MomentInput, MomentLongDateFormat } from "moment"
+
 export type Event = {
   id: string
   title: string
@@ -56,86 +59,63 @@ export type Ticket = {
 
 export const demoEvents: Event[] = [
   {
-    id: "event002",
-    title: "DONG live in Tokyo",
+    id: "event003",
+    title: "Degree Maila",
     subtitle: "Tokyo",
     description:
-      "Gazzab entertainment presents DONG live in Tokyo. Let's celebrate the start of the year with one of the most successful rapper of Nepal.",
+      "",
     venue: {
-      id: "venue002",
-      title: "Nightclub WARP SHINJUKU",
+      id: "venue003",
+      title: "Nakano Zero Hall",
       description: "",
 
       address: {
-        id: "address001",
-        postalCode: "160-0021",
+        id: "address003",
+        postalCode: "164-0001",
         prefecture: "Tokyo",
-        city: "Shinjuku-ku",
-        addressLine1: "Kabukicho 1 Chome−21−1 B1",
+        city: "Nakano-ku",
+        addressLine1: "Nakano 2-9-7 ",
       },
-      access: "5 minute walk from Shinjuku Station",
+      access: "5 minute walk from Nakano Station",
     },
-    dateStart: 1704528000,
-    dateEnd: 1704546000,
-    dateGateOpen: 1704524400,
-    dateTicketSalesStart: 1702833550,
+    dateStart: getTimestamp('2024-04-29 18:00:00'),
+    dateEnd: getTimestamp('2024-04-29  23:59:59'),
+    dateGateOpen: getTimestamp('2024-04-29  17:00:00'),
+    dateTicketSalesStart: getTimestamp('2024-04-14  00:00:00'),
     maximumNumberOfTicketsAvailable: 1000,
     photo: "/images/dong-tokyo.jpg",
     notices: [],
     tickets: [
       {
-        id: "ticket001",
-        title: "Early Birds Ticket",
-        description: "Early bird tickets at discounted price.",
-        price: 3500,
+        id: "ticket011",
+        title: "Students",
+        description: "Discounted ticker for students.",
+        price: 2500,
         stripePriceId:
           process.env.ENV === "production"
-            ? "price_1OONu3BE6fqNwbhoAabhkksw"
-            : "price_1OOO0kBE6fqNwbho7G3Af08U",
+            ? "price_1P5MP2BE6fqNwbhoIa6U2qH0"
+            : "price_1P5M4HBE6fqNwbhoPUpcrccT",
         available: true,
-        maximumNumberOfTicketsAvailable: 100,
-        dateTicketSalesStart: 1702833421,
-        dateTicketSalesEnd: 1704553200,
+        maximumNumberOfTicketsAvailable: 500,
+        dateTicketSalesStart: getTimestamp('2024-04-14  00:00:00'),
       },
       {
-        id: "ticket002",
+        id: "ticket012",
         title: "General Ticket",
         description: "General price tickets",
-        price: 4000,
+        price: 3000,
         stripePriceId:
           process.env.ENV === "production"
-            ? "price_1OONuqBE6fqNwbhoWM4fz4YR"
-            : "price_1OOO11BE6fqNwbhoaUEG0oe0",
+            ? "price_1P5MOSBE6fqNwbhoCoarnrAI"
+            : "price_1P5M59BE6fqNwbhoYfH1yIju",
         available: true,
-        maximumNumberOfTicketsAvailable: 200,
-        dateTicketSalesStart: 1702833421,
-      },
-      {
-        id: "ticket003",
-        title: "Standard Ticket",
-        description: "Standard tickets",
-        price: 5000,
-        stripePriceId:
-          process.env.ENV === "production"
-            ? "price_1OONvpBE6fqNwbhowIcEn7S9"
-            : "price_1OOO1eBE6fqNwbhoQaOmwDsd",
-        available: true,
-        maximumNumberOfTicketsAvailable: 200,
-        dateTicketSalesStart: 1702833421,
-      },
-      {
-        id: "ticket004",
-        title: "VIP Ticket",
-        description: "VIP tickets",
-        price: 10000,
-        stripePriceId:
-          process.env.ENV === "production"
-            ? "price_1OONx9BE6fqNwbhos4ppPM3u"
-            : "price_1OOO25BE6fqNwbho11NofRzq",
-        available: true,
-        maximumNumberOfTicketsAvailable: 100,
-        dateTicketSalesStart: 1702833421,
+        maximumNumberOfTicketsAvailable: 1000,
+        dateTicketSalesStart: getTimestamp('2024-04-14  00:00:00'),
       },
     ],
   },
 ]
+
+function getTimestamp(date: MomentInput) {
+  return moment(date).unix();
+}
