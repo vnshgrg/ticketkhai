@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react"
-import { cn } from "@/src/lib"
 import { formatJPY } from "@/src/utils"
 import axios, { AxiosError } from "axios"
 import { Html5QrcodeScanner } from "html5-qrcode"
@@ -32,6 +31,8 @@ export const Scanner = (): React.ReactElement => {
         false
       )
 
+      console.log(scanner)
+
       scanner.render(onScanSuccess, onScanFailure)
     }
   }, [])
@@ -52,7 +53,6 @@ export const Scanner = (): React.ReactElement => {
         }
       } catch (err) {
         const error = err as AxiosError<{ result: boolean; message: string }>
-        console.log(error.response)
         setError(error.response?.data?.message || "An error occurred.")
         playAudio(errorAudio)
       } finally {
