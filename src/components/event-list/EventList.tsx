@@ -141,7 +141,7 @@ export const EventList = (): React.ReactElement => {
                     <div>
                       {moment(event.dateStart * 1000)
                         .locale("ja")
-                        .format("h:mmA")}
+                        .format("hh:mmA")}
                     </div>
                   </div>
                   <div>
@@ -158,7 +158,7 @@ export const EventList = (): React.ReactElement => {
                     <div>
                       {moment(event.dateGateOpen * 1000)
                         .locale("ja")
-                        .format("h:mmA")}
+                        .format("hh:mmA")}
                     </div>
                   </div>
                   <div className="col-span-2">
