@@ -64,7 +64,7 @@ export default function IndexPage() {
           </DL>
           <DL label="サポート (Support)">
             info@ticketkhai.com (24時間・年休無給)<br />
-            047-709-5154 (平成　9:00時〜17:00時)<br />
+            047-709-5154 (平日　9:00時〜17:00時)<br />
           </DL>
           <DL label="Payment period">
             <p>
