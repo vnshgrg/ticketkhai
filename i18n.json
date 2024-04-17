@@ -1,6 +1,6 @@
 {
   "locales": ["en", "jp"],
-  "defaultLocale": "en",
+  "defaultLocale": "jp",
   "pages": {
     "*": ["common"]
   }

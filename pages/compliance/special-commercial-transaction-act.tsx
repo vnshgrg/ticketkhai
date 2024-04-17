@@ -24,21 +24,29 @@ export default function IndexPage() {
           <DL label="電話番号 (Phone number)">047-709-5154</DL>
           <DL label="メールアドレス (Email address)">info@ticketkhai.com</DL>
           <DL label="運営統括責任者 (Head of Operations)">
-            ディペス　シュレスト(Dipesh Shrestha)
+            スレスタ ディペス (Shrestha Dipesh)
           </DL>
           <DL label="商品代金以外の必要料金 (Additional fees)">
-            すべての税金と手数料は価格に含まれています。
-            <br />
-            コンビニ決済は店舗によりコンビニ手数料がかかります。
-            <br />
-            銀行によっては振込手数料がかかる場合があります。
+            <p className="mb-2">
+            税金と手数料は価格に含まれています。
             <br />
             All the tax and handling fees are included in the price.
+            </p>
+            <p className="mb-2">
+            ご注文の送料は無料です。
             <br />
-            Convenience store payment will incur a convenience store fee
+            Shipping is free.
+            </p>
+            <p className="mb-2">
+            コンビニ決済は店舗によりコンビニ手数料がかかります。
+            <br />Convenience store payment will incur a convenience store fee
             depending on the store.
+            </p>
+            <p className="mb-2">
+            銀行によっては振込手数料がかかる場合があります。
             <br />
             Bank transfer fee may incur depending upon the bank.
+            </p>
           </DL>
           <DL label="返品 (Exchanges & Return)">
             当サイトで販売する商品の性質上、1回限りのイベント参加券となります。
@@ -63,34 +71,35 @@ export default function IndexPage() {
             Credit Cards, Bank Transfer and Convenience store
           </DL>
           <DL label="サポート (Support)">
-            info@ticketkhai.com (24時間・年休無給)<br />
-            047-709-5154 (平日　9:00時〜17:00時)<br />
+          <p className="mb-2">
+            info@ticketkhai.com (24時間・年休無給)
+            </p>
+            <p className="mb-2">
+            047-709-5154 (平日　9:00時〜17:00時)</p>
           </DL>
           <DL label="Payment period">
-            <p>
-              ・クレジットカード：決済時（クレジットカード会社ごとに異なります）
+          <p className="mb-2">
+              クレジットカード：決済時（クレジットカード会社ごとに異なります）
               <br />
               Credit card payments are processed depending upon credit card
-              companies
+              companies.
             </p>
-            <p>
-              ・銀行振込：ご注文後7日以内
+            <p className="mb-2">
+              銀行振込：ご注文後7日以内
               <br />
-              Bank transfer must be completed within 7 days of the date of order
+              Bank transfer must be completed within 7 days of the date of order.
             </p>
-            <p>
-              ・コンビニエンスストア：ご注文後3日以内
+            <p className="mb-2">
+              コンビニエンスストア：ご注文後3日以内
               <br />
               Convenience store payment must be completed within 3 days of the
-              date of order
+              date of order.
             </p>
           </DL>
           <DL label="Price">
             ￥2,500 for students
             <br />
             ￥3,000 for standard tickets
-            <br />
-            ￥10,000 for VIP tickets
             <br />
             <span className="italic">
               ※すべてのチケットタイプは空き状況に応じて、先着順で販売されます。
