@@ -21,7 +21,7 @@ export default function IndexPage() {
           <DL label="所在地 (Address)">
             〒272-0142 千葉県市川市欠真間1-14-8 フラワーヴェール102
           </DL>
-          <DL label="電話番号 (Phone number)">047-709-5154</DL>
+          <DL label="電話番号 (Phone number)">047-709-5154　(平日　9:00時〜17:00時)</DL>
           <DL label="メールアドレス (Email address)">info@ticketkhai.com</DL>
           <DL label="運営統括責任者 (Head of Operations)">
             スレスタ ディペス (Shrestha Dipesh)
