@@ -143,7 +143,7 @@ const buyTicketHandler = async (
             mode: "payment",
             payment_method_types: [
               "card",
-              // "konbini",
+              "konbini",
               "alipay",
               "wechat_pay",
               "customer_balance",
