@@ -98,7 +98,7 @@ export const EventList = (): React.ReactElement => {
         return (
           <div
             key={event.id}
-            className="overflow-hidden rounded-lg border border-slate-200 bg-white"
+            className="overflow-hidden rounded-lg border border-slate-200 bg-white mb-6"
           >
             <div>
               <img
