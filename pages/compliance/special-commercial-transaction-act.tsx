@@ -62,6 +62,10 @@ export default function IndexPage() {
             <br />
             Credit Cards, Bank Transfer and Convenience store
           </DL>
+          <DL label="サポート (Support)">
+            info@ticketkhai.com (24時間・年休無給)<br />
+            047-709-5154 (平成　9:00時〜17:00時)<br />
+          </DL>
           <DL label="Payment period">
             <p>
               ・クレジットカード：決済時（クレジットカード会社ごとに異なります）
@@ -94,11 +98,6 @@ export default function IndexPage() {
               *All ticket types are subject to availability and sold in first
               come first served basis
             </span>
-          </DL>
-          <DL label="Support">
-            <strong>サポート又はお問い合わせ：</strong><br />
-            info@ticketkhai.com (24時間・年休無給)<br />
-            047-709-5154 (平成　9:00時〜17:00時)<br />
           </DL>
         </div>
       </section>
