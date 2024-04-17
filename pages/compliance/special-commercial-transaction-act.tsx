@@ -24,7 +24,7 @@ export default function IndexPage() {
           <DL label="電話番号 (Phone number)">047-709-5154</DL>
           <DL label="メールアドレス (Email address)">info@ticketkhai.com</DL>
           <DL label="運営統括責任者 (Head of Operations)">
-            ソミタ　シュレスト(Somita Shrestha)
+            ディペス　シュレスト(Dipesh Shrestha)
           </DL>
           <DL label="商品代金以外の必要料金 (Additional fees)">
             すべての税金と手数料は価格に含まれています。
@@ -82,9 +82,9 @@ export default function IndexPage() {
             </p>
           </DL>
           <DL label="Price">
-            ￥3,500 for early birds tickets
+            ￥2,500 for students
             <br />
-            ￥4,500 for standard tickets
+            ￥3,000 for standard tickets
             <br />
             ￥10,000 for VIP tickets
             <br />
@@ -94,6 +94,11 @@ export default function IndexPage() {
               *All ticket types are subject to availability and sold in first
               come first served basis
             </span>
+          </DL>
+          <DL label="Support">
+            <strong>サポート又はお問い合わせ：</strong><br />
+            info@ticketkhai.com (24時間・年休無給)<br />
+            047-709-5154 (平成　9:00時〜17:00時)<br />
           </DL>
         </div>
       </section>
