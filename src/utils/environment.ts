@@ -1,0 +1,1 @@
+export const isProduction = ["production"].includes(process.env.ENV);
