@@ -1,5 +1,6 @@
 import moment from "moment-timezone"
 import { MomentInput } from "moment"
+import {isProduction} from "@/src/utils"
 
 
 export type Event = {
@@ -93,7 +94,7 @@ export const demoEvents: Event[] = [
         description: "Discounted ticker for students.",
         price: 2500,
         stripePriceId:
-          process.env.ENV === "production"
+        isProduction
             ? "price_1P5MP2BE6fqNwbhoIa6U2qH0"
             : "price_1P5M4HBE6fqNwbhoPUpcrccT",
         available: true,
@@ -106,7 +107,7 @@ export const demoEvents: Event[] = [
         description: "General price tickets",
         price: 3000,
         stripePriceId:
-          process.env.ENV === "production"
+        isProduction
             ? "price_1P5MOSBE6fqNwbhoCoarnrAI"
             : "price_1P5M59BE6fqNwbhoYfH1yIju",
         available: true,
@@ -150,7 +151,7 @@ export const demoEvents: Event[] = [
         description: "Discounted ticker for students.",
         price: 2500,
         stripePriceId:
-          process.env.ENV === "production"
+        isProduction
             ? "price_1P5MP2BE6fqNwbhoIa6U2qH0"
             : "price_1P5M4HBE6fqNwbhoPUpcrccT",
         available: true,
