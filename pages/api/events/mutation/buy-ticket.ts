@@ -20,16 +20,6 @@ export interface BuyTicketParams {
   noOfTickets: number
 }
 
-const payment_method_types = [
-  "card",
-  "alipay",
-  "wechat_pay",
-  "customer_balance",
-  "link",
-]
-
-if(isProduction) payment_method_types.push("konbini");
-
 const buyTicketHandler = async (
   req: NextApiRequest,
   res: NextApiResponse<any>
@@ -152,7 +142,13 @@ const buyTicketHandler = async (
               },
             ],
             mode: "payment",
-            payment_method_types,
+            payment_method_types: [
+              "card",
+              "alipay",
+              "wechat_pay",
+              "customer_balance",
+              "link",
+            ],
             payment_method_options: {
               wechat_pay: {
                 client: "web",
