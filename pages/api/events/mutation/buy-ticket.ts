@@ -4,7 +4,7 @@ import { DB } from "@/src/utils/db"
 import {isProduction} from "@/src/utils"
 import { KomojuStatus } from "@prisma/client"
 import { getServerSession } from "next-auth/next"
-import Stripe, {PaymentMethodType} from "stripe"
+import Stripe from "stripe"
 
 import { demoEvents } from "@/src/config/events"
 import { siteConfig } from "@/src/config/site"
