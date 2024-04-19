@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next"
 import { createCustomer, searchCustomer } from "@/src/lib"
 import { DB } from "@/src/utils/db"
+import {isProduction} from "@/src/utils"
 import { KomojuStatus } from "@prisma/client"
 import { getServerSession } from "next-auth/next"
 import Stripe from "stripe"
@@ -18,6 +19,16 @@ export interface BuyTicketParams {
   ticketId: string
   noOfTickets: number
 }
+
+const payment_method_types = [
+  "card",
+  "alipay",
+  "wechat_pay",
+  "customer_balance",
+  "link",
+]
+
+if(isProduction) payment_method_types.push("konbini");
 
 const buyTicketHandler = async (
   req: NextApiRequest,
@@ -141,14 +152,7 @@ const buyTicketHandler = async (
               },
             ],
             mode: "payment",
-            payment_method_types: [
-              "card",
-              "konbini",
-              "alipay",
-              "wechat_pay",
-              "customer_balance",
-              "link",
-            ],
+            payment_method_types,
             payment_method_options: {
               wechat_pay: {
                 client: "web",
