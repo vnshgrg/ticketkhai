@@ -116,50 +116,6 @@ export const demoEvents: Event[] = [
       },
     ],
   },
-
-  {
-    id: "event004",
-    title: "Degree Maila",
-    subtitle: "Yokohama",
-    description:
-      "",
-    venue: {
-      id: "venue004",
-      title: "Nishi Koukhaido Hall",
-      description: "",
-
-      address: {
-        id: "address004",
-        postalCode: "220-0073",
-        prefecture: "Kanagawa",
-        city: "Nishi-ku",
-        addressLine1: "Yokohama 1-6-41",
-      },
-      access: "10 minutes walk from Yokohama Station",
-    },
-    dateStart: getTimestamp('2024-04-21 18:30:00'),
-    dateEnd: getTimestamp('2024-04-21 23:59:59'),
-    dateGateOpen: getTimestamp('2024-04-21 18:00:00'),
-    dateTicketSalesStart: getTimestamp('2024-04-14 00:00:00'),
-    maximumNumberOfTicketsAvailable: 1000,
-    photo: "/images/degree-maila.jpg",
-    notices: [],
-    tickets: [
-      {
-        id: "ticket011",
-        title: "Students",
-        description: "Discounted ticker for students.",
-        price: 2500,
-        stripePriceId:
-        isProduction
-            ? "price_1P5MP2BE6fqNwbhoIa6U2qH0"
-            : "price_1P5M4HBE6fqNwbhoPUpcrccT",
-        available: true,
-        maximumNumberOfTicketsAvailable: 500,
-        dateTicketSalesStart: getTimestamp('2024-04-14 00:00:00'),
-      },
-    ],
-  },
 ]
 
 function getTimestamp(date: MomentInput) {
