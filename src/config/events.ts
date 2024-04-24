@@ -92,10 +92,10 @@ export const demoEvents: Event[] = [
         id: "ticket011",
         title: "Students",
         description: "Discounted ticker for students.",
-        price: 2500,
+        price: 2000,
         stripePriceId:
         isProduction
-            ? "price_1P5MP2BE6fqNwbhoIa6U2qH0"
+            ? "price_1P8ywkBE6fqNwbhoaKTLOsLy"
             : "price_1P5M4HBE6fqNwbhoPUpcrccT",
         available: true,
         maximumNumberOfTicketsAvailable: 500,
