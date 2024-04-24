@@ -149,11 +149,11 @@ export const demoEvents: Event[] = [
         id: "ticket012",
         title: "General",
         description: "With Free Drink",
-        price: 2000,
+        price: 1500,
         stripePriceId:
         isProduction
-            ? "price_1P8ywkBE6fqNwbhoaKTLOsLy"
-            : "price_1P5M4HBE6fqNwbhoPUpcrccT",
+            ? "price_1P96zSBE6fqNwbhoVkXV87Ls"
+            : "price_1P970PBE6fqNwbhoZQ8aQqKL",
         available: true,
         maximumNumberOfTicketsAvailable: 300,
         dateTicketSalesStart: getTimestamp('2024-04-14 00:00:00'),
