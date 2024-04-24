@@ -108,7 +108,7 @@ export const EventList = (): React.ReactElement => {
               />
             </div>
             <div className="relative">
-              <div className="z-10 -mt-32 h-32 w-full  bg-gradient-to-b from-transparent to-white to-80%">
+              <div className="z-10 -mt-32 h-32 w-full bg-gradient-to-b from-transparent to-white to-80%">
                 &nbsp;
               </div>
               <div className="-mt-32 h-full w-full space-y-6 p-4 text-sm">
@@ -116,7 +116,7 @@ export const EventList = (): React.ReactElement => {
                   {event.title}
                 </div>
                 <div className="flex items-center justify-center">
-                  <h3 className="inline-block font-bold uppercase text-red-600">
+                  <h3 className="inline-block font-bold uppercase text-red-600 bg-white py-1 px-2 bg-opacity-80 rounded">
                     {event.subtitle}
                   </h3>
                 </div>
