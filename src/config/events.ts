@@ -120,7 +120,7 @@ export const demoEvents: Event[] = [
   {
     id: "event004",
     title: "Royal Rock Fest.",
-    subtitle: "BarChord live in Tokyo",
+    subtitle: "BarChord & The We (Hami)",
     description:
       "",
     venue: {
