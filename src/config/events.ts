@@ -116,6 +116,50 @@ export const demoEvents: Event[] = [
       },
     ],
   },
+
+  {
+    id: "event004",
+    title: "Royal Rock Fest.",
+    subtitle: "BarChord live in Tokyo",
+    description:
+      "",
+    venue: {
+      id: "venue004",
+      title: "Royal Gardel Lounge & Bar",
+      description: "",
+
+      address: {
+        id: "address004",
+        postalCode: "169-0073",
+        prefecture: "Tokyo",
+        city: "Shinjuku-ku",
+        addressLine1: "Hyakunincho 2-17-11, B1",
+      },
+      access: "4 minute walk from Okubo/Shin-Okubo Station",
+    },
+    dateStart: getTimestamp('2024-05-05 19:00:00'),
+    dateEnd: getTimestamp('2024-05-05 23:59:59'),
+    dateGateOpen: getTimestamp('2024-05-05 18:00:00'),
+    dateTicketSalesStart: getTimestamp('2024-04-14 00:00:00'),
+    maximumNumberOfTicketsAvailable: 300,
+    photo: "/images/royal-rock-fest.png",
+    notices: [],
+    tickets: [
+      {
+        id: "ticket012",
+        title: "General",
+        description: "With Free Drink",
+        price: 2000,
+        stripePriceId:
+        isProduction
+            ? "price_1P8ywkBE6fqNwbhoaKTLOsLy"
+            : "price_1P5M4HBE6fqNwbhoPUpcrccT",
+        available: true,
+        maximumNumberOfTicketsAvailable: 300,
+        dateTicketSalesStart: getTimestamp('2024-04-14 00:00:00'),
+      }
+    ],
+  },
 ]
 
 function getTimestamp(date: MomentInput) {
