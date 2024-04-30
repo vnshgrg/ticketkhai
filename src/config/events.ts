@@ -61,63 +61,6 @@ export type Ticket = {
 
 export const demoEvents: Event[] = [
   {
-    id: "event003",
-    title: "Degree Maila",
-    subtitle: "Tokyo",
-    description:
-      "",
-    venue: {
-      id: "venue003",
-      title: "Nakano Zero Hall",
-      description: "",
-
-      address: {
-        id: "address003",
-        postalCode: "164-0001",
-        prefecture: "Tokyo",
-        city: "Nakano-ku",
-        addressLine1: "Nakano 2-9-7",
-      },
-      access: "5 minute walk from Nakano Station",
-    },
-    dateStart: getTimestamp('2024-04-29 18:00:00'),
-    dateEnd: getTimestamp('2024-04-29 23:59:59'),
-    dateGateOpen: getTimestamp('2024-04-29 17:00:00'),
-    dateTicketSalesStart: getTimestamp('2024-04-14 00:00:00'),
-    maximumNumberOfTicketsAvailable: 1000,
-    photo: "/images/degree-maila.jpg",
-    notices: [],
-    tickets: [
-      {
-        id: "ticket011",
-        title: "Students",
-        description: "Discounted ticker for students.",
-        price: 2000,
-        stripePriceId:
-        isProduction
-            ? "price_1P8ywkBE6fqNwbhoaKTLOsLy"
-            : "price_1P5M4HBE6fqNwbhoPUpcrccT",
-        available: true,
-        maximumNumberOfTicketsAvailable: 500,
-        dateTicketSalesStart: getTimestamp('2024-04-14 00:00:00'),
-      },
-      {
-        id: "ticket012",
-        title: "General Ticket",
-        description: "General price tickets",
-        price: 3000,
-        stripePriceId:
-        isProduction
-            ? "price_1P5MOSBE6fqNwbhoCoarnrAI"
-            : "price_1P5M59BE6fqNwbhoYfH1yIju",
-        available: true,
-        maximumNumberOfTicketsAvailable: 1000,
-        dateTicketSalesStart: getTimestamp('2024-04-14 00:00:00'),
-      },
-    ],
-  },
-
-  {
     id: "event004",
     title: "Royal Rock Fest.",
     subtitle: "BarChord & The We (Hami)",
