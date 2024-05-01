@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { useRouter } from "next/router"
 import axios from "axios"
+import useTranslation from "next-translate/useTranslation"
 
 export const useEvents = () => {
   const [loading, setLoading] = useState<boolean>(true)
@@ -9,6 +10,7 @@ export const useEvents = () => {
   const [data, setData] = useState<any>(null)
   const [error, setError] = useState<string>("")
   const router = useRouter()
+  const { lang } = useTranslation()
 
   useEffect(() => {
     fetchEvents()
@@ -37,11 +39,15 @@ export const useEvents = () => {
   const purchaseTicket = async ({ eventId, ticketId, noOfTickets }) => {
     try {
       setLoading(true)
-      const response = await axios.post("/api/events/mutation/buy-ticket", {
-        eventId,
-        ticketId,
-        noOfTickets,
-      })
+      const response = await axios.post(
+        "/api/events/mutation/buy-ticket",
+        {
+          eventId,
+          ticketId,
+          noOfTickets,
+        },
+        { headers: { "accept-language": lang } }
+      )
 
       if (response?.data?.data?.session_url) {
         router.push(response?.data?.data?.session_url)
