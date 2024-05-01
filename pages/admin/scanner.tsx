@@ -1,5 +1,5 @@
 import Head from "next/head"
-import { Layout, Scanner, UserLayout } from "@/src/components"
+import { Layout, Scanner } from "@/src/components"
 
 import { siteConfig } from "@/src/config/site"
 

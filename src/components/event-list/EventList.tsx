@@ -46,7 +46,7 @@ export const EventList = (): React.ReactElement => {
   const { t } = useTranslation("common")
 
   if (loading) {
-    return <div>{t("site-loading")}...</div>
+    return <div className="w-full">{t("site-loading")}...</div>
   }
 
   if (error) {
@@ -70,7 +70,7 @@ export const EventList = (): React.ReactElement => {
   const events: Event[] = data?.data
 
   return (
-    <div className="">
+    <div className="w-full">
       {events.map((event) => {
         const ticketTypesRadioItem: RadioItem[] = event.tickets
           .filter((ticket) => ticket.available)
@@ -98,7 +98,7 @@ export const EventList = (): React.ReactElement => {
         return (
           <div
             key={event.id}
-            className="overflow-hidden rounded-lg border border-slate-200 bg-white mb-6"
+            className="overflow-hidden rounded-lg border border-slate-200 bg-white mb-6 w-full"
           >
             <div>
               <img
@@ -111,21 +111,21 @@ export const EventList = (): React.ReactElement => {
               <div className="z-10 -mt-32 h-32 w-full bg-gradient-to-b from-transparent to-white to-80%">
                 &nbsp;
               </div>
-              <div className="-mt-32 h-full w-full space-y-6 p-4 text-sm">
-                <div className="hidden text-2xl font-semibold text-slate-800">
-                  {event.title}
-                </div>
-                <div className="flex items-center justify-center">
-                  <h3 className="inline-block font-bold uppercase text-red-600 bg-white py-1 px-2 bg-opacity-80 rounded">
+              <div className="-mt-16 h-full w-full space-y-6 p-4 text-sm">
+                <div>
+                  <h2 className="text-2xl font-black text-slate-800 uppercase tracking-tight">
+                    {event.title}
+                  </h2>
+                  <h3 className="inline-block font-semibold text-slate-600 uppercase ">
                     {event.subtitle}
                   </h3>
+                  <div className="font-sm text-slate-800">
+                    {event.description}
+                  </div>
                 </div>
-                <div className="font-sm text-slate-800">
-                  {event.description}
-                </div>
-                <div className="grid grid-cols-2 gap-y-4 text-xs text-slate-800">
+                <div className="grid grid-cols-2 gap-y-4 text-sm text-slate-800">
                   <div>
-                    <div className="text-xs font-medium uppercase">
+                    <div className="font-semibold uppercase">
                       {t("event-date")}
                     </div>
                     <div>
@@ -135,7 +135,7 @@ export const EventList = (): React.ReactElement => {
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="text-xs font-medium uppercase">
+                    <div className="font-semibold uppercase">
                       {t("event-time")}
                     </div>
                     <div>
@@ -145,14 +145,14 @@ export const EventList = (): React.ReactElement => {
                     </div>
                   </div>
                   <div>
-                    <div className="text-xs font-medium uppercase">
+                    <div className="font-semibold uppercase">
                       {t("event-venue")}
                     </div>
                     <div>{event.venue.title}</div>
                   </div>
 
                   <div className="text-right">
-                    <div className="text-xs font-medium uppercase">
+                    <div className="font-semibold uppercase">
                       {t("event-gate-open")}
                     </div>
                     <div>
@@ -162,7 +162,7 @@ export const EventList = (): React.ReactElement => {
                     </div>
                   </div>
                   <div className="col-span-2">
-                    <div className="text-xs font-medium uppercase">
+                    <div className="font-semibold uppercase">
                       {t("event-address")}
                     </div>
                     <div>{readableAddress(event.venue.address)}</div>
