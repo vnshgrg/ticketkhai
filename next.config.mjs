@@ -4,10 +4,6 @@ import nextTranslate from "next-translate-plugin"
 const nextConfig = nextTranslate({
   reactStrictMode: true,
   experimental: {},
-  i18n: {
-    locales: ["en", "jp"],
-    defaultLocale: "en",
-  },
   webpack: (config) => {
     config.resolve.fallback = {
       ...config.resolve.fallback,
