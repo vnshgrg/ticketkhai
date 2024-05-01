@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next"
 import { createCustomer, searchCustomer } from "@/src/lib"
+import { isProduction } from "@/src/utils"
 import { DB } from "@/src/utils/db"
-import {isProduction} from "@/src/utils"
 import { KomojuStatus } from "@prisma/client"
 import { getServerSession } from "next-auth/next"
 import Stripe from "stripe"
@@ -20,6 +20,13 @@ export interface BuyTicketParams {
   noOfTickets: number
 }
 
+export type StripeLocaleRecord = Record<
+  "en" | "jp",
+  Stripe.Checkout.SessionCreateParams.Locale
+>
+
+const stripeLocale = { en: "en", jp: "ja" }
+
 const buyTicketHandler = async (
   req: NextApiRequest,
   res: NextApiResponse<any>
@@ -30,12 +37,16 @@ const buyTicketHandler = async (
     case "POST":
       try {
         const session = await getServerSession(req, res, authOptions)
-        // Get user from session
 
+        // Get user from session
         if (!session || !session.user) {
           res.status(401).end(`Unauthorized`)
           return
         }
+
+        // get user's locale
+        const lang = req.headers["accept-language"] || "en"
+        const locale = stripeLocale[lang] || stripeLocale.en
 
         const { user } = session
 
@@ -86,16 +97,6 @@ const buyTicketHandler = async (
         }
 
         const subtotal = ticket.price * noOfTickets
-        // const paymentFeeAmount = paymentFee ? subtotal * (paymentFee / 100) : 0
-        // const handlingFeeAmount = handlingFee || 0
-        // const taxAmount = tax
-        //   ? (subtotal + handlingFeeAmount + paymentFeeAmount) * (tax / 100)
-        //   : 0
-        // const total = Math.floor(
-        //   subtotal + handlingFeeAmount + paymentFeeAmount + taxAmount
-        // )
-
-        // create Transaction
 
         const transaction = await DB.transaction.create({
           data: {
@@ -142,13 +143,7 @@ const buyTicketHandler = async (
               },
             ],
             mode: "payment",
-            payment_method_types: [
-              "card",
-              "alipay",
-              "wechat_pay",
-              "customer_balance",
-              "link",
-            ],
+            payment_method_types: ["card", "customer_balance", "link"],
             payment_method_options: {
               wechat_pay: {
                 client: "web",
@@ -165,12 +160,13 @@ const buyTicketHandler = async (
               shipping: "auto",
               name: "auto",
             },
-            success_url: `${process.env.NEXT_PUBLIC_SITE_URL}/payment/?result=success`,
-            cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL}/payment/?result=fail`,
+            success_url: `${process.env.NEXT_PUBLIC_SITE_URL}/${lang}/payment/?result=success`,
+            cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL}/${lang}/payment/?result=fail`,
             automatic_tax: { enabled: true },
             metadata: {
               transactionId: transaction.id,
             },
+            locale,
           })
 
           await DB.transaction.update({
