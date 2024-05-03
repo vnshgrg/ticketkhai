@@ -29,7 +29,7 @@ const stripeWebhookHandler = async (
         const body: string = await webhookPayloadParser(req)
         const signature =
           headers["stripe-signature"] || headers["Stripe-Signature"]
-        debugger
+
         // verify webhook signature
         const WHK = process.env.STRIPE_WHK
 

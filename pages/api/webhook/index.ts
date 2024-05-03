@@ -1,11 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from "next"
 import { validateWebhook } from "@/src/lib"
-import { bodyFromRaw } from "@/src/utils"
 import { DB } from "@/src/utils/db"
 import { sendSMS } from "@/src/utils/sms"
-import { FaceSmileIcon } from "@heroicons/react/20/solid"
 import { KomojuStatus, TicketStatus } from "@prisma/client"
 
+import { demoEvents } from "@/src/config/events"
 import { siteConfig } from "@/src/config/site"
 
 export interface VerifyParams {
@@ -18,7 +17,6 @@ const webhookHandler = async (
   res: NextApiResponse<any>
 ) => {
   const { method, headers } = req
-  const duplicateRequest = req
 
   switch (method) {
     case "POST":
