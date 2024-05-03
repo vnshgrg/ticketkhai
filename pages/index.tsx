@@ -39,24 +39,27 @@ export default function IndexPage(props) {
     const { user, expires } = sessionData
     const { name, mobile } = user
     content = (
-      <div className="space-y-2">
+      <div className="flex flex-row items-baseline justify-between space-y-2">
         <p className="font-medium">
           {t("welcome")} {name},
         </p>
-        <p className="">
-          <Link href="/user/my-tickets">
-            <span className="mt-4 font-bold">{t("nav-mypage")}</span>
-          </Link>
-        </p>
+        <Button
+          type="button"
+          onClick={() => {
+            router.push("/user/my-tickets")
+          }}
+        >
+          {t("nav-mytickets")}
+        </Button>
       </div>
     )
   }
 
   return (
     <Layout>
-      <div className="mx-auto min-w-[28rem] max-w-md">
+      <div className="mx-auto w-full max-w-md">
         <div className="flex flex-col space-y-4 px-5 py-10">
-          <div>
+          <div className="hidden sm:block">
             <h1 className="grow text-lg font-extrabold leading-tight tracking-tighter text-slate-800 dark:text-slate-200 sm:text-xl md:text-2xl lg:text-3xl">
               {t("site-name")}
             </h1>
