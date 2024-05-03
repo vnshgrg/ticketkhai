@@ -85,8 +85,11 @@ const buyTicketHandler = async (
           },
         })
 
+        const ticketMultiplier = ticket.numberOfTickets || 1
+        const totalTicketsToBeIssued = noOfTickets * ticketMultiplier
+
         if (
-          soldTickets._sum.quantity + noOfTickets >
+          soldTickets._sum.quantity + totalTicketsToBeIssued >
           ticket.maximumNumberOfTicketsAvailable
         ) {
           res.status(400).json({
@@ -103,7 +106,7 @@ const buyTicketHandler = async (
             eventId,
             ticketTypeId: ticketId,
             unitPrice: ticket.price,
-            quantity: noOfTickets,
+            quantity: totalTicketsToBeIssued,
             discount: 0,
             tax: 0,
             handlingFee: 0,

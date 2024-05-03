@@ -79,12 +79,11 @@ export const EventList = (): React.ReactElement => {
             value: ticket.id,
           }))
 
-        const currentTicketType =
-          event.tickets.find((ticket) => ticket.id === watch("ticketType"))
-            ?.title || null
-        const currentTicketPrice =
-          event.tickets.find((ticket) => ticket.id === watch("ticketType"))
-            ?.price || null
+        const currentTicket = event.tickets.find(
+          (ticket) => ticket.id === watch("ticketType")
+        )
+        const currentTicketType = currentTicket?.title || null
+        const currentTicketPrice = currentTicket?.price || null
         const currentNoOfTickets = parseInt(watch("numberOfTickets")) || null
         const currentSubTotal = currentTicketPrice * currentNoOfTickets
         const currentHandlingFee = siteConfig.fees.handlingFee || 0
@@ -231,57 +230,62 @@ export const EventList = (): React.ReactElement => {
                       />
                       <Separator />
                       {currentTicketType && currentNoOfTickets && (
-                        <div className="divide-y divide-slate-100 rounded-lg border border-slate-200 text-sm">
-                          <div className="flex flex-row justify-between p-3">
-                            <div>{t("ticket-type")}</div>
-                            <div>{currentTicketType}</div>
+                        <>
+                          <div>
+                            <h3 className="font-bold">{currentTicketType}</h3>
+                            <p className="text-sm">
+                              {currentTicket.description}
+                            </p>
                           </div>
-                          <div className="flex flex-row justify-between p-3">
-                            <div>{t("ticket-price")}</div>
-                            <div>
-                              {currentTicketPrice &&
-                                formatJPY(currentTicketPrice)}
+
+                          <div className="divide-y divide-slate-100 rounded-lg border border-slate-200 text-sm">
+                            <div className="flex flex-row justify-between p-3">
+                              <div>{t("ticket-price")}</div>
+                              <div>
+                                {currentTicketPrice &&
+                                  formatJPY(currentTicketPrice)}
+                              </div>
+                            </div>
+                            <div className="flex flex-row justify-between p-3">
+                              <div>{t("ticket-no-of-tickets")}</div>
+                              <div>{currentNoOfTickets}</div>
+                            </div>
+                            <div className="flex flex-row justify-between p-3">
+                              <div>
+                                {t("subtotal")}{" "}
+                                <span className="text-slate-500">
+                                  ({currentNoOfTickets} ×{" "}
+                                  {formatJPY(currentTicketPrice)})
+                                </span>
+                              </div>
+                              <div>
+                                {currentSubTotal && formatJPY(currentSubTotal)}
+                              </div>
+                            </div>
+                            <div className="flex flex-row justify-between p-3">
+                              <div>{t("handling-fee")}</div>
+                              <div>
+                                {currentHandlingFee &&
+                                  formatJPY(currentHandlingFee)}
+                              </div>
+                            </div>
+                            <div className="flex flex-row justify-between p-3">
+                              <div>{t("payment-fee")}</div>
+                              <div>
+                                {currentPaymentFee &&
+                                  formatJPY(currentPaymentFee)}
+                              </div>
+                            </div>
+                            <div className="flex flex-row justify-between p-3">
+                              <div>{t("tax")}</div>
+                              <div>{currentTax && formatJPY(currentTax)}</div>
+                            </div>
+                            <div className="flex flex-row justify-between p-3 font-bold">
+                              <div>{t("total")}</div>
+                              <div>{formatJPY(currentTotal)}</div>
                             </div>
                           </div>
-                          <div className="flex flex-row justify-between p-3">
-                            <div>{t("ticket-no-of-tickets")}</div>
-                            <div>{currentNoOfTickets}</div>
-                          </div>
-                          <div className="flex flex-row justify-between p-3">
-                            <div>
-                              {t("subtotal")}{" "}
-                              <span className="text-slate-500">
-                                ({currentNoOfTickets} ×{" "}
-                                {formatJPY(currentTicketPrice)})
-                              </span>
-                            </div>
-                            <div>
-                              {currentSubTotal && formatJPY(currentSubTotal)}
-                            </div>
-                          </div>
-                          <div className="flex flex-row justify-between p-3">
-                            <div>{t("handling-fee")}</div>
-                            <div>
-                              {currentHandlingFee &&
-                                formatJPY(currentHandlingFee)}
-                            </div>
-                          </div>
-                          <div className="flex flex-row justify-between p-3">
-                            <div>{t("payment-fee")}</div>
-                            <div>
-                              {currentPaymentFee &&
-                                formatJPY(currentPaymentFee)}
-                            </div>
-                          </div>
-                          <div className="flex flex-row justify-between p-3">
-                            <div>{t("tax")}</div>
-                            <div>{currentTax && formatJPY(currentTax)}</div>
-                          </div>
-                          <div className="flex flex-row justify-between p-3 font-bold">
-                            <div>{t("total")}</div>
-                            <div>{formatJPY(currentTotal)}</div>
-                          </div>
-                        </div>
+                        </>
                       )}
                     </div>
                     {currentTotal > 0 && (

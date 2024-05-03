@@ -46,6 +46,7 @@ export type Ticket = {
   title: string
   description: string
   price: number
+  numberOfTickets: number
   stripePriceId: string
   available: boolean
   photo?: string[]
@@ -91,6 +92,7 @@ export const demoEvents: Event[] = [
         title: "General",
         description: "With Free Drink",
         price: 1500,
+        numberOfTickets: 1,
         stripePriceId: isProduction
           ? "price_1P96zSBE6fqNwbhoVkXV87Ls"
           : "price_1P970PBE6fqNwbhoZQ8aQqKL",
@@ -127,28 +129,30 @@ export const demoEvents: Event[] = [
     photo: "/images/boksi-ko-ghar.jpg",
     notices: [],
     tickets: [
-      // {
-      //   id: "ticket011",
-      //   title: "Students",
-      //   description: "Discounted ticker for students.",
-      //   price: 2000,
-      //   stripePriceId: isProduction
-      //     ? "price_1P8ywkBE6fqNwbhoaKTLOsLy"
-      //     : "price_1P5M4HBE6fqNwbhoPUpcrccT",
-      //   available: true,
-      //   maximumNumberOfTicketsAvailable: 500,
-      //   dateTicketSalesStart: getTimestamp("2024-04-14 00:00:00"),
-      // },
       {
         id: "ticket012",
-        title: "General Ticket",
+        title: "General",
         description: "General price tickets",
         price: 3000,
+        numberOfTickets: 1,
         stripePriceId: isProduction
           ? "price_1P5MOSBE6fqNwbhoCoarnrAI"
           : "price_1P5M59BE6fqNwbhoYfH1yIju",
         available: true,
         maximumNumberOfTicketsAvailable: 1000,
+        dateTicketSalesStart: getTimestamp("2024-04-14 00:00:00"),
+      },
+      {
+        id: "ticket014",
+        title: "Family",
+        description: "4 tickets at discuonted price",
+        price: 10000,
+        numberOfTickets: 4,
+        stripePriceId: isProduction
+          ? "price_1PCEZABE6fqNwbho6Xs7Gx35"
+          : "price_1PCEZhBE6fqNwbhoWlmNzW9V",
+        available: true,
+        maximumNumberOfTicketsAvailable: 500,
         dateTicketSalesStart: getTimestamp("2024-04-14 00:00:00"),
       },
     ],
