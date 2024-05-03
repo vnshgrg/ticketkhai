@@ -131,7 +131,7 @@ export const demoEvents: Event[] = [
     tickets: [
       {
         id: "ticket012",
-        title: "General Ticket",
+        title: "General",
         description: "General price tickets",
         price: 3000,
         numberOfTickets: 1,
