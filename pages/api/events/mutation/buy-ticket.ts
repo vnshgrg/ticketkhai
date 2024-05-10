@@ -146,10 +146,10 @@ const buyTicketHandler = async (
               },
             ],
             mode: "payment",
-            payment_method_types: ["card", "customer_balance", "link"],
+            payment_method_types: ["card", "konbini", "customer_balance", "link"],
             payment_method_options: {
-              wechat_pay: {
-                client: "web",
+              konbini: {
+                expires_after_days: 7,
               },
               customer_balance: {
                 funding_type: "bank_transfer",
