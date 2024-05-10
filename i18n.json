@@ -1,7 +1,7 @@
 {
   "locales": ["en", "jp"],
-  "defaultLocale": "jp",
-  "localeDetection": false,
+  "defaultLocale": "en",
+  "localeDetection": true,
   "pages": {
     "*": ["common"]
   }
