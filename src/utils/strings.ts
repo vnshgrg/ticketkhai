@@ -1,4 +1,5 @@
 import { Readable } from "node:stream"
+import moment from "moment"
 
 import { Address } from "../config/events"
 
@@ -7,11 +8,20 @@ export const readableAddress = (address: Address): string => {
 }
 
 export const formatJPY = (amount: number): string => {
-  return `￥${numberWithCommas(amount)}`
+  return new Intl.NumberFormat("ja-JP", {
+    style: "currency",
+    currency: "JPY",
+  }).format(amount)
 }
 
-const numberWithCommas = (x: number): string => {
-  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+export const dateFromUtc = (
+  date: string | number,
+  format: any = "YYYY/MM/DD HH:mm:ss"
+) => {
+  const momentDate = moment(date)
+  if (!momentDate.isValid) return null
+
+  return momentDate.format(format)
 }
 
 export const customBuffer = async (readable: Readable) => {
