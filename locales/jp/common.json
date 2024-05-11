@@ -79,5 +79,14 @@
   "ts-created": "保留中",
   "awaiting-payment": "支払い待ち",
   "cancel-ticket": "チケット購入をキャンセル",
-  "cancel-ticket-confirm": "{{eventName}} の {{ticketType}} チケットをキャンセルしてもよろしいですか?"
+  "cancel-ticket-confirm": "{{eventName}} の {{ticketType}} チケットをキャンセルしてもよろしいですか?",
+  "expires": "有効期限",
+  "konbini-familymart": "ファミリーマート",
+  "konbini-lawson": "ローソン",
+  "konbini-ministop": "ミニストップ",
+  "konbini-seicomart": "セイコーマート",
+  "confirmation-number": "確認番号",
+  "payment-code": "お支払コード",
+  "show-instructions": "指示を表示",
+  "hide-instructions": "指示を非表示"
 }

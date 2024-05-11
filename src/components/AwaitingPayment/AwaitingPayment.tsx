@@ -206,7 +206,9 @@ function KonbiniTransferInstruction({ transaction }) {
             <div className="">{formatJPY(transaction.totalPrice)}</div>
           </div>
           <div className="col-span-1 lg:col-span-2 opacity-80">
-            <div className="text-xs uppercase text-slate-500">Expires</div>
+            <div className="text-xs uppercase text-slate-500">
+              {t("expires")}
+            </div>
             <div className="">
               {dateFromUtc(
                 konbiniTransferInstruction.expires_at * 1000,
@@ -248,22 +250,24 @@ type KonbiniDetailsProps = {
 }
 function KonbiniDetail({ konbini, details }: KonbiniDetailsProps) {
   const [isOpen, setIsOpen] = useState(false)
+  const { t } = useTranslation("common")
+
   return (
     <div>
-      <div className="text-xs uppercase text-slate-500">
-        {/* {t(`pd-${key}`)} */}
-        {konbini}
+      <div className="flex items-center mb-2 text-left h-8 w-24">
+        <img src={`/konbini-icon/konbini-${konbini}.svg`} className="max-h-8" />
       </div>
+      <div className="text-xs text-slate-500">{t(`konbini-${konbini}`)}</div>
       {isOpen && (
         <div>
           <div className="mt-3 text-xs font-medium text-slate-500">
-            Confirmation number
+            {t("confirmation-number")}
           </div>
           <div className="font-mono text-normal">
             {details.confirmation_number}
           </div>
           <div className="mt-3 text-xs font-medium text-slate-500">
-            Payment code
+            {t("payment-code")}
           </div>
           <div className="font-mono text-normal">{details.payment_code}</div>
         </div>
@@ -274,7 +278,7 @@ function KonbiniDetail({ konbini, details }: KonbiniDetailsProps) {
         }}
         className="mt-2 cursor-pointer text-slate-700 hover:text-slate-900"
       >
-        {isOpen ? "Hide instruction" : "Show instruction"}
+        {isOpen ? t("hide-instructions") : t("show-instructions")}
       </div>
     </div>
   )

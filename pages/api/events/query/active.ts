@@ -1,9 +1,4 @@
 import type { NextApiRequest, NextApiResponse } from "next"
-import { encodePassword } from "@/src/utils/auth"
-import { DB } from "@/src/utils/db"
-import { IdentifierType } from "@prisma/client"
-import { parsePhoneNumber } from "libphonenumber-js"
-import moment from "moment"
 
 import { demoEvents } from "@/src/config/events"
 
