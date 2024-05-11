@@ -141,17 +141,7 @@ export const useCandidateRegistration = () => {
   const { errors } = formState
 
   const onSubmit: SubmitHandler<BasicRegistration> = async (formValues) => {
-    // console.log("[onSubmit]:", formValues)
     const { email, password } = formValues
-
-    // try {
-    //   // Delete unnecessary data
-    //   delete formValues.confirmEmail
-
-    //   const { data } = await axios.post("/api/user/register", formValues)
-    // } catch (error) {
-    //   console.log("Error:", error.response?.data || error.message)
-    // }
   }
 
   return {

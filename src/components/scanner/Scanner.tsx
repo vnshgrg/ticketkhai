@@ -31,8 +31,6 @@ export const Scanner = (): React.ReactElement => {
         false
       )
 
-      console.log(scanner)
-
       scanner.render(onScanSuccess, onScanFailure)
     }
   }, [])
