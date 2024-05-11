@@ -123,11 +123,11 @@ function BankTransferInstruction({ transaction }) {
     <div className="divide-y-2 divide-slate-100">
       <div className={`sm:-pb-4 flex space-x-6 py-4`}>
         <div className="grid grow grid-cols-2 items-center gap-x-0 gap-y-4 sm:grid-cols-4 sm:gap-4">
-          <div className="col-span-1 opacity-50">
+          <div className="col-span-1 opacity-80">
             <div className="text-xs uppercase text-slate-500">{t("total")}</div>
             <div className="">{formatJPY(transaction.totalPrice)}</div>
           </div>
-          <div className="col-span-1 opacity-50">
+          <div className="col-span-1 opacity-80">
             <div className="text-xs uppercase text-slate-500">
               {t("pd-amount-received")}
             </div>
