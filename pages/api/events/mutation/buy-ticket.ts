@@ -128,7 +128,6 @@ const buyTicketHandler = async (
           let customer = await searchCustomer(userId)
 
           if (!customer) {
-            console.log("creating customer")
             customer = await createCustomer(userId, {
               name,
               mobile,
@@ -146,7 +145,12 @@ const buyTicketHandler = async (
               },
             ],
             mode: "payment",
-            payment_method_types: ["card", "konbini", "customer_balance", "link"],
+            payment_method_types: [
+              "card",
+              "konbini",
+              "customer_balance",
+              "link",
+            ],
             payment_method_options: {
               konbini: {
                 expires_after_days: 7,

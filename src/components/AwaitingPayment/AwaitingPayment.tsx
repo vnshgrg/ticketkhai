@@ -1,5 +1,6 @@
 import { useState } from "react"
 import Link from "next/link"
+import { dateFromUtc, formatJPY } from "@/src/utils"
 import moment from "moment"
 import useTranslation from "next-translate/useTranslation"
 
@@ -10,6 +11,10 @@ import { Button } from "@/src/components/ui/button"
 export const AwaitingPayment = ({ transaction }) => {
   const [isShown, setIsShown] = useState(false)
   const { t } = useTranslation("common")
+
+  const isBankTransfer =
+    transaction.paymentDetails?.display_bank_transfer_instructions
+  const isKonbiniTransfer = transaction.paymentDetails?.konbini_display_details
 
   return (
     <div className="space-y-2 divide-y-2 divide-slate-100 rounded-xl bg-white py-3 px-4 text-sm shadow-md shadow-slate-100">
@@ -46,10 +51,7 @@ export const AwaitingPayment = ({ transaction }) => {
             {t("ticket-price")}
           </div>
           <div className="font-bold text-slate-800">
-            {new Intl.NumberFormat("ja-JP", {
-              style: "currency",
-              currency: "JPY",
-            }).format(transaction.totalPrice)}
+            {formatJPY(transaction.totalPrice)}
           </div>
         </div>
         <div>
@@ -66,7 +68,7 @@ export const AwaitingPayment = ({ transaction }) => {
             {t("ordered-at")}
           </div>
           <div className="">
-            {moment(transaction.updatedAt * 1000).format("Do MMMM, YYYY h:mmA")}
+            {dateFromUtc(transaction.updatedAt * 1000, "Do MMMM, YYYY h:mmA")}
           </div>
         </div>
         <div className="col-span-2 hidden flex-col space-y-2 text-center sm:col-span-1 sm:flex sm:text-right">
@@ -99,102 +101,185 @@ export const AwaitingPayment = ({ transaction }) => {
         </div>
       )}
 
-      {isShown && (
-        <div className="divide-y-2 divide-slate-100">
-          <div className={`sm:-pb-4 flex space-x-6 py-4`}>
-            <div className="grid grow grid-cols-2 items-center gap-x-0 gap-y-4 sm:grid-cols-4 sm:gap-4">
-              <div className="col-span-1 opacity-50">
-                <div className="text-xs uppercase text-slate-500">
-                  {t("total")}
-                </div>
-                <div className="">
-                  {new Intl.NumberFormat("ja-JP", {
-                    style: "currency",
-                    currency: "JPY",
-                  }).format(transaction.totalPrice)}
-                </div>
-              </div>
-              <div className="col-span-1 opacity-50">
-                <div className="text-xs uppercase text-slate-500">
-                  {t("pd-amount-received")}
-                </div>
-                <div className="">
-                  {new Intl.NumberFormat("ja-JP", {
-                    style: "currency",
-                    currency: "JPY",
-                  }).format(
-                    transaction.totalPrice -
-                      transaction.paymentDetails
-                        .display_bank_transfer_instructions.amount_remaining
-                  )}
-                </div>
-              </div>
-              <div className="col-span-1">
-                <div className="text-xs uppercase text-slate-500">
-                  {t("pd-transfer-amount")}
-                </div>
-                <div className="font-bold">
-                  {new Intl.NumberFormat("ja-JP", {
-                    style: "currency",
-                    currency: "JPY",
-                  }).format(
-                    transaction.paymentDetails
-                      .display_bank_transfer_instructions.amount_remaining
-                  )}
-                </div>
-              </div>
-              <div className="col-span-1 text-right">
-                <div className="">
-                  <Link
-                    href={
-                      transaction.paymentDetails
-                        .display_bank_transfer_instructions
-                        .hosted_instructions_url
-                    }
-                    target="_blank"
-                  >
-                    {t("pd-show-full-transfer-details")}
-                  </Link>
-                </div>
-              </div>
-            </div>
+      {isShown && isBankTransfer && (
+        <BankTransferInstruction transaction={transaction} />
+      )}
+
+      {isShown && isKonbiniTransfer && (
+        <KonbiniTransferInstruction transaction={transaction} />
+      )}
+    </div>
+  )
+}
+
+function BankTransferInstruction({ transaction }) {
+  const { t } = useTranslation("common")
+  const bankTransferInstruction =
+    transaction.paymentDetails.display_bank_transfer_instructions
+
+  if (!bankTransferInstruction) return null
+
+  return (
+    <div className="divide-y-2 divide-slate-100">
+      <div className={`sm:-pb-4 flex space-x-6 py-4`}>
+        <div className="grid grow grid-cols-2 items-center gap-x-0 gap-y-4 sm:grid-cols-4 sm:gap-4">
+          <div className="col-span-1 opacity-80">
+            <div className="text-xs uppercase text-slate-500">{t("total")}</div>
+            <div className="">{formatJPY(transaction.totalPrice)}</div>
           </div>
-          <div className={`sm:-pb-4 flex space-x-6 py-4`}>
-            <div className="grid grow grid-cols-2 gap-x-0 gap-y-4 sm:grid-cols-4 sm:gap-4">
-              {Object.entries(
-                transaction.paymentDetails.display_bank_transfer_instructions
-                  ?.financial_addresses[0].zengin
-              ).map(([key, value], index) => (
-                <div
-                  key={index}
-                  className={key === "account_holder_name" ? `col-span-2` : ""}
-                >
-                  <div className="text-xs uppercase text-slate-500">
-                    {/* {t("event-title")} */}
-                    {t(`pd-${key}`)}
-                  </div>
-                  <div className="">{value as string}</div>
-                </div>
-              ))}
+          <div className="col-span-1 opacity-80">
+            <div className="text-xs uppercase text-slate-500">
+              {t("pd-amount-received")}
             </div>
-          </div>
-          <div
-            className={`flex items-center justify-center py-4 text-slate-600 sm:pb-2`}
-          >
             <div className="">
-              {t("pd-message", {
-                amount: new Intl.NumberFormat("ja-JP", {
-                  style: "currency",
-                  currency: "JPY",
-                }).format(
-                  transaction.paymentDetails.display_bank_transfer_instructions
-                    .amount_remaining
-                ),
-              })}
+              {formatJPY(
+                transaction.totalPrice -
+                  bankTransferInstruction.amount_remaining
+              )}
+            </div>
+          </div>
+          <div className="col-span-1">
+            <div className="text-xs uppercase text-slate-500">
+              {t("pd-transfer-amount")}
+            </div>
+            <div className="font-bold">
+              {formatJPY(bankTransferInstruction.amount_remaining)}
+            </div>
+          </div>
+          <div className="col-span-1 text-right">
+            <div className="">
+              <Link
+                href={bankTransferInstruction.hosted_instructions_url}
+                target="_blank"
+              >
+                {t("pd-show-full-transfer-details")}
+              </Link>
             </div>
           </div>
         </div>
+      </div>
+      <div className={`sm:-pb-4 flex space-x-6 py-4`}>
+        <div className="grid grow grid-cols-2 gap-x-0 gap-y-4 sm:grid-cols-4 sm:gap-4">
+          {Object.entries(
+            bankTransferInstruction.financial_addresses[0].zengin
+          ).map(([key, value], index) => (
+            <div
+              key={index}
+              className={key === "account_holder_name" ? `col-span-2` : ""}
+            >
+              <div className="text-xs uppercase text-slate-500">
+                {/* {t("event-title")} */}
+                {t(`pd-${key}`)}
+              </div>
+              <div className="">{value as string}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div
+        className={`flex items-center justify-center py-4 text-slate-600 sm:pb-2`}
+      >
+        <div className="">
+          {t("pd-message", {
+            amount: formatJPY(bankTransferInstruction.amount_remaining),
+          })}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function KonbiniTransferInstruction({ transaction }) {
+  const { t } = useTranslation("common")
+
+  const konbiniTransferInstruction =
+    transaction.paymentDetails.konbini_display_details
+
+  if (!konbiniTransferInstruction) return null
+
+  return (
+    <div className="divide-y-2 divide-slate-100">
+      <div className={`sm:-pb-4 flex space-x-6 py-4`}>
+        <div className="grid grow grid-cols-1 items-center gap-x-0 gap-y-4 sm:grid-cols-4 sm:gap-4">
+          <div className="col-span-1 opacity-80">
+            <div className="text-xs uppercase text-slate-500">{t("total")}</div>
+            <div className="">{formatJPY(transaction.totalPrice)}</div>
+          </div>
+          <div className="col-span-1 lg:col-span-2 opacity-80">
+            <div className="text-xs uppercase text-slate-500">
+              {t("expires")}
+            </div>
+            <div className="">
+              {dateFromUtc(
+                konbiniTransferInstruction.expires_at * 1000,
+                "Do MMMM, YYYY h:mmA"
+              )}
+            </div>
+          </div>
+          <div className="col-span-1 text-center lg:text-right">
+            <div className="">
+              <Link
+                href={konbiniTransferInstruction.hosted_voucher_url}
+                target="_blank"
+              >
+                {t("pd-show-full-transfer-details")}
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className={`sm:-pb-4 flex space-x-6 py-4`}>
+        <div className="grid grow grid-cols-1 gap-x-0 gap-y-4 sm:grid-cols-4 sm:gap-4">
+          {Object.entries(konbiniTransferInstruction.stores).map(
+            ([key, value]: [string, any], index) => (
+              <KonbiniDetail key={index} konbini={key} details={value} />
+            )
+          )}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+type KonbiniDetailsProps = {
+  konbini: string
+  details: {
+    confirmation_number: string
+    payment_code: string
+  }
+}
+function KonbiniDetail({ konbini, details }: KonbiniDetailsProps) {
+  const [isOpen, setIsOpen] = useState(false)
+  const { t } = useTranslation("common")
+
+  return (
+    <div>
+      <div className="flex items-center mb-2 text-left h-8 w-24">
+        <img src={`/konbini-icon/konbini-${konbini}.svg`} className="max-h-8" />
+      </div>
+      <div className="text-xs text-slate-500">{t(`konbini-${konbini}`)}</div>
+      {isOpen && (
+        <div>
+          <div className="mt-3 text-xs font-medium text-slate-500">
+            {t("confirmation-number")}
+          </div>
+          <div className="font-mono text-normal">
+            {details.confirmation_number}
+          </div>
+          <div className="mt-3 text-xs font-medium text-slate-500">
+            {t("payment-code")}
+          </div>
+          <div className="font-mono text-normal">{details.payment_code}</div>
+        </div>
       )}
+      <div
+        onClick={() => {
+          setIsOpen((curr) => !curr)
+        }}
+        className="mt-2 cursor-pointer text-slate-700 hover:text-slate-900"
+      >
+        {isOpen ? t("hide-instructions") : t("show-instructions")}
+      </div>
     </div>
   )
 }

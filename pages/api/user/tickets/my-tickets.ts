@@ -32,8 +32,6 @@ const myTicektsHandler = async (
         const { user } = session
         const activeEvents = demoEvents.map(({ id }) => id)
 
-        console.log({ activeEvents })
-
         const { tickets } = await DB.user.findUnique({
           where: { id: user.id },
           select: {
