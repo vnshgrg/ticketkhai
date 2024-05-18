@@ -1,10 +1,9 @@
-import { isProduction } from "@/src/utils"
-import { MomentInput } from "moment"
-import moment from "moment-timezone"
+import { getTimestamp, isProduction } from "@/src/utils"
 
 export type Event = {
   id: string
   title: string
+  slug: string
   subtitle: string
   description: string
   photo?: string
@@ -39,6 +38,7 @@ export type Address = {
   email?: string
   lat?: number
   lng?: number
+  mapLink?: string
 }
 
 export type Ticket = {
@@ -62,9 +62,11 @@ export type Ticket = {
 export const demoEvents: Event[] = [
   {
     id: "event006",
+    slug: "1974ad-live-in-tokyo",
     title: "1974AD Original Lineup",
     subtitle: "Live in Tokyo",
-    description: "",
+    description:
+      "Original lineup of the legendary band from Nepal, 1974AD performing live in Tokyo, Japan.",
     venue: {
       id: "venue004",
       title: "GARDEN新木場FACTORY",
@@ -76,6 +78,7 @@ export const demoEvents: Event[] = [
         prefecture: "Tokyo",
         city: "Koto-ku",
         addressLine1: "Shinkiba 2-8-2",
+        mapLink: "https://maps.app.goo.gl/HV9K9iFey9HPDXk26",
       },
       access: "16 minute walk from Shinkiba Station",
     },
@@ -144,6 +147,7 @@ export const demoEvents: Event[] = [
   },
   {
     id: "event005",
+    slug: "boksi-ko-ghar",
     title: "Boksi Ko Ghar",
     subtitle: "Tokyo",
     description: "",
@@ -158,6 +162,7 @@ export const demoEvents: Event[] = [
         prefecture: "Tokyo",
         city: "Nakano-ku",
         addressLine1: "Nakano 2-9-7",
+        mapLink: "https://maps.app.goo.gl/AyT9g3iV5eM83zAt5",
       },
       access: "5 minute walk from Nakano Station",
     },
@@ -198,7 +203,3 @@ export const demoEvents: Event[] = [
     ],
   },
 ]
-
-function getTimestamp(date: MomentInput) {
-  return moment.tz(date, "Asia/Tokyo").unix()
-}

@@ -1,14 +1,15 @@
 import { useRouter } from "next/router"
 import { EventList } from "@/src/components"
+import { activeEvents } from "@/src/utils/temp"
 import { getServerSession } from "next-auth/next"
+import { useSession } from "next-auth/react"
 import useTranslation from "next-translate/useTranslation"
 
 import { Layout } from "@/src/components/layout"
 import { Button, buttonVariants } from "@/src/components/ui/button"
-import { authOptions } from "./api/auth/[...nextauth]"
 
-export default function IndexPage(props) {
-  const { sessionData } = props
+export default function IndexPage({ events }) {
+  const { data: sessionData } = useSession()
   const router = useRouter()
   const { t } = useTranslation("common")
   let content = (
@@ -66,7 +67,7 @@ export default function IndexPage(props) {
           </div>
           <div className="pb-4">{content}</div>
           <div className="">
-            <EventList />
+            <EventList events={events} />
           </div>
         </div>
       </div>
@@ -74,9 +75,9 @@ export default function IndexPage(props) {
   )
 }
 
-export async function getServerSideProps({ req, res }) {
-  const session = await getServerSession(req, res, authOptions)
+export async function getStaticProps() {
+  const events = activeEvents()
   return {
-    props: { sessionData: session }, // will be passed to the page component as props
+    props: { events },
   }
 }

@@ -1,5 +1,6 @@
 import { Readable } from "node:stream"
-import moment from "moment"
+import { MomentInput } from "moment"
+import moment from "moment-timezone"
 
 import { Address } from "../config/events"
 
@@ -42,4 +43,8 @@ export const bodyFromRaw = async (req) => {
   const buf = await customBuffer(req)
   const rawBody = buf.toString("utf8")
   return rawBody
+}
+
+export const getTimestamp = (date: MomentInput) => {
+  return moment.tz(date, "Asia/Tokyo").unix()
 }

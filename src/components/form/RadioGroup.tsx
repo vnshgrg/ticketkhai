@@ -44,14 +44,17 @@ export const RadioGroup = React.forwardRef<HTMLInputElement, RadioGroupProps>(
     return (
       <div className="block">
         {label && (
-          <Label htmlFor={label.for} className="cursor-pointer">
+          <Label
+            htmlFor={label.for}
+            className="flex items-center text-sm font-semibold text-slate-500 uppercase mb-2 cursor-pointer"
+          >
             {label.label}
           </Label>
         )}
         {supportingText && (
           <div className="text-sm text-slate-500">{supportingText}</div>
         )}
-        <fieldset className="my-2 max-w-md">
+        <fieldset className="mt-3 w-full">
           <legend className="sr-only">{name}</legend>
           <div className="flex flex-col items-start space-y-4">
             {options.map((option) => {
@@ -60,14 +63,14 @@ export const RadioGroup = React.forwardRef<HTMLInputElement, RadioGroupProps>(
                 <div
                   key={option.label}
                   className={`pl-3 w-full flex items-start rounded-lg ${
-                    isSelected ? `bg-slate-50` : `hover:bg-slate-100`
+                    isSelected ? `bg-slate-100` : `hover:bg-slate-50`
                   }`}
                 >
                   <input
                     id={option.value}
                     type="radio"
                     defaultChecked={isSelected}
-                    className="h-4 w-4 mt-3 border-slate-300 bg-slate-50 text-slate-500 focus:ring-slate-300 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-600 dark:focus:ring-slate-600"
+                    className="h-4 w-4 mt-4 border-slate-300 bg-slate-50 text-slate-500 focus:ring-slate-300 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-600 dark:focus:ring-slate-600"
                     ref={forwardedRef}
                     name={name}
                     value={option.value}
@@ -76,19 +79,21 @@ export const RadioGroup = React.forwardRef<HTMLInputElement, RadioGroupProps>(
                   />
                   <label
                     htmlFor={option.value}
-                    className="block w-full px-3 py-3 leading-none cursor-pointer peer-disabled:opacity-70"
+                    className="block w-full flex items-center justify-between px-3 py-3 leading-none cursor-pointer peer-disabled:opacity-70"
                   >
-                    <span className="flex justify-between">
-                      <span className="font-semibold">{option.label}</span>
-                      {option.price && (
-                        <span className="font-bold">{option.price}</span>
+                    <span>
+                      <span className="font-semibold text-base">
+                        {option.label}
+                      </span>
+                      {option.secondaryLabel && (
+                        <span className="block text-sm mt-1">
+                          {option.secondaryLabel}
+                        </span>
                       )}
                     </span>
-                    {option.secondaryLabel && (
-                      <span className="block text-sm mt-2">
-                        {option.secondaryLabel}
-                      </span>
-                    )}
+                    <span className="font-semibold text-lg">
+                      {option.price}
+                    </span>
                   </label>
                 </div>
               )

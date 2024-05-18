@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { GoogleAnalytics } from "@next/third-parties/google"
 import useTranslation from "next-translate/useTranslation"
 
 import { SiteHeader } from "@/src/components/site-header"
@@ -12,7 +13,7 @@ export function Layout({ children }: LayoutProps) {
   return (
     <>
       <SiteHeader />
-      <main className="flex flex-1 flex-col pt-6 lg:pt-16">{children}</main>
+      <main className="flex flex-1 flex-col pt-12 md:pt-16">{children}</main>
       <footer className="mt-10 border-t border-slate-100 py-6 text-center text-sm text-slate-600">
         <p className="mb-4 space-x-10">
           <Link href="/">{t("nav-home")}</Link>
@@ -23,6 +24,7 @@ export function Layout({ children }: LayoutProps) {
         </p>
         <p>&copy; copyright 2023. Ticketkhai.com</p>
       </footer>
+      <GoogleAnalytics gaId="G-2ZQQ1M6LP3" />
     </>
   )
 }
