@@ -155,6 +155,7 @@ function BankTransferInstruction({ transaction }) {
               <Link
                 href={bankTransferInstruction.hosted_instructions_url}
                 target="_blank"
+                rel="noreferrer"
               >
                 {t("pd-show-full-transfer-details")}
               </Link>
@@ -227,6 +228,7 @@ function KonbiniTransferInstruction({ transaction }) {
               <Link
                 href={konbiniTransferInstruction.hosted_voucher_url}
                 target="_blank"
+                rel="noreferrer"
               >
                 {t("pd-show-full-payment-details")}
               </Link>

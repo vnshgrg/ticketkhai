@@ -29,7 +29,7 @@
   "ticket-purchased-on": "Purchased on",
   "event-title": "Event",
   "event-show": "Show",
-  "ticket-type": "Type",
+  "ticket-type": "Select ticket",
   "ticket-status": "Status",
   "ticket-show": "Show tickets",
   "ticket-hide": "Hide tickets",
@@ -92,5 +92,9 @@
   "confirmation-number": "Confirmation number",
   "payment-code": "Payment code",
   "show-instructions": "Show instructions",
-  "hide-instructions": "Hide instructions"
+  "hide-instructions": "Hide instructions",
+  "about-event": "About",
+  "login-or-register": "Login or Register",
+  "login-or-register-description": "Please login or register an account to purchase your ticket.",
+  "show-on-map": "Show on Map"
 }

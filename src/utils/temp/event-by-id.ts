@@ -14,3 +14,18 @@ export const eventById = (eventId: string): Event => {
     throw new Error(error.message)
   }
 }
+
+export const eventBySlug = (slug: string): Event => {
+  try {
+    const filteredDemoEvent = demoEvents.filter(
+      (event) => slug === event.slug
+    )[0]
+    if (!filteredDemoEvent) {
+      // throw new Error("No even found")
+      return null
+    }
+    return filteredDemoEvent
+  } catch (error) {
+    throw new Error(error.message)
+  }
+}
