@@ -79,7 +79,7 @@ export const RadioGroup = React.forwardRef<HTMLInputElement, RadioGroupProps>(
                   />
                   <label
                     htmlFor={option.value}
-                    className="block w-full flex items-center justify-between px-3 py-3 leading-none cursor-pointer peer-disabled:opacity-70"
+                    className="w-full flex items-center justify-between px-3 py-3 leading-none cursor-pointer peer-disabled:opacity-70"
                   >
                     <span>
                       <span className="font-semibold text-base">
