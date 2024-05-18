@@ -220,6 +220,7 @@ export default function EventPage({ event }: { event: Event }) {
                     <a
                       href={event.venue.address.mapLink}
                       target="_blank"
+                      rel="noreferrer"
                       tabIndex={-1}
                     >
                       {event.venue.title}
@@ -229,6 +230,7 @@ export default function EventPage({ event }: { event: Event }) {
                     <a
                       href={event.venue.address.mapLink}
                       target="_blank"
+                      rel="noreferrer"
                       tabIndex={-1}
                       className="text-sm"
                     >
@@ -240,6 +242,7 @@ export default function EventPage({ event }: { event: Event }) {
                   <a
                     href={event.venue.address.mapLink}
                     target="_blank"
+                    rel="noreferrer"
                     tabIndex={2}
                     className={buttonVariants({ variant: "subtle" })}
                   >
