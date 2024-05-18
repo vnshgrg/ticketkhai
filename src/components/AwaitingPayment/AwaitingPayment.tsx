@@ -1,7 +1,6 @@
 import { useState } from "react"
 import Link from "next/link"
 import { dateFromUtc, formatJPY } from "@/src/utils"
-import moment from "moment"
 import useTranslation from "next-translate/useTranslation"
 
 import { TransactionStatus } from "@/src/config/transactionStatusLabel"
@@ -11,6 +10,7 @@ import { Button } from "@/src/components/ui/button"
 export const AwaitingPayment = ({ transaction }) => {
   const [isShown, setIsShown] = useState(false)
   const { t } = useTranslation("common")
+  const { lang } = useTranslation()
 
   const isBankTransfer =
     transaction.paymentDetails?.display_bank_transfer_instructions
@@ -68,7 +68,11 @@ export const AwaitingPayment = ({ transaction }) => {
             {t("ordered-at")}
           </div>
           <div className="">
-            {dateFromUtc(transaction.updatedAt * 1000, "Do MMMM, YYYY h:mmA")}
+            {dateFromUtc(
+              transaction.updatedAt * 1000,
+              lang,
+              "Do MMMM, YYYY h:mmA"
+            )}
           </div>
         </div>
         <div className="col-span-2 hidden flex-col space-y-2 text-center sm:col-span-1 sm:flex sm:text-right">
@@ -191,6 +195,7 @@ function BankTransferInstruction({ transaction }) {
 
 function KonbiniTransferInstruction({ transaction }) {
   const { t } = useTranslation("common")
+  const { lang } = useTranslation()
 
   const konbiniTransferInstruction =
     transaction.paymentDetails.konbini_display_details
@@ -212,6 +217,7 @@ function KonbiniTransferInstruction({ transaction }) {
             <div className="">
               {dateFromUtc(
                 konbiniTransferInstruction.expires_at * 1000,
+                lang,
                 "Do MMMM, YYYY h:mmA"
               )}
             </div>
@@ -222,7 +228,7 @@ function KonbiniTransferInstruction({ transaction }) {
                 href={konbiniTransferInstruction.hosted_voucher_url}
                 target="_blank"
               >
-                {t("pd-show-full-transfer-details")}
+                {t("pd-show-full-payment-details")}
               </Link>
             </div>
           </div>

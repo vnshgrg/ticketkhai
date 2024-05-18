@@ -60,6 +60,8 @@
   "pd-transfer-amount": "払込金額",
   "pd-show-full-transfer-details": "振込の詳細を表示",
   "pd-hide-full-transfer-details": "振込の詳細を非表示",
+  "pd-show-full-payment-details": "お支払の詳細を表示",
+  "pd-hide-full-payment-details": "お支払の詳細を表示",
   "pd-account_holder_name": "口座名義",
   "pd-account_number": "口座番号",
   "pd-account_type": "口座の種類",

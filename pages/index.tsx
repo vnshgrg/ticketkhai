@@ -1,11 +1,8 @@
-import Link from "next/link"
 import { useRouter } from "next/router"
 import { EventList } from "@/src/components"
-import moment from "moment"
 import { getServerSession } from "next-auth/next"
 import useTranslation from "next-translate/useTranslation"
 
-import { siteConfig } from "@/src/config/site"
 import { Layout } from "@/src/components/layout"
 import { Button, buttonVariants } from "@/src/components/ui/button"
 import { authOptions } from "./api/auth/[...nextauth]"
@@ -57,7 +54,7 @@ export default function IndexPage(props) {
 
   return (
     <Layout>
-      <div className="mx-auto w-full max-w-md">
+      <div className="mx-auto w-full max-w-4xl">
         <div className="flex flex-col space-y-4 px-5 py-10">
           <div className="hidden sm:block">
             <h1 className="grow text-lg font-extrabold leading-tight tracking-tighter text-slate-800 dark:text-slate-200 sm:text-xl md:text-2xl lg:text-3xl">
@@ -67,8 +64,10 @@ export default function IndexPage(props) {
               {t("site-subtitle")}
             </p>
           </div>
-          <div>{content}</div>
-          <EventList />
+          <div className="pb-4">{content}</div>
+          <div className="">
+            <EventList />
+          </div>
         </div>
       </div>
     </Layout>

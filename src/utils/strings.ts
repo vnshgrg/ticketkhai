@@ -16,11 +16,17 @@ export const formatJPY = (amount: number): string => {
 
 export const dateFromUtc = (
   date: string | number,
-  format: any = "YYYY/MM/DD HH:mm:ss"
+  lang: string,
+  format: string
 ) => {
   const momentDate = moment(date)
   if (!momentDate.isValid) return null
 
+  if (lang === "jp") {
+    format = "YYYY年MM月DD日 HH:mm"
+  } else if (!format) {
+    format = "YYYY/MM/DD HH:mm"
+  }
   return momentDate.format(format)
 }
 
