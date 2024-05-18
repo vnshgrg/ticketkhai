@@ -44,6 +44,16 @@ export const useBuyTicket = () => {
     }
   }
 
+  const incrementTicketCount = () => {
+    const currentCount = parseInt(watch("numberOfTickets"))
+    if (currentCount < 20) setValue("numberOfTickets", `${currentCount + 1}`)
+  }
+
+  const decrementTicketCount = () => {
+    const currentCount = parseInt(watch("numberOfTickets"))
+    if (currentCount > 1) setValue("numberOfTickets", `${currentCount - 1}`)
+  }
+
   return {
     register,
     watch,
@@ -52,5 +62,7 @@ export const useBuyTicket = () => {
     control,
     handleSubmit,
     onSubmit,
+    incrementTicketCount,
+    decrementTicketCount,
   }
 }

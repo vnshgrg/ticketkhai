@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { dateFromUtc, formatJPY } from "@/src/utils"
 import { TicketStatus } from "@prisma/client"
 import moment from "moment"
 import { useQRCode } from "next-qrcode"
@@ -10,6 +11,7 @@ export const Ticket = ({ transaction }) => {
   const [isShown, setIsShown] = useState(false)
   const { Canvas } = useQRCode()
   const { t } = useTranslation("common")
+  const { lang } = useTranslation()
 
   const ticketStatusClass = (status: TicketStatus): string => {
     if (status === TicketStatus.available) {
@@ -46,10 +48,7 @@ export const Ticket = ({ transaction }) => {
             {t("ticket-price")}
           </div>
           <div className="font-bold text-slate-800">
-            {new Intl.NumberFormat("ja-JP", {
-              style: "currency",
-              currency: "JPY",
-            }).format(transaction.totalPrice)}
+            {formatJPY(transaction.totalPrice)}
           </div>
         </div>
         <div>
@@ -66,7 +65,11 @@ export const Ticket = ({ transaction }) => {
             {t("ticket-purchased-on")}
           </div>
           <div className="">
-            {moment(transaction.updatedAt * 1000).format("Do MMMM, YYYY h:mmA")}
+            {dateFromUtc(
+              transaction.updatedAt * 1000,
+              lang,
+              "Do MMMM, YYYY h:mmA"
+            )}
           </div>
         </div>
         <div className="col-span-2 hidden text-center sm:col-span-1 sm:block sm:text-right">
@@ -123,8 +126,10 @@ export const Ticket = ({ transaction }) => {
                       {t("event-date")}
                     </div>
                     <div className="">
-                      {moment(transaction.event.dateStart * 1000).format(
-                        "MMM DD, YYYY"
+                      {dateFromUtc(
+                        transaction.event.dateStart * 1000,
+                        null,
+                        lang === "jp" ? "YYYY年MM月DD日" : "MMM DD, YYYY"
                       )}
                     </div>
                   </div>
@@ -133,8 +138,10 @@ export const Ticket = ({ transaction }) => {
                       {t("event-time")}
                     </div>
                     <div className="">
-                      {moment(transaction.event.dateStart * 1000).format(
-                        "h:mmA"
+                      {dateFromUtc(
+                        transaction.event.dateStart * 1000,
+                        null,
+                        lang === "jp" ? "HH:mm" : "h:mmA"
                       )}
                     </div>
                   </div>

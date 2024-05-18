@@ -62,6 +62,8 @@
   "pd-transfer-amount": "Transfer Amount",
   "pd-show-full-transfer-details": "Show full transfer details",
   "pd-hide-full-transfer-details": "Hide full transfer details",
+  "pd-show-full-payment-details": "Show payment details",
+  "pd-hide-full-payment-details": "Hide payment details",
   "pd-account_holder_name": "Account holder name",
   "pd-account_number": "Account number",
   "pd-account_type": "Account type",

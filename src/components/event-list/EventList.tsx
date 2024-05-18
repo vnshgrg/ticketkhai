@@ -2,7 +2,7 @@
 import React from "react"
 import { useRouter } from "next/router"
 import { useBuyTicket, useEvents } from "@/src/hooks"
-import { formatJPY, readableAddress } from "@/src/utils"
+import { dateFromUtc, formatJPY, readableAddress } from "@/src/utils"
 import moment from "moment"
 import { useSession } from "next-auth/react"
 import useTranslation from "next-translate/useTranslation"
@@ -41,9 +41,16 @@ export const EventList = (): React.ReactElement => {
     purchaseTicket,
     ticketPurchaseLoading,
   } = useEvents()
-  const { register, errors, watch } = useBuyTicket()
+  const {
+    register,
+    errors,
+    watch,
+    incrementTicketCount,
+    decrementTicketCount,
+  } = useBuyTicket()
   const router = useRouter()
   const { t } = useTranslation("common")
+  const { lang } = useTranslation()
 
   if (loading) {
     return <div className="w-full">{t("site-loading")}...</div>
@@ -70,12 +77,14 @@ export const EventList = (): React.ReactElement => {
   const events: Event[] = data?.data
 
   return (
-    <div className="w-full">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
       {events.map((event) => {
         const ticketTypesRadioItem: RadioItem[] = event.tickets
           .filter((ticket) => ticket.available)
           .map((ticket) => ({
             label: ticket.title,
+            secondaryLabel: ticket.description ?? undefined,
+            price: formatJPY(ticket.price),
             value: ticket.id,
           }))
 
@@ -94,10 +103,11 @@ export const EventList = (): React.ReactElement => {
           (siteConfig.fees.tax / 100)
         const currentTotal =
           currentSubTotal + currentHandlingFee + currentPaymentFee + currentTax
+
         return (
           <div
             key={event.id}
-            className="overflow-hidden rounded-lg border border-slate-200 bg-white mb-6 w-full"
+            className="overflow-hidden rounded-lg border border-slate-200 bg-white w-full"
           >
             <div>
               <img
@@ -186,22 +196,32 @@ export const EventList = (): React.ReactElement => {
                   <SheetContent
                     position={"right"}
                     size="content"
-                    className="max-h-screen overflow-y-scroll"
+                    className="min-w-[28rem] max-h-screen overflow-y-scroll"
                   >
                     <SheetHeader>
                       <SheetTitle>{t("buy-tickets")}</SheetTitle>
                     </SheetHeader>
                     <div className="grid gap-5 py-4">
-                      <div className="space-y-2">
+                      <div className="space-y-1">
                         <div className="text-xl font-semibold text-slate-800">
                           {event.title}
                         </div>
-                        <div>{event.subtitle}</div>
-                        <div>
-                          {moment(event.dateStart * 1000).toLocaleString()}
+                        <div className="font-semibold uppercase text-slate-700">
+                          {event.subtitle}
                         </div>
-                        <div>{event.venue.title}</div>
-                        <div>{readableAddress(event.venue.address)}</div>
+                        <div className="text-sm">
+                          {dateFromUtc(
+                            event.dateStart * 1000,
+                            null,
+                            lang === "jp"
+                              ? "YYYY年MM月DD日 HH時mm分"
+                              : "MMM DD, YYYY h:mm A"
+                          )}
+                        </div>
+                        <div className="text-sm">{event.venue.title}</div>
+                        <div className="text-sm">
+                          {readableAddress(event.venue.address)}
+                        </div>
                       </div>
                       <Separator />
                       <RadioGroup
@@ -214,26 +234,36 @@ export const EventList = (): React.ReactElement => {
                         disabled={ticketPurchaseLoading}
                       />
                       <Separator />
-                      <Input
-                        type="number"
-                        name="numberOfTickets"
-                        id="numberOfTickets"
-                        placeholder="1"
-                        label={{
-                          label: t("ticket-no-of-tickets"),
-                          for: "numberOfTickets",
-                        }}
-                        error={errors.numberOfTickets?.message as string}
-                        aria-invalid={errors.numberOfTickets ? true : false}
-                        disabled={ticketPurchaseLoading}
-                        {...register("numberOfTickets")}
-                      />
+
+                      <div className="space-y-4">
+                        <div className="text-sm font-medium leading-none">
+                          {t("ticket-no-of-tickets")}
+                        </div>
+                        <div className="grid grid-cols-3 gap-8">
+                          <button
+                            onClick={() => decrementTicketCount()}
+                            className="bg-slate-50 hover:bg-slate-100 py-2 rounded-lg disabled:opacity-20 disabled:hover:bg-slate-50"
+                            disabled={watch("numberOfTickets") === "1"}
+                          >
+                            -1
+                          </button>
+                          <div className="text-center py-2 text-md font-medium">
+                            {watch("numberOfTickets")}
+                          </div>
+                          <button
+                            onClick={() => incrementTicketCount()}
+                            className="bg-slate-50 hover:bg-slate-100 py-2 rounded-lg disabled:opacity-20 disabled:hover:bg-slate-50"
+                          >
+                            +1
+                          </button>
+                        </div>
+                      </div>
                       <Separator />
                       {currentTicketType && currentNoOfTickets && (
-                        <>
-                          <div>
+                        <div className="max-w-md">
+                          <div className="mb-4 bg-slate-200 py-3 px-4 rounded-lg">
                             <h3 className="font-bold">{currentTicketType}</h3>
-                            <p className="text-sm">
+                            <p className="text-sm mt-1">
                               {currentTicket.description}
                             </p>
                           </div>
@@ -285,7 +315,7 @@ export const EventList = (): React.ReactElement => {
                               <div>{formatJPY(currentTotal)}</div>
                             </div>
                           </div>
-                        </>
+                        </div>
                       )}
                     </div>
                     {currentTotal > 0 && (
