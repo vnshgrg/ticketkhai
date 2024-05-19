@@ -91,18 +91,6 @@ export default function EventPage({ event }: { event: Event }) {
         value: formatJPY(currentSubTotal),
       },
       {
-        label: t("handling-fee"),
-        value: formatJPY(currentHandlingFee),
-      },
-      {
-        label: t("payment-fee"),
-        value: formatJPY(currentPaymentFee),
-      },
-      {
-        label: t("tax"),
-        value: formatJPY(currentTax),
-      },
-      {
         label: (
           <div className="text-base font-bold text-slate-800 py-2">
             {t("total")}
