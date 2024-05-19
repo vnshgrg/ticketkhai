@@ -145,63 +145,63 @@ export const demoEvents: Event[] = [
       // },
     ],
   },
-  // {
-  //   id: "event005",
-  //   slug: "boksi-ko-ghar",
-  //   title: "Boksi Ko Ghar",
-  //   subtitle: "Tokyo",
-  //   description: "",
-  //   venue: {
-  //     id: "venue003",
-  //     title: "Nakano Zero Hall",
-  //     description: "",
+  {
+    id: "event005",
+    slug: "boksi-ko-ghar",
+    title: "Boksi Ko Ghar",
+    subtitle: "Tokyo",
+    description: "",
+    venue: {
+      id: "venue003",
+      title: "Nakano Zero Hall",
+      description: "",
 
-  //     address: {
-  //       id: "address003",
-  //       postalCode: "164-0001",
-  //       prefecture: "Tokyo",
-  //       city: "Nakano-ku",
-  //       addressLine1: "Nakano 2-9-7",
-  //       mapLink: "https://maps.app.goo.gl/AyT9g3iV5eM83zAt5",
-  //     },
-  //     access: "5 minute walk from Nakano Station",
-  //   },
-  //   dateStart: getTimestamp("2024-05-19 18:00:00"),
-  //   dateEnd: getTimestamp("2024-05-19 23:59:59"),
-  //   dateGateOpen: getTimestamp("2024-05-19 17:00:00"),
-  //   dateTicketSalesStart: getTimestamp("2024-05-01 00:00:00"),
-  //   maximumNumberOfTicketsAvailable: 1000,
-  //   photo: "/images/boksi-ko-ghar.jpg",
-  //   notices: [],
-  //   tickets: [
-  //     {
-  //       id: "ticket012",
-  //       title: "General",
-  //       description: "General price tickets",
-  //       price: 3000,
-  //       numberOfTickets: 1,
-  //       stripePriceId: isProduction
-  //         ? "price_1P5MOSBE6fqNwbhoCoarnrAI"
-  //         : "price_1P5M59BE6fqNwbhoYfH1yIju",
-  //       available: true,
-  //       maximumNumberOfTicketsAvailable: 1000,
-  //       dateTicketSalesStart: getTimestamp("2024-04-14 00:00:00"),
-  //     },
-  //     {
-  //       id: "ticket014",
-  //       title: "Family",
-  //       description: "4 tickets at discuonted price",
-  //       price: 10000,
-  //       numberOfTickets: 4,
-  //       stripePriceId: isProduction
-  //         ? "price_1PCEZABE6fqNwbho6Xs7Gx35"
-  //         : "price_1PCEZhBE6fqNwbhoWlmNzW9V",
-  //       available: true,
-  //       maximumNumberOfTicketsAvailable: 500,
-  //       dateTicketSalesStart: getTimestamp("2024-04-14 00:00:00"),
-  //     },
-  //   ],
-  // },
+      address: {
+        id: "address003",
+        postalCode: "164-0001",
+        prefecture: "Tokyo",
+        city: "Nakano-ku",
+        addressLine1: "Nakano 2-9-7",
+        mapLink: "https://maps.app.goo.gl/AyT9g3iV5eM83zAt5",
+      },
+      access: "5 minute walk from Nakano Station",
+    },
+    dateStart: getTimestamp("2024-05-19 18:00:00"),
+    dateEnd: getTimestamp("2024-05-19 23:59:59"),
+    dateGateOpen: getTimestamp("2024-05-19 17:00:00"),
+    dateTicketSalesStart: getTimestamp("2024-05-01 00:00:00"),
+    maximumNumberOfTicketsAvailable: 1000,
+    photo: "/images/boksi-ko-ghar.jpg",
+    notices: [],
+    tickets: [
+      {
+        id: "ticket012",
+        title: "General",
+        description: "General price tickets",
+        price: 3000,
+        numberOfTickets: 1,
+        stripePriceId: isProduction
+          ? "price_1P5MOSBE6fqNwbhoCoarnrAI"
+          : "price_1P5M59BE6fqNwbhoYfH1yIju",
+        available: true,
+        maximumNumberOfTicketsAvailable: 1000,
+        dateTicketSalesStart: getTimestamp("2024-04-14 00:00:00"),
+      },
+      {
+        id: "ticket014",
+        title: "Family",
+        description: "4 tickets at discuonted price",
+        price: 10000,
+        numberOfTickets: 4,
+        stripePriceId: isProduction
+          ? "price_1PCEZABE6fqNwbho6Xs7Gx35"
+          : "price_1PCEZhBE6fqNwbhoWlmNzW9V",
+        available: true,
+        maximumNumberOfTicketsAvailable: 500,
+        dateTicketSalesStart: getTimestamp("2024-04-14 00:00:00"),
+      },
+    ],
+  },
 
   {
     id: "event007",
