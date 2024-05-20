@@ -150,7 +150,7 @@ export const demoEvents: Event[] = [
     slug: "farki-farki",
     title: "Farki Farki",
     subtitle: "Tokyo show",
-    description: "",
+    description: "Staring Anmol KC and Jassita Gurung in the lead roles, the movie is set against the backdrop of mystical elements. The story unfolds as a time-traveling love saga. Love transcends boundaries, and in this enchanting tale, it knows no limits.",
     venue: {
       id: "venue003",
       title: "Nakano Zero Hall",
