@@ -1,24 +1,10 @@
 import React from "react"
 import Link from "next/link"
-import { useRouter } from "next/router"
-import { useBuyTicket, useEvents } from "@/src/hooks"
-import { dateFromUtc, formatJPY, readableAddress } from "@/src/utils"
-import { useSession } from "next-auth/react"
+import { dateFromUtc } from "@/src/utils"
 import useTranslation from "next-translate/useTranslation"
 
 import { Event } from "@/src/config/events"
-import { siteConfig } from "@/src/config/site"
-import { RadioGroup, RadioItem } from "../form"
-import { Button, buttonVariants } from "../ui/button"
-import { Separator } from "../ui/separator"
-import {
-  Sheet,
-  SheetContent,
-  SheetFooter,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "../ui/sheet"
+import { buttonVariants } from "../ui/button"
 
 export const EventList = ({
   events,
