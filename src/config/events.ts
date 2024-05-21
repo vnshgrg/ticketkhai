@@ -88,7 +88,7 @@ export const demoEvents: Event[] = [
     dateTicketSalesStart: getTimestamp("2024-05-01 00:00:00"),
     maximumNumberOfTicketsAvailable: 1000,
     photo: "/images/1974-ad.jpg",
-    notices: ["Early birds tickets on sale now!"],
+    notices: ["Early birds tickets sale ending soon!"],
     tickets: [
       {
         id: "ticket015",
