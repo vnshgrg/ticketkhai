@@ -2,6 +2,8 @@ import { KomojuStatus, TicketStatus, User } from "@prisma/client"
 
 import { siteConfig } from "@/src/config/site"
 import { DB } from "../db"
+import { isProduction } from "../environment"
+import { sendSlackMessage, formatTicketSoldSlackMessage } from "../slack"
 import { sendSMS } from "../sms"
 
 export type IssueTicketParams = {
@@ -66,11 +68,17 @@ export const issueTicket: IssueTicket = async ({
     ])
 
     try {
-      await sendSMS({
-        provider: "twilio",
-        message: `Your ticket purchase is complete. Visit: ${siteConfig.baseurl}`,
-        to: user.mobile,
-      })
+      if(isProduction){
+        await sendSMS({
+          provider: "twilio",
+          message: `Your ticket purchase is complete. Visit: ${siteConfig.baseurl}`,
+          to: user.mobile,
+        })
+      }
+
+      await sendSlackMessage(
+        formatTicketSoldSlackMessage({eventName: eventId, quantity: quantity.toString(), transactionId, ticketType: ticketTypeId})
+      )
     } catch (error) {
       console.log(error)
       throw error
