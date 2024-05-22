@@ -45,10 +45,13 @@ export default function EventPage({ event }: { event: Event }) {
       price: formatJPY(ticket.price),
       value: ticket.id,
     }))
+  const ticketsAvailable = ticketTypesRadioItem.length > 0
 
   useEffect(() => {
-    // select first item as selected ticket
-    // setValue("ticketType", ticketTypesRadioItem[0].value)
+    if(ticketsAvailable) {
+      // select first item as selected ticket
+      setValue("ticketType", ticketTypesRadioItem[0].value)
+    }
   }, [])
 
   const currentTicket = event.tickets.find(
@@ -260,7 +263,7 @@ export default function EventPage({ event }: { event: Event }) {
             </div>
           )}
 
-          {ticketTypesRadioItem.length > 0 && (<div className={styles.box}>
+          {ticketsAvailable && (<div className={styles.box}>
             <div className={styles.boxContent}>
               <RadioGroup
                 register={register}
@@ -300,7 +303,7 @@ export default function EventPage({ event }: { event: Event }) {
             </div>
           </div>)}
 
-          {(status === "authenticated" && ticketTypesRadioItem.length > 0) && (
+          {(status === "authenticated" && ticketsAvailable) && (
             <>
               {currentTicketType && currentNoOfTickets && (
                 <div className={styles.box}>
