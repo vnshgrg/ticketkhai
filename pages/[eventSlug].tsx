@@ -300,7 +300,7 @@ export default function EventPage({ event }: { event: Event }) {
             </div>
           </div>)}
 
-          {false && (
+          {(status === "authenticated" && ticketTypesRadioItem.length > 0) && (
             <>
               {currentTicketType && currentNoOfTickets && (
                 <div className={styles.box}>
