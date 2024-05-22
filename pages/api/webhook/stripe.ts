@@ -1,10 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from "next"
 import { DB } from "@/src/utils/db"
-import { fulFillOrder, issueTicket } from "@/src/utils/events"
+import { fulFillOrder } from "@/src/utils/events"
 import { sendSMS } from "@/src/utils/sms"
 import { KomojuStatus } from "@prisma/client"
 import Stripe from "stripe"
-
+import { isProduction } from "@/src/utils/environment"
 import { siteConfig } from "@/src/config/site"
 import { getCustomerById, webhookPayloadParser } from "@/src/lib/stripe"
 
