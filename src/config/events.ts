@@ -88,21 +88,21 @@ export const demoEvents: Event[] = [
     dateTicketSalesStart: getTimestamp("2024-05-01 00:00:00"),
     maximumNumberOfTicketsAvailable: 1000,
     photo: "/images/1974-ad.jpg",
-    notices: ["Early birds tickets sale ending soon!"],
+    notices: ["Early birds tickets sold out!"],
     tickets: [
-      {
-        id: "ticket015",
-        title: "Early birds",
-        description: "Limited discounted price tickets",
-        price: 4000,
-        numberOfTickets: 1,
-        stripePriceId: isProduction
-          ? "price_1PHaDcBE6fqNwbhoE7sSCZwh"
-          : "price_1PHa1CBE6fqNwbhoOf0eRwWb",
-        available: true,
-        maximumNumberOfTicketsAvailable: 100,
-        dateTicketSalesStart: getTimestamp("2024-04-14 00:00:00"),
-      },
+      // {
+      //   id: "ticket015",
+      //   title: "Early birds",
+      //   description: "Limited discounted price tickets",
+      //   price: 4000,
+      //   numberOfTickets: 1,
+      //   stripePriceId: isProduction
+      //     ? "price_1PHaDcBE6fqNwbhoE7sSCZwh"
+      //     : "price_1PHa1CBE6fqNwbhoOf0eRwWb",
+      //   available: true,
+      //   maximumNumberOfTicketsAvailable: 100,
+      //   dateTicketSalesStart: getTimestamp("2024-04-14 00:00:00"),
+      // },
       // {
       //   id: "ticket016",
       //   title: "Standard",
