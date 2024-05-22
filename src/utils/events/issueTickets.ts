@@ -77,7 +77,7 @@ export const issueTicket: IssueTicket = async ({
       }
 
       await sendSlackMessage(
-        formatTicketSoldSlackMessage({eventName: eventId, quantity, transactionId, ticketType: ticketTypeId})
+        formatTicketSoldSlackMessage({eventName: eventId, quantity: quantity.toString(), transactionId, ticketType: ticketTypeId})
       )
     } catch (error) {
       console.log(error)
