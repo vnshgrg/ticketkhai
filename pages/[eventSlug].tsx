@@ -48,7 +48,7 @@ export default function EventPage({ event }: { event: Event }) {
 
   useEffect(() => {
     // select first item as selected ticket
-    setValue("ticketType", ticketTypesRadioItem[0].value)
+    // setValue("ticketType", ticketTypesRadioItem[0].value)
   }, [])
 
   const currentTicket = event.tickets.find(
@@ -300,7 +300,7 @@ export default function EventPage({ event }: { event: Event }) {
             </div>
           </div>
 
-          {status === "authenticated" && (
+          {status === "HIDDEN" && (
             <>
               {currentTicketType && currentNoOfTickets && (
                 <div className={styles.box}>
