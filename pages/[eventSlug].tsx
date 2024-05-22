@@ -260,7 +260,7 @@ export default function EventPage({ event }: { event: Event }) {
             </div>
           )}
 
-          <div className={styles.box}>
+          {ticketTypesRadioItem.length > 0 && (<div className={styles.box}>
             <div className={styles.boxContent}>
               <RadioGroup
                 register={register}
@@ -298,9 +298,9 @@ export default function EventPage({ event }: { event: Event }) {
                 </div>
               </div>
             </div>
-          </div>
+          </div>)}
 
-          {status === "HIDDEN" && (
+          {false && (
             <>
               {currentTicketType && currentNoOfTickets && (
                 <div className={styles.box}>
