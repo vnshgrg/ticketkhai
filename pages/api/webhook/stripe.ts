@@ -61,11 +61,13 @@ const stripeWebhookHandler = async (
               },
             })
             try {
-              await sendSMS({
-                provider: "twilio",
-                message: `Your ticket purchase is awaiting payment. Pay now: ${siteConfig.baseurl}`,
-                to: user.mobile,
-              })
+              if(isProduction){
+                await sendSMS({
+                  provider: "twilio",
+                  message: `Your ticket purchase is awaiting payment. Pay now: ${siteConfig.baseurl}`,
+                  to: user.mobile,
+                })
+              }
             } catch (error) {
               console.log(error.message)
             }
@@ -164,7 +166,9 @@ const stripeWebhookHandler = async (
               message: `Partial payment received. Transfer ${parsedAmountRemaining} to complete payment.`,
             }
             try {
-              await sendSMS({ provider: "twilio", ...textMessage })
+              if(isProduction){
+                await sendSMS({ provider: "twilio", ...textMessage })
+              }
             } catch (error) {
               console.log("Error at sendSMS", error.message)
             }
