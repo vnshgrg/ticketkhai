@@ -263,16 +263,6 @@ export default function EventPage({ event }: { event: Event }) {
             )}
           </div>
 
-          {hasNotice && (
-            <div className={styles.noticeContainer}>
-              {notices.map((notice, index) => (
-                <div key={index} className={styles.noticeItem}>
-                  <MegaphoneIcon className="w-5 h-5 mr-3 shrink-0" /> {notice}
-                </div>
-              ))}
-            </div>
-          )}
-
           {ticketsAvailable && (
             <div className={styles.box}>
               <div className={styles.boxContent}>
