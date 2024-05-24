@@ -45,10 +45,13 @@ export default function EventPage({ event }: { event: Event }) {
       price: formatJPY(ticket.price),
       value: ticket.id,
     }))
+  const ticketsAvailable = ticketTypesRadioItem.length > 0
 
   useEffect(() => {
-    // select first item as selected ticket
-    // setValue("ticketType", ticketTypesRadioItem[0].value)
+    if (ticketsAvailable) {
+      // select first item as selected ticket
+      setValue("ticketType", ticketTypesRadioItem[0].value)
+    }
   }, [])
 
   const currentTicket = event.tickets.find(
@@ -260,47 +263,59 @@ export default function EventPage({ event }: { event: Event }) {
             )}
           </div>
 
-          {ticketTypesRadioItem.length > 0 && (<div className={styles.box}>
-            <div className={styles.boxContent}>
-              <RadioGroup
-                register={register}
-                options={ticketTypesRadioItem}
-                name="ticketType"
-                label={{ label: t("ticket-type"), for: "ticketType" }}
-                supportingText=""
-                error={errors.ticketType?.message as string}
-                disabled={ticketPurchaseLoading}
-                value={selectedTicketRadioItem}
-              />
-            </div>
-            <div className={styles.boxContent}>
-              <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 justify-between items-baseline">
-                <div className={`${styles.labelStyle}`}>
-                  {t("ticket-no-of-tickets")}
+          {hasNotice && (
+            <div className={styles.noticeContainer}>
+              {notices.map((notice, index) => (
+                <div key={index} className={styles.noticeItem}>
+                  <MegaphoneIcon className="w-5 h-5 mr-3 shrink-0" /> {notice}
                 </div>
-                <div className="grid grid-cols-3 gap-4">
-                  <Button
-                    onClick={() => decrementTicketCount()}
-                    className={buttonVariants({ variant: "subtle" })}
-                    disabled={watch("numberOfTickets") === "1"}
-                  >
-                    -1
-                  </Button>
-                  <div className="text-center text-md font-medium border border-slate-200 w-12 py-2 rounded-lg">
-                    {watch("numberOfTickets")}
+              ))}
+            </div>
+          )}
+
+          {ticketsAvailable && (
+            <div className={styles.box}>
+              <div className={styles.boxContent}>
+                <RadioGroup
+                  register={register}
+                  options={ticketTypesRadioItem}
+                  name="ticketType"
+                  label={{ label: t("ticket-type"), for: "ticketType" }}
+                  supportingText=""
+                  error={errors.ticketType?.message as string}
+                  disabled={ticketPurchaseLoading}
+                  value={selectedTicketRadioItem}
+                />
+              </div>
+              <div className={styles.boxContent}>
+                <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 justify-between items-baseline">
+                  <div className={`${styles.labelStyle}`}>
+                    {t("ticket-no-of-tickets")}
                   </div>
-                  <Button
-                    onClick={() => incrementTicketCount()}
-                    className={buttonVariants({ variant: "subtle" })}
-                  >
-                    +1
-                  </Button>
+                  <div className="grid grid-cols-3 gap-4">
+                    <Button
+                      onClick={() => decrementTicketCount()}
+                      className={buttonVariants({ variant: "subtle" })}
+                      disabled={watch("numberOfTickets") === "1"}
+                    >
+                      -1
+                    </Button>
+                    <div className="text-center text-md font-medium border border-slate-200 w-12 py-2 rounded-lg">
+                      {watch("numberOfTickets")}
+                    </div>
+                    <Button
+                      onClick={() => incrementTicketCount()}
+                      className={buttonVariants({ variant: "subtle" })}
+                    >
+                      +1
+                    </Button>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>)}
+          )}
 
-          {(status === "authenticated" && ticketTypesRadioItem.length > 0) && (
+          {status === "authenticated" && ticketsAvailable && (
             <>
               {currentTicketType && currentNoOfTickets && (
                 <div className={styles.box}>

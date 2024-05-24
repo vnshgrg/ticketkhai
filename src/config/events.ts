@@ -206,7 +206,7 @@ export const demoEvents: Event[] = [
         title: "Student",
         description: "Discuonted ticket for students",
         price: 2500,
-        numberOfTickets: 4,
+        numberOfTickets: 1,
         stripePriceId: isProduction
           ? "price_1PHyZFBE6fqNwbhox3v8CQ0l"
           : "price_1PHybSBE6fqNwbhoyVyD8xQr",
