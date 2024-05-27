@@ -161,15 +161,14 @@ export const demoEvents: Event[] = [
   {
     id: "event007",
     slug: "farki-farki",
-    title: "Farki Farki",
+    title: "Farki Farki with Anmol KC",
     subtitle: "Tokyo show",
     description:
-      "Starring Anmol KC and Jassita Gurung in the lead roles, the movie is set against the backdrop of mystical elements. The story unfolds as a time-traveling love saga. Love transcends boundaries, and in this enchanting tale, it knows no limits.",
+      "The story unfolds as a time-traveling love saga. In this enchanting tale love transcends boundaries.",
     venue: {
       id: "venue003",
       title: "Nakano Zero Hall",
       description: "",
-
       address: {
         id: "address003",
         postalCode: "164-0001",
@@ -186,7 +185,7 @@ export const demoEvents: Event[] = [
     dateTicketSalesStart: getTimestamp("2024-05-01 00:00:00"),
     maximumNumberOfTicketsAvailable: 1000,
     photo: "/images/farki-farki.jpg",
-    notices: [],
+    notices: ["Red carpet premiere with Anmol KC!"],
     tickets: [
       {
         id: "ticket020",
