@@ -1,5 +1,11 @@
 import { getTimestamp, isProduction } from "@/src/utils"
 
+export type ConfirmPurchase = {
+  title: string
+  subtitle: string
+  description: string
+}
+
 export type Event = {
   id: string
   title: string
@@ -7,6 +13,7 @@ export type Event = {
   subtitle: string
   description: string
   photo?: string
+  ogImage?: string
   venue: Venue
   dateStart: number
   dateEnd: number
@@ -17,6 +24,7 @@ export type Event = {
   dateTicketSalesStart?: number
   dateTicketSalesEnd?: number
   extraNotes?: string
+  confirmPurchase?: ConfirmPurchase
 }
 
 export type Venue = {
@@ -89,6 +97,12 @@ export const demoEvents: Event[] = [
     maximumNumberOfTicketsAvailable: 1000,
     photo: "/images/1974-ad.jpg",
     notices: ["Early birds second phase tickets on sale!"],
+    confirmPurchase: {
+      title: "1974AD Live in Tokyo",
+      subtitle: "Tokyo",
+      description:
+        "The ticket you are trying to purchase is for TOKYO concert. Are you sure you want to continue with your order?",
+    },
     tickets: [
       // {
       //   id: "ticket015",
@@ -185,6 +199,7 @@ export const demoEvents: Event[] = [
     dateTicketSalesStart: getTimestamp("2024-05-01 00:00:00"),
     maximumNumberOfTicketsAvailable: 1000,
     photo: "/images/farki-farki.jpg",
+    ogImage: "/images/farki-farki-og-image.jpeg",
     notices: ["Red carpet premiere with Anmol KC!"],
     tickets: [
       {
