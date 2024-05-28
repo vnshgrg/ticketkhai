@@ -49,13 +49,6 @@ export default function EventPage({ event }: { event: Event }) {
     }))
   const ticketsAvailable = ticketTypesRadioItem.length > 0
 
-  useEffect(() => {
-    if (ticketsAvailable) {
-      // select first item as selected ticket
-      setValue("ticketType", ticketTypesRadioItem[0].value)
-    }
-  }, [])
-
   const currentTicket = event.tickets.find(
     (ticket) => ticket.id === watch("ticketType")
   )
