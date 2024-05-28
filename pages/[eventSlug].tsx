@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useRouter } from "next/router"
 import { Layout, RadioGroup, RadioItem, Seo } from "@/src/components"
 import { useBuyTicket, useEvents } from "@/src/hooks"
@@ -20,9 +20,11 @@ import useTranslation from "next-translate/useTranslation"
 
 import { Event } from "@/src/config/events"
 import { siteConfig } from "@/src/config/site"
+import { PurchasConfirmDialog } from "@/src/components/purchase-confirm"
 import { Button, buttonVariants } from "@/src/components/ui/button"
 
 export default function EventPage({ event }: { event: Event }) {
+  const [isLoading, setIsLoading] = useState(false)
   const { purchaseTicket, ticketPurchaseLoading } = useEvents()
   const {
     register,
@@ -107,12 +109,23 @@ export default function EventPage({ event }: { event: Event }) {
       },
     ]
 
+  const shouldAlertBeforePurchase = !!event.confirmPurchase
+
+  const buyTickets = async () => {
+    setIsLoading(true)
+    await purchaseTicket({
+      eventId: event.id,
+      ticketId: watch("ticketType"),
+      noOfTickets: parseInt(watch("numberOfTickets")),
+    })
+  }
+
   return (
     <Layout>
       <Seo
         title={event.title}
         description={event.description}
-        image={event.photo}
+        image={event.ogImage ? event.ogImage : event.photo}
       />
       <div className="mx-auto w-full md:min-w-[28rem] max-w-2xl">
         <div className="flex flex-col space-y-4 md:space-y-6 px-5 py-10">
@@ -336,22 +349,24 @@ export default function EventPage({ event }: { event: Event }) {
                           )
                         })}
                       </div>
-                      <Button
-                        type="submit"
-                        onClick={async () => {
-                          await purchaseTicket({
-                            eventId: event.id,
-                            ticketId: watch("ticketType"),
-                            noOfTickets: parseInt(watch("numberOfTickets")),
-                          })
-                        }}
-                        className="w-full flex flex-row items-center"
-                        size="lg"
-                        disabled={ticketPurchaseLoading}
-                      >
-                        <BanknotesIcon className="mr-2 w-5 h-5" />
-                        {t("confirm-and-pay")}
-                      </Button>
+                      {shouldAlertBeforePurchase ? (
+                        <PurchasConfirmDialog
+                          details={event.confirmPurchase}
+                          onClick={buyTickets}
+                          disabled={ticketPurchaseLoading || isLoading}
+                        />
+                      ) : (
+                        <Button
+                          type="submit"
+                          onClick={buyTickets}
+                          className="w-full flex flex-row items-center"
+                          size="lg"
+                          disabled={ticketPurchaseLoading || isLoading}
+                        >
+                          <BanknotesIcon className="mr-2 w-5 h-5" />
+                          {t("confirm-and-pay")}
+                        </Button>
+                      )}
                     </div>
                   </div>
                 </div>
