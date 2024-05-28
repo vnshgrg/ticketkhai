@@ -216,6 +216,19 @@ export const demoEvents: Event[] = [
         dateTicketSalesStart: getTimestamp("2024-04-14 00:00:00"),
       },
       {
+        id: "ticket022",
+        title: "VIP",
+        description: "Free dinner with Anmol KC",
+        price: 10000,
+        numberOfTickets: 1,
+        stripePriceId: isProduction
+          ? "price_1PLQ1dBE6fqNwbhoL9VvtA0S"
+          : "price_1PLQ1wBE6fqNwbhoYCGEgkju",
+        available: true,
+        maximumNumberOfTicketsAvailable: 500,
+        dateTicketSalesStart: getTimestamp("2024-04-14 00:00:00"),
+      },
+      {
         id: "ticket021",
         title: "Student",
         description: "Discuonted ticket for students",
