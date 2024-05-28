@@ -94,5 +94,6 @@
   "about-event": "イベントについて",
   "login-or-register": "ログインまたは登録",
   "login-or-register-description": "チケットを購入するにはログインまたはアカウント登録を行ってください。",
-  "show-on-map": "地図上に表示"
+  "show-on-map": "地図上に表示",
+  "cancel": "キャンセル"
 }
