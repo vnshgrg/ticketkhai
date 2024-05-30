@@ -12,7 +12,8 @@
     "react/jsx-key": "off",
     "tailwindcss/no-custom-classname": "off",
     "tailwindcss/classnames-order": "off",
-    "tailwindcss/migration-from-tailwind-2": "off"
+    "tailwindcss/migration-from-tailwind-2": "off",
+    "@next/next/no-img-element": "off"
   },
   "settings": {
     "tailwindcss": {
