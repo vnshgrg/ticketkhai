@@ -96,7 +96,10 @@ export const demoEvents: Event[] = [
     dateTicketSalesStart: getTimestamp("2024-05-01 00:00:00"),
     maximumNumberOfTicketsAvailable: 1000,
     photo: "/images/1974-ad.jpg",
-    notices: ["Early birds second phase tickets on sale!"],
+    notices: [
+      "Early birds second phase tickets sold out!",
+      "Regular tickets are on sale now!",
+    ],
     confirmPurchase: {
       title: "1974AD Live in Tokyo",
       subtitle: "Tokyo",
@@ -117,59 +120,59 @@ export const demoEvents: Event[] = [
       //   maximumNumberOfTicketsAvailable: 100,
       //   dateTicketSalesStart: getTimestamp("2024-04-14 00:00:00"),
       // },
+      // {
+      //   id: "ticket019",
+      //   title: "Early birds second phase",
+      //   description: "Limited discounted price tickets",
+      //   price: 4500,
+      //   numberOfTickets: 1,
+      //   stripePriceId: isProduction
+      //     ? "price_1PJlk2BE6fqNwbhobYzZbqlV"
+      //     : "price_1PJlikBE6fqNwbhoyRg53tEe",
+      //   available: true,
+      //   maximumNumberOfTicketsAvailable: 100,
+      //   dateTicketSalesStart: getTimestamp("2024-04-14 00:00:00"),
+      // },
       {
-        id: "ticket019",
-        title: "Early birds second phase",
-        description: "Limited discounted price tickets",
-        price: 4500,
+        id: "ticket016",
+        title: "Standard",
+        description: "General ticket for single person entry",
+        price: 5000,
         numberOfTickets: 1,
         stripePriceId: isProduction
-          ? "price_1PJlk2BE6fqNwbhobYzZbqlV"
-          : "price_1PJlikBE6fqNwbhoyRg53tEe",
+          ? "price_1PHaDcBE6fqNwbhonOxrekhx"
+          : "price_1PHa1CBE6fqNwbho3Y2fG9CB",
         available: true,
-        maximumNumberOfTicketsAvailable: 100,
+        maximumNumberOfTicketsAvailable: 1000,
         dateTicketSalesStart: getTimestamp("2024-04-14 00:00:00"),
       },
-      // {
-      //   id: "ticket016",
-      //   title: "Standard",
-      //   description: "General ticket for single person entry",
-      //   price: 5000,
-      //   numberOfTickets: 1,
-      //   stripePriceId: isProduction
-      //     ? "price_1PHaDcBE6fqNwbhonOxrekhx"
-      //     : "price_1PHa1CBE6fqNwbho3Y2fG9CB",
-      //   available: true,
-      //   maximumNumberOfTicketsAvailable: 1000,
-      //   dateTicketSalesStart: getTimestamp("2024-04-14 00:00:00"),
-      // },
-      // {
-      //   id: "ticket017",
-      //   title: "Couple",
-      //   description: "Discounted ticket for couples",
-      //   price: 9000,
-      //   numberOfTickets: 1,
-      //   stripePriceId: isProduction
-      //     ? "price_1PHaDcBE6fqNwbhoFKmUMUmN"
-      //     : "price_1PHa1CBE6fqNwbhofcjg69Xm",
-      //   available: true,
-      //   maximumNumberOfTicketsAvailable: 1000,
-      //   dateTicketSalesStart: getTimestamp("2024-04-14 00:00:00"),
-      // },
-      // {
-      //   id: "ticket018",
-      //   title: "VIP",
-      //   description:
-      //     "VIP ticket for single person entry, includes Free exclusive event T-shirt, VIP wrist-band, 1 Free drink",
-      //   price: 10000,
-      //   numberOfTickets: 1,
-      //   stripePriceId: isProduction
-      //     ? "price_1PHaDcBE6fqNwbhopGmlyEg6"
-      //     : "price_1PHa1CBE6fqNwbhockSeOhrO",
-      //   available: true,
-      //   maximumNumberOfTicketsAvailable: 1000,
-      //   dateTicketSalesStart: getTimestamp("2024-04-14 00:00:00"),
-      // },
+      {
+        id: "ticket017",
+        title: "Couple",
+        description: "Discounted ticket for couples",
+        price: 9000,
+        numberOfTickets: 1,
+        stripePriceId: isProduction
+          ? "price_1PHaDcBE6fqNwbhoFKmUMUmN"
+          : "price_1PHa1CBE6fqNwbhofcjg69Xm",
+        available: true,
+        maximumNumberOfTicketsAvailable: 1000,
+        dateTicketSalesStart: getTimestamp("2024-04-14 00:00:00"),
+      },
+      {
+        id: "ticket018",
+        title: "VIP",
+        description:
+          "VIP ticket for single person entry, includes Free exclusive event T-shirt, VIP wrist-band, 1 Free drink",
+        price: 10000,
+        numberOfTickets: 1,
+        stripePriceId: isProduction
+          ? "price_1PHaDcBE6fqNwbhopGmlyEg6"
+          : "price_1PHa1CBE6fqNwbhockSeOhrO",
+        available: true,
+        maximumNumberOfTicketsAvailable: 1000,
+        dateTicketSalesStart: getTimestamp("2024-04-14 00:00:00"),
+      },
     ],
   },
   {
