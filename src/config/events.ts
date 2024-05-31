@@ -96,10 +96,7 @@ export const demoEvents: Event[] = [
     dateTicketSalesStart: getTimestamp("2024-05-01 00:00:00"),
     maximumNumberOfTicketsAvailable: 1000,
     photo: "/images/1974-ad.jpg",
-    notices: [
-      "Early birds second phase tickets sold out!",
-      "Regular tickets are on sale now!",
-    ],
+    notices: ["Regular tickets are on sale now!"],
     confirmPurchase: {
       title: "1974AD Live in Tokyo",
       subtitle: "Tokyo",
@@ -242,6 +239,83 @@ export const demoEvents: Event[] = [
           : "price_1PHybSBE6fqNwbhoyVyD8xQr",
         available: true,
         maximumNumberOfTicketsAvailable: 500,
+        dateTicketSalesStart: getTimestamp("2024-04-14 00:00:00"),
+      },
+    ],
+  },
+
+  {
+    id: "event008",
+    slug: "1974ad-live-in-kyoto",
+    title: "1974AD Original Lineup",
+    subtitle: "Live in Kyoto",
+    description:
+      "Original lineup of the legendary band from Nepal, 1974AD performing live in Kyoto, Japan.",
+    venue: {
+      id: "venue005",
+      title: "KBS Hall",
+      description: "",
+      address: {
+        id: "address005",
+        postalCode: "602-8588",
+        prefecture: "Kyoto",
+        city: "Kamigyo",
+        addressLine1: "Karasumakamichojamachi, KBS Kyoto Broadcasting Hall",
+        mapLink: "https://maps.app.goo.gl/F6qzKnAYfK8Yw1UZ6",
+      },
+      access: "8 minutes walk from Marutamachi Station, Exit 2 (left)",
+    },
+    dateStart: getTimestamp("2024-08-03 17:00:00"),
+    dateEnd: getTimestamp("2024-08-03 23:00:00"),
+    dateGateOpen: getTimestamp("2024-08-03 15:00:00"),
+    dateTicketSalesStart: getTimestamp("2024-05-01 00:00:00"),
+    maximumNumberOfTicketsAvailable: 1000,
+    photo: "/images/1974-ad-kyoto.jpg",
+    notices: ["Early birds on sale till June 7th!"],
+    confirmPurchase: {
+      title: "1974AD Live in Kyoto",
+      subtitle: "Kyoto",
+      description:
+        "The ticket you are trying to purchase is for KYOTO concert. Are you sure you want to continue with your order?",
+    },
+    tickets: [
+      {
+        id: "ticket023",
+        title: "Early birds",
+        description: "Limited discounted price tickets",
+        price: 3000,
+        numberOfTickets: 1,
+        stripePriceId: isProduction
+          ? "price_1PMXMiBE6fqNwbhoN5ZK5nFC"
+          : "price_1PMXJiBE6fqNwbhoR464Cnue",
+        available: true,
+        maximumNumberOfTicketsAvailable: 100,
+        dateTicketSalesStart: getTimestamp("2024-04-14 00:00:00"),
+      },
+      {
+        id: "ticket024",
+        title: "Standard",
+        description: "General ticket for single person entry",
+        price: 4000,
+        numberOfTickets: 1,
+        stripePriceId: isProduction
+          ? "price_1PMXLyBE6fqNwbhofXnkQalY"
+          : "price_1PMXJGBE6fqNwbhofSieZDGp",
+        available: true,
+        maximumNumberOfTicketsAvailable: 1000,
+        dateTicketSalesStart: getTimestamp("2024-04-14 00:00:00"),
+      },
+      {
+        id: "ticket025",
+        title: "VIP",
+        description: "Special tickets for single person entry",
+        price: 10000,
+        numberOfTickets: 1,
+        stripePriceId: isProduction
+          ? "price_1PMXMtBE6fqNwbhoKzaCLtn3"
+          : "price_1PMXK8BE6fqNwbhotC2opWkJ",
+        available: true,
+        maximumNumberOfTicketsAvailable: 1000,
         dateTicketSalesStart: getTimestamp("2024-04-14 00:00:00"),
       },
     ],
