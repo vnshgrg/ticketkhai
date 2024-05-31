@@ -20,6 +20,7 @@ import useTranslation from "next-translate/useTranslation"
 
 import { Event } from "@/src/config/events"
 import { siteConfig } from "@/src/config/site"
+import { Notice } from "@/src/components/notice"
 import { PurchasConfirmDialog } from "@/src/components/purchase-confirm"
 import { Button, buttonVariants } from "@/src/components/ui/button"
 
@@ -162,15 +163,7 @@ export default function EventPage({ event }: { event: Event }) {
             />
           </div>
 
-          {hasNotice && (
-            <div className={styles.noticeContainer}>
-              {notices.map((notice, index) => (
-                <div key={index} className={styles.noticeItem}>
-                  <MegaphoneIcon className="w-5 h-5 mr-3 shrink-0" /> {notice}
-                </div>
-              ))}
-            </div>
-          )}
+          {hasNotice && <Notice notices={event.notices} />}
 
           <div className={styles.box}>
             <div className={styles.boxContent}>
@@ -245,7 +238,7 @@ export default function EventPage({ event }: { event: Event }) {
                     </a>
                   </div>
                 </div>
-                <div>
+                <div className="shrink-0">
                   <a
                     href={event.venue.address.mapLink}
                     target="_blank"
@@ -438,10 +431,7 @@ const styles = {
   valueStyle: "text-base font-semibold",
   infoItem: "",
   venueContainer:
-    "flex flex-col sm:flex-row items-start sm:items-center justify-between space-y-4 sm:space-y-0",
+    "flex flex-col sm:flex-row items-start sm:items-center justify-between sm:space-x-4 space-y-4 space-x-0 sm:space-y-0",
   box: "space-y-2 divide-y-2 divide-slate-100 rounded-lg bg-white shadow-md shadow-slate-100",
   boxContent: "p-4",
-  noticeContainer:
-    "divide-y divide-red-600 rounded-lg text-red-50 bg-red-700 text-sm shadow-md shadow-red-300",
-  noticeItem: "flex items-center text-base text-red-100 px-4 py-3",
 }

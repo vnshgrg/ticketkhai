@@ -4,6 +4,7 @@ import { dateFromUtc } from "@/src/utils"
 import useTranslation from "next-translate/useTranslation"
 
 import { Event } from "@/src/config/events"
+import { Notice } from "../notice"
 import { buttonVariants } from "../ui/button"
 
 export const EventList = ({
@@ -26,16 +27,20 @@ export const EventItem = ({ event }: { event: Event }) => {
   const { t } = useTranslation("common")
   const { lang } = useTranslation()
 
-  const eventStartDate = event.dateStart * 1000;
+  const eventStartDate = event.dateStart * 1000
+
+  const hasNotice = event.notices && event.notices.length > 0
 
   return (
     <div>
-      <div
-        className="overflow-hidden rounded-lg border border-slate-200 bg-white w-full"
-      >
+      <div className="overflow-hidden rounded-lg border border-slate-200 bg-white w-full">
         <div>
           <Link href={`/${event.slug}`}>
-            <img src={event.photo} alt={event.title} className="aspect-square" />
+            <img
+              src={event.photo}
+              alt={event.title}
+              className="aspect-square"
+            />
           </Link>
         </div>
         <div className="relative">
@@ -70,24 +75,17 @@ export const EventItem = ({ event }: { event: Event }) => {
                     <Link href={`/${event.slug}`}>{event.subtitle}</Link>
                   </h3>
                 </div>
-              </div>  
+              </div>
               <div className="font-sm text-slate-800 mt-4">
                 {event.description}
               </div>
             </div>
-              {event.notices.map((notice, index) => {
-                return (
-                  <div
-                    key={index}
-                    className="col-span-2 rounded bg-red-600 px-3 py-2 text-sm font-semibold text-white"
-                  >
-                    {notice}
-                  </div>
-                )
-              })}
+            {hasNotice && <Notice notices={event.notices} />}
             <div>
               <Link href={`/${event.slug}`}>
-                <span className={`${buttonVariants({ variant: "default" })} w-full`}>
+                <span
+                  className={`${buttonVariants({ variant: "default" })} w-full`}
+                >
                   {t("buy-tickets")}
                 </span>
               </Link>
