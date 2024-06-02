@@ -85,25 +85,25 @@ export function formatTicketSoldSlackMessage({
                 elements: [
                   {
                     type: "text",
+                    text: `Type: ${ticket.title}`,
+                  },
+                ],
+              },
+              {
+                type: "rich_text_section",
+                elements: [
+                  {
+                    type: "text",
+                    text: `Price: ${formatJPY(ticket.price)}`,
+                  },
+                ],
+              },
+              {
+                type: "rich_text_section",
+                elements: [
+                  {
+                    type: "text",
                     text: `Quantity: ${quantity}`,
-                  },
-                ],
-              },
-              {
-                type: "rich_text_section",
-                elements: [
-                  {
-                    type: "text",
-                    text: `Ticket Type: ${ticket.title}`,
-                  },
-                ],
-              },
-              {
-                type: "rich_text_section",
-                elements: [
-                  {
-                    type: "text",
-                    text: `Ticket Price: ${formatJPY(ticket.price)}`,
                   },
                 ],
               },
