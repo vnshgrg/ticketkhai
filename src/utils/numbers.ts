@@ -61,28 +61,17 @@ export const aggregateTransactioinStat = (
   let transactions: TransactionRow[]
   if (frequency === "today") {
     transactions = txns.filter(({ updatedAt }) => {
-      const today = moment()
-      const todayStart = today.startOf("day")
-      const todayEnd = today.endOf("day")
+      const today = moment().startOf("day")
+      const updated = moment(updatedAt).startOf("day")
 
-      const updated = moment(updatedAt)
-
-      return (
-        updated.isSameOrAfter(todayStart) && updated.isSameOrBefore(todayEnd)
-      )
+      return updated.isSame(today, "day")
     })
   } else if (frequency === "yesterday") {
     transactions = txns.filter(({ updatedAt }) => {
-      const yesterday = moment().subtract(1, "day")
-      const yesterdayStart = yesterday.startOf("day")
-      const yesterdayEnd = yesterday.endOf("day")
+      const yesterday = moment().startOf("day").subtract(1, "day")
+      const updated = moment(updatedAt).startOf("day")
 
-      const updated = moment(updatedAt)
-
-      return (
-        updated.isSameOrAfter(yesterdayStart) &&
-        updated.isSameOrBefore(yesterdayEnd)
-      )
+      return updated.isSame(yesterday)
     })
   } else {
     transactions = txns
