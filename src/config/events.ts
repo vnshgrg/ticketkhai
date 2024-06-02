@@ -1,5 +1,7 @@
 import { getTimestamp, isProduction } from "@/src/utils"
 
+import { admins } from "./admins"
+
 export type ConfirmPurchase = {
   title: string
   subtitle: string
@@ -25,6 +27,7 @@ export type Event = {
   dateTicketSalesEnd?: number
   extraNotes?: string
   confirmPurchase?: ConfirmPurchase
+  admin?: string[]
 }
 
 export type Venue = {
@@ -75,6 +78,7 @@ export const demoEvents: Event[] = [
     subtitle: "Tokyo show",
     description:
       "The story unfolds as a time-traveling love saga. In this enchanting tale love transcends boundaries.",
+    admin: [admins.suvash],
     venue: {
       id: "venue003",
       title: "Nakano Zero Hall",
@@ -175,32 +179,32 @@ export const demoEvents: Event[] = [
         "The ticket you are trying to purchase is for TOKYO concert. Are you sure you want to continue with your order?",
     },
     tickets: [
-      // {
-      //   id: "ticket015",
-      //   title: "Early birds",
-      //   description: "Limited discounted price tickets",
-      //   price: 4000,
-      //   numberOfTickets: 1,
-      //   stripePriceId: isProduction
-      //     ? "price_1PHaDcBE6fqNwbhoE7sSCZwh"
-      //     : "price_1PHa1CBE6fqNwbhoOf0eRwWb",
-      //   available: true,
-      //   maximumNumberOfTicketsAvailable: 100,
-      //   dateTicketSalesStart: getTimestamp("2024-04-14 00:00:00"),
-      // },
-      // {
-      //   id: "ticket019",
-      //   title: "Early birds second phase",
-      //   description: "Limited discounted price tickets",
-      //   price: 4500,
-      //   numberOfTickets: 1,
-      //   stripePriceId: isProduction
-      //     ? "price_1PJlk2BE6fqNwbhobYzZbqlV"
-      //     : "price_1PJlikBE6fqNwbhoyRg53tEe",
-      //   available: true,
-      //   maximumNumberOfTicketsAvailable: 100,
-      //   dateTicketSalesStart: getTimestamp("2024-04-14 00:00:00"),
-      // },
+      {
+        id: "ticket015",
+        title: "Early birds",
+        description: "Limited discounted price tickets",
+        price: 4000,
+        numberOfTickets: 1,
+        stripePriceId: isProduction
+          ? "price_1PHaDcBE6fqNwbhoE7sSCZwh"
+          : "price_1PHa1CBE6fqNwbhoOf0eRwWb",
+        available: false,
+        maximumNumberOfTicketsAvailable: 100,
+        dateTicketSalesStart: getTimestamp("2024-04-14 00:00:00"),
+      },
+      {
+        id: "ticket019",
+        title: "Early birds second phase",
+        description: "Limited discounted price tickets",
+        price: 4500,
+        numberOfTickets: 1,
+        stripePriceId: isProduction
+          ? "price_1PJlk2BE6fqNwbhobYzZbqlV"
+          : "price_1PJlikBE6fqNwbhoyRg53tEe",
+        available: false,
+        maximumNumberOfTicketsAvailable: 100,
+        dateTicketSalesStart: getTimestamp("2024-04-14 00:00:00"),
+      },
       {
         id: "ticket016",
         title: "Standard",
