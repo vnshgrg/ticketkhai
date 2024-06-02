@@ -1,5 +1,12 @@
 import { useRouter } from "next/router"
-import { Contact, LogIn, LogOut, ScanLine, User } from "lucide-react"
+import {
+  Contact,
+  FileTextIcon,
+  LogIn,
+  LogOut,
+  ScanLine,
+  User,
+} from "lucide-react"
 import { signIn, signOut, useSession } from "next-auth/react"
 import { useTheme } from "next-themes"
 import useTranslation from "next-translate/useTranslation"
@@ -55,6 +62,15 @@ export const LoginButton = () => {
                 {/* <span className="text-xs font-normal">{email}</span> */}
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
+              <DropdownMenuItem
+                className="cursor-pointer"
+                onClick={() => {
+                  router.push("/admin/list")
+                }}
+              >
+                <FileTextIcon className="mr-2 h-4 w-4" />
+                <span>Sales Report</span>
+              </DropdownMenuItem>
               <DropdownMenuItem
                 className="cursor-pointer"
                 onClick={() => {
