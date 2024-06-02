@@ -1,5 +1,7 @@
 import { getTimestamp, isProduction } from "@/src/utils"
 
+import { admins } from "./admins"
+
 export type ConfirmPurchase = {
   title: string
   subtitle: string
@@ -25,6 +27,7 @@ export type Event = {
   dateTicketSalesEnd?: number
   extraNotes?: string
   confirmPurchase?: ConfirmPurchase
+  admin?: string[]
 }
 
 export type Venue = {
@@ -75,6 +78,7 @@ export const demoEvents: Event[] = [
     subtitle: "Tokyo show",
     description:
       "The story unfolds as a time-traveling love saga. In this enchanting tale love transcends boundaries.",
+    admin: [admins.suvash],
     venue: {
       id: "venue003",
       title: "Nakano Zero Hall",
