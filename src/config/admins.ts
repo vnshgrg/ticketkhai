@@ -1,4 +1,5 @@
 import { isProduction } from "../utils"
+import { Event } from "./events"
 
 const productionAdmins = {
   avinash: "cli5ywph50000le0frjjmaaeh",
@@ -20,4 +21,16 @@ const isGodAdmin = (userId: string) =>
 export const isAdmin = (userId: string) => {
   if (isGodAdmin(userId)) return true
   return !!Object.values(admins).find((id) => id === userId)
+}
+
+export const isEventAdmin = (event: Event, userId: string) => {
+  if (isGodAdmin(userId)) return true
+
+  if (!isAdmin) return false
+
+  const { admin } = event
+
+  if (!admin) return false
+
+  return admin.includes(userId)
 }

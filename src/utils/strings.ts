@@ -48,3 +48,7 @@ export const bodyFromRaw = async (req) => {
 export const getTimestamp = (date: MomentInput) => {
   return moment.tz(date, "Asia/Tokyo").unix()
 }
+
+export const classNames = (...classes) => {
+  return classes.filter(Boolean).join(" ")
+}
