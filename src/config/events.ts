@@ -251,6 +251,7 @@ export const demoEvents: Event[] = [
   {
     id: "event008",
     slug: "1974ad-live-in-kyoto",
+    admin: [admins.samil],
     title: "1974AD Original Lineup",
     subtitle: "Live in Kyoto",
     description:
