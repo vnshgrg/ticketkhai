@@ -78,7 +78,7 @@ export const demoEvents: Event[] = [
     subtitle: "Tokyo show",
     description:
       "The story unfolds as a time-traveling love saga. In this enchanting tale love transcends boundaries.",
-    admin: [admins.suvash],
+    admin: [admins.suvash, admins.asim],
     venue: {
       id: "venue003",
       title: "Nakano Zero Hall",
