@@ -74,7 +74,7 @@ export const demoEvents: Event[] = [
   {
     id: "event007",
     slug: "farki-farki",
-    title: "Farki Farki",
+    title: "Farki Farki with Anmol KC",
     subtitle: "Tokyo show",
     description:
       "The story unfolds as a time-traveling love saga. In this enchanting tale love transcends boundaries.",
@@ -99,7 +99,8 @@ export const demoEvents: Event[] = [
     dateTicketSalesStart: getTimestamp("2024-05-01 00:00:00"),
     maximumNumberOfTicketsAvailable: 1000,
     photo: "/images/farki-farki.jpg",
-    notices: [],
+    ogImage: "/images/farki-farki-og-image.jpeg",
+    notices: ["Red carpet premiere with Anmol KC!"],
     tickets: [
       {
         id: "ticket020",
@@ -123,7 +124,7 @@ export const demoEvents: Event[] = [
         stripePriceId: isProduction
           ? "price_1PLQ1dBE6fqNwbhoL9VvtA0S"
           : "price_1PLQ1wBE6fqNwbhoYCGEgkju",
-        available: false,
+        available: true,
         maximumNumberOfTicketsAvailable: 500,
         dateTicketSalesStart: getTimestamp("2024-04-14 00:00:00"),
       },
