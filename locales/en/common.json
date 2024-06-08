@@ -15,6 +15,7 @@
   "auth-logout": "Logout",
   "auth-register": "Register",
   "auth-forgot-password": "Forgot password",
+  "auth-forgot-password-send-verification-code": "Send verification code",
   "auth-login-title": "Sign in to your account",
   "auth-register-title": "Register new account",
   "auth-japanese-number": "A Japanese mobile number.",

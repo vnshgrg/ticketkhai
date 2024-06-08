@@ -15,6 +15,7 @@
   "auth-logout": "ログアウト",
   "auth-register": "新規登録",
   "auth-forgot-password": "パスワード忘れた",
+  "auth-forgot-password-send-verification-code": "認証コードを送信",
   "auth-login-title": "ログインしてください",
   "auth-register-title": "新しいアカウントを登録",
   "auth-japanese-number": "日本の携帯電話番号。",
