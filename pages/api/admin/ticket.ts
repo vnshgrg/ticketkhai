@@ -103,7 +103,6 @@ const myTicektsHandler = async (
           .json({ result: true, message: "success", data: populatedTickets })
         return
       } catch (error) {
-        console.log(error)
         res.status(500).json({
           result: false,
           error: error?.message || "An unknown error occurred.",

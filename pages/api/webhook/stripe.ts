@@ -1,10 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from "next"
 import { DB } from "@/src/utils/db"
+import { isProduction } from "@/src/utils/environment"
 import { fulFillOrder } from "@/src/utils/events"
 import { sendSMS } from "@/src/utils/sms"
 import { KomojuStatus } from "@prisma/client"
 import Stripe from "stripe"
-import { isProduction } from "@/src/utils/environment"
+
 import { siteConfig } from "@/src/config/site"
 import { getCustomerById, webhookPayloadParser } from "@/src/lib/stripe"
 
@@ -61,7 +62,7 @@ const stripeWebhookHandler = async (
               },
             })
             try {
-              if(isProduction){
+              if (isProduction) {
                 await sendSMS({
                   provider: "twilio",
                   message: `Your ticket purchase is awaiting payment. Pay now: ${siteConfig.baseurl}`,
@@ -69,7 +70,11 @@ const stripeWebhookHandler = async (
                 })
               }
             } catch (error) {
-              console.log(error.message)
+              res.status(500).json({
+                result: false,
+                message: "Could not send verification code.",
+              })
+              return
             }
 
             await DB.webhook.create({
@@ -166,7 +171,7 @@ const stripeWebhookHandler = async (
               message: `Partial payment received. Transfer ${parsedAmountRemaining} to complete payment.`,
             }
             try {
-              if(isProduction){
+              if (isProduction) {
                 await sendSMS({ provider: "twilio", ...textMessage })
               }
             } catch (error) {

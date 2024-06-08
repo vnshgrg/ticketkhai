@@ -22,7 +22,6 @@ export async function sendSlackMessage(message: any) {
     }
     await axios.request(config)
   } catch (error) {
-    console.log(error)
     return
   }
 }

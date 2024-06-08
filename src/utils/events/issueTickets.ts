@@ -89,7 +89,6 @@ export const issueTicket: IssueTicket = async ({
         })
       )
     } catch (error) {
-      console.log(error)
       throw error
     }
   } catch (error) {

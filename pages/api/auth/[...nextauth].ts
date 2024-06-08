@@ -39,7 +39,6 @@ export const authOptions: NextAuthOptions = {
           // Return null if user data could not be retrieved
           return null
         } catch (error) {
-          console.log(error.response?.data)
           throw new Error(error.response?.data.message || "Failed to login")
         }
       },

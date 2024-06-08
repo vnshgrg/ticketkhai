@@ -16,7 +16,6 @@ export const sendSMS = async (number: string, message: string) => {
     const result = await SNS.send(smsCommand)
     return result
   } catch (error) {
-    console.log(error)
     throw new Error(error.message)
   }
 }

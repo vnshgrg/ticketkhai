@@ -1,6 +1,6 @@
 import { useRouter } from "next/router"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { SubmitHandler, useForm } from "react-hook-form"
+import { useForm } from "react-hook-form"
 import { z } from "zod"
 
 const buyTicket = z
@@ -37,13 +37,6 @@ export const useBuyTicket = () => {
 
   const { errors } = formState
 
-  const onSubmit: SubmitHandler<BuyTicket> = async (formValues) => {
-    try {
-    } catch (error) {
-      console.log("Error:", error.response?.data || error)
-    }
-  }
-
   const incrementTicketCount = () => {
     const currentCount = parseInt(watch("numberOfTickets"))
     if (currentCount < 20) setValue("numberOfTickets", `${currentCount + 1}`)
@@ -61,7 +54,6 @@ export const useBuyTicket = () => {
     setValue,
     control,
     handleSubmit,
-    onSubmit,
     incrementTicketCount,
     decrementTicketCount,
   }

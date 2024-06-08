@@ -61,7 +61,6 @@ export const listAvailableTickets = async (userId) => {
     })
     return populatedTransactions
   } catch (error) {
-    console.log(error)
     return []
   }
 }

@@ -188,8 +188,6 @@ const buyTicketHandler = async (
           })
           return
         } catch (error) {
-          console.log(error.message)
-          console.log(error.response?.data)
           res.status(500).json({
             result: false,
             error:
@@ -200,7 +198,6 @@ const buyTicketHandler = async (
           return
         }
       } catch (error) {
-        console.log(error)
         res.status(500).json({
           result: false,
           message: error.message || "An error occurred.",

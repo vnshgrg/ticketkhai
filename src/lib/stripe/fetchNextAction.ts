@@ -14,7 +14,6 @@ export const fetchNextAction = async (sessionId) => {
     )
     return paymentIntent.next_action
   } catch (error) {
-    console.log(error)
     return null
   }
 }

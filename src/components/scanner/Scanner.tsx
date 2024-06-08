@@ -105,7 +105,6 @@ export const Scanner = (): React.ReactElement => {
       }
     } catch (err) {
       const error = err as AxiosError<{ result: boolean; message: string }>
-      console.log(error.response)
       setError(error.response?.data?.message || "An error occurred.")
       playAudio(errorAudio)
     } finally {

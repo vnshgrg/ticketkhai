@@ -71,7 +71,6 @@ export const listPendingTransactions = async (userId) => {
     const result = await Promise.all(populatedTransactions)
     return result
   } catch (error) {
-    console.log(error)
     return []
   }
 }
