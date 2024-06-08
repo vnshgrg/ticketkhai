@@ -1,5 +1,5 @@
 import Head from "next/head"
-import { AuthErrorTypes, Info, Input, Layout } from "@/src/components"
+import { AuthErrorTypes, Info, Input, Layout, Seo } from "@/src/components"
 import { useVerify } from "@/src/hooks"
 
 import { siteConfig } from "@/src/config/site"
@@ -18,9 +18,7 @@ const VerifyPage = ({ data }) => {
 
   return (
     <Layout>
-      <Head>
-        <title>Verify - {siteConfig.name}</title>
-      </Head>
+      <Seo title="Verify" />
       <section className="flex flex-1 flex-col items-center justify-center bg-slate-50 dark:bg-slate-900  sm:px-6 lg:px-8 space-y-6">
         <div className="w-full px-4 sm:px-0 sm:mx-auto sm:max-w-md">
           <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-slate-700 dark:text-slate-200">

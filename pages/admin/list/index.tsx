@@ -1,7 +1,7 @@
 import Head from "next/head"
 import Link from "next/link"
 import { authOptions } from "@/pages/api/auth/[...nextauth]"
-import { Layout, UserLayout } from "@/src/components"
+import { Layout, Seo, UserLayout } from "@/src/components"
 import { getServerSession } from "next-auth/next"
 
 import { isEventAdmin } from "@/src/config/admins"
@@ -11,9 +11,7 @@ import { siteConfig } from "@/src/config/site"
 const AdminPage = ({ events }) => {
   return (
     <Layout>
-      <Head>
-        <title>{siteConfig.name}</title>
-      </Head>
+      <Seo title="Your events" />
       <UserLayout>
         <h1 className="flex items-center justify-between text-lg font-medium tracking-tight text-slate-900 sm:text-xl">
           Your events

@@ -1,6 +1,6 @@
 import Head from "next/head"
 import { useRouter } from "next/router"
-import { AuthErrorTypes, Info } from "@/src/components"
+import { AuthErrorTypes, Info, Seo } from "@/src/components"
 import { useRegistration } from "@/src/hooks/useRegister"
 import { getServerSession } from "next-auth/next"
 import useTranslation from "next-translate/useTranslation"
@@ -21,12 +21,7 @@ export default function RegisterPage() {
 
   return (
     <Layout>
-      <Head>
-        <title>
-          {" "}
-          {t("auth-register-title")} - {siteConfig.name}
-        </title>
-      </Head>
+      <Seo title={t("auth-register-title")} />
       <section className="flex flex-1 flex-col items-center justify-center space-y-6 bg-slate-50  dark:bg-slate-900 sm:px-6 lg:px-8">
         <div className="w-full px-4 sm:mx-auto sm:max-w-md sm:px-0">
           <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-slate-700 dark:text-slate-200">

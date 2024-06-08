@@ -1,14 +1,12 @@
 import Head from "next/head"
-import { Layout, Scanner } from "@/src/components"
+import { Layout, Scanner, Seo } from "@/src/components"
 
 import { siteConfig } from "@/src/config/site"
 
 const AdminPage = () => {
   return (
     <Layout>
-      <Head>
-        <title>Admin - {siteConfig.name}</title>
-      </Head>
+      <Seo title="Scanner" />
       <div className="mt-8 w-full">
         <div className="mx-auto max-w-7xl">
           <Scanner />

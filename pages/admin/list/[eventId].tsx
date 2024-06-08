@@ -1,7 +1,7 @@
 import React from "react"
 import Head from "next/head"
 import { authOptions } from "@/pages/api/auth/[...nextauth]"
-import { Layout, UserLayout } from "@/src/components"
+import { Layout, Seo, UserLayout } from "@/src/components"
 import { classNames, dateFromUtc, formatJPY } from "@/src/utils"
 import { DB } from "@/src/utils/db"
 import {
@@ -151,9 +151,7 @@ const AdminPage = ({
 
   return (
     <Layout>
-      <Head>
-        <title>{siteConfig.name}</title>
-      </Head>
+      <Seo title={event.title} />
       <UserLayout>
         <h1 className="flex items-center justify-between text-lg font-medium tracking-tight text-slate-900 sm:text-xl">
           {event.title} - {event.subtitle}

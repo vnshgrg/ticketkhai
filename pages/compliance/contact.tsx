@@ -1,9 +1,12 @@
+import { Seo } from "@/src/components"
+
 import { siteConfig } from "@/src/config/site"
 import { Layout } from "@/src/components/layout"
 
 export default function Contact() {
   return (
     <Layout>
+      <Seo title="お問い合わせ" />
       <section className="container grid items-center gap-6 pt-6 pb-8 md:gap-8 md:py-20">
         <div className="flex max-w-[700px] mx-auto flex-col items-start gap-3 md:gap-4">
           <h1 className="text-lg text-center font-bold tracking-tighter text-slate-800 dark:text-slate-200 sm:text-xl md:text-2xl lg:text-2xl">
