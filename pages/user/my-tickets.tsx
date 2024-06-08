@@ -1,5 +1,11 @@
 import Head from "next/head"
-import { AwaitingPayment, Layout, Ticket, UserLayout } from "@/src/components"
+import {
+  AwaitingPayment,
+  Layout,
+  Seo,
+  Ticket,
+  UserLayout,
+} from "@/src/components"
 import { listAvailableTickets, listPendingTransactions } from "@/src/utils/user"
 import _ from "lodash"
 import { getServerSession } from "next-auth/next"
@@ -13,9 +19,7 @@ export default function MyTicketsPage({ tickets, pending }) {
   const { t } = useTranslation("common")
   return (
     <Layout>
-      <Head>
-        <title>{siteConfig.name}</title>
-      </Head>
+      <Seo title={t("ticket-your-tickets")} />
       <UserLayout>
         <div className="relative mx-auto max-w-4xl">
           <h1 className="flex items-center justify-between text-lg font-medium tracking-tight text-slate-900 sm:text-xl">

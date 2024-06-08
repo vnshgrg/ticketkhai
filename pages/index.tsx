@@ -1,5 +1,5 @@
 import { useRouter } from "next/router"
-import { EventList } from "@/src/components"
+import { EventList, Seo } from "@/src/components"
 import { activeEvents } from "@/src/utils/temp"
 import { getServerSession } from "next-auth/next"
 import { useSession } from "next-auth/react"
@@ -55,6 +55,7 @@ export default function IndexPage({ events }) {
 
   return (
     <Layout>
+      <Seo />
       <div className="mx-auto w-full max-w-4xl">
         <div className="flex flex-col space-y-4 px-5 py-10">
           <div className="hidden sm:block">

@@ -1,6 +1,6 @@
 import { GetServerSideProps } from "next"
 import Head from "next/head"
-import { Layout } from "@/src/components"
+import { Layout, Seo } from "@/src/components"
 
 import { siteConfig } from "@/src/config/site"
 
@@ -27,9 +27,7 @@ const ErrorPage = ({ error }) => {
 
   return (
     <Layout>
-      <Head>
-        <title>Error - {siteConfig.name}</title>
-      </Head>
+      <Seo title="Error" />
       <div className="flex flex-1 flex-col items-center justify-center">
         <h1>{errorMessage}</h1>
       </div>
