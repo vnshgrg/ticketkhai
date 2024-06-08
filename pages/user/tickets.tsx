@@ -1,4 +1,5 @@
 import Head from "next/head"
+import Link from "next/link"
 import {
   AwaitingPayment,
   Layout,
@@ -24,7 +25,9 @@ export default function MyTicketsPage({ tickets, pending }) {
         <div className="relative mx-auto max-w-4xl">
           <h1 className="flex items-center justify-between text-lg font-medium tracking-tight text-slate-900 sm:text-xl">
             {t("ticket-your-tickets")}
-            <Button variant="subtle">{t("go-home")}</Button>
+            <Link href="/">
+              <Button variant="subtle">{t("go-home")}</Button>
+            </Link>
           </h1>
           <div className="mb-6 mt-4">
             {tickets.length > 0 ? (
