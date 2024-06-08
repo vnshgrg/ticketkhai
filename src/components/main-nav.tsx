@@ -1,10 +1,8 @@
 import * as React from "react"
 import Link from "next/link"
-import { useSession } from "next-auth/react"
 import useTranslation from "next-translate/useTranslation"
 
 import { NavItem } from "@/src/types/nav"
-import { siteConfig } from "@/src/config/site"
 import { cn } from "@/src/lib/utils"
 import { Icons } from "@/src/components/icons"
 import { Button } from "@/src/components/ui/button"

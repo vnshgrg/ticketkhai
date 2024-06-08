@@ -41,8 +41,6 @@ export const listAvailableTickets = async (userId) => {
       },
     })
 
-    console.log(transactions)
-
     const populatedTransactions = transactions.map((transaction) => {
       return {
         ...transaction,
