@@ -44,7 +44,7 @@ export default function IndexPage({ events }) {
         <Button
           type="button"
           onClick={() => {
-            router.push("/user/my-tickets")
+            router.push("/user/tickets")
           }}
         >
           {t("nav-mytickets")}

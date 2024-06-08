@@ -140,7 +140,7 @@ const webhookHandler = async (
             try {
               await sendSMS({
                 provider: "twilio",
-                message: `Your ticket purchase is complete. Visit: ${siteConfig.baseurl}`,
+                message: `Purchase complete. Tickets: ${siteConfig.baseurl}/user/tickets`,
                 to: userTickets.mobile,
               })
             } catch (error) {
