@@ -49,10 +49,8 @@ const registerHandler = async (
         return
       }
 
-      const providerAccountId = randomUUID()
-
       // Update or create data in your database
-      const { id: newUserId, verificationRequests } = await DB.user.create({
+      const { verificationRequests } = await DB.user.create({
         data: {
           name,
           mobile: parsedMobile.number,

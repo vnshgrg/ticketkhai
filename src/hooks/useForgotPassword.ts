@@ -1,20 +1,21 @@
+import React from "react"
 import { useRouter } from "next/router"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { signIn } from "next-auth/react"
+import axios from "axios"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { z } from "zod"
 
-const login = z.object({
+const forgotPassword = z.object({
   username: z.string().min(1, { message: "Mobile number is required." }),
-  password: z.string().min(1, { message: "password is required." }),
 })
-export type Login = z.infer<typeof login>
+export type Login = z.infer<typeof forgotPassword>
 
-export const useLogin = () => {
+export const useForgotPassword = () => {
+  const [loading, setLoading] = React.useState(false)
   const router = useRouter()
   const { register, handleSubmit, watch, formState, control, setValue } =
     useForm<Login>({
-      resolver: zodResolver(login),
+      resolver: zodResolver(forgotPassword),
       mode: "all",
       shouldFocusError: true,
     })
@@ -23,23 +24,24 @@ export const useLogin = () => {
 
   const onSubmit: SubmitHandler<Login> = async (formValues) => {
     try {
-      const { ok, error, url } = await signIn("credentials", {
+      setLoading(true)
+      const { data } = await axios.post("/api/user/forgot-password", {
         ...formValues,
-        redirect: false,
       })
-      if (!ok) {
-        router.replace({ pathname: "/login", query: { error } })
-        return
-      } else {
-        router.replace({ pathname: "/" })
-        return
-      }
+      const params = data.data
+
+      router.replace({
+        pathname: `/forgot-password/change-password`,
+        query: params,
+      })
     } catch (error) {
       console.log("Error:", error.response?.data || error)
       router.replace({
         pathname: "/login",
         query: { error: error.response?.data.message || "An error occurred." },
       })
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -51,5 +53,6 @@ export const useLogin = () => {
     control,
     handleSubmit,
     onSubmit,
+    loading,
   }
 }
