@@ -3,6 +3,7 @@ import { AuthErrorTypes, Info, Input, Layout } from "@/src/components"
 import { useVerify } from "@/src/hooks"
 
 import { siteConfig } from "@/src/config/site"
+import { Button, buttonVariants } from "@/src/components/ui/button"
 
 const VerifyPage = ({ data }) => {
   const { type, identifier, token, key } = data
@@ -54,7 +55,7 @@ const VerifyPage = ({ data }) => {
                   type="text"
                   name="code"
                   id="code"
-                  label={{ label: "code", for: "code" }}
+                  label={{ label: "Code", for: "code" }}
                   error={errors.code?.message as string}
                   aria-invalid={errors.code ? true : false}
                   disabled={loading}
@@ -63,12 +64,15 @@ const VerifyPage = ({ data }) => {
               </div>
 
               <div>
-                <button
+                <Button
                   type="submit"
-                  className="flex w-full justify-center rounded-md bg-indigo-600 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  className={buttonVariants({
+                    variant: "default",
+                    width: "full",
+                  })}
                 >
                   Verify
-                </button>
+                </Button>
               </div>
             </form>
           </div>
