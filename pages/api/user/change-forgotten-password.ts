@@ -61,6 +61,9 @@ const registerHandler = async (
           token,
           deletedAt: null,
         },
+        orderBy: {
+          createdAt: "desc",
+        },
         select: { id: true },
       })
 
@@ -89,12 +92,10 @@ const registerHandler = async (
         },
       })
 
-      // remove verification code
-      const verificationCodeDeleteResult = await DB.verificationRequest.delete({
+      // delete verification code
+      await DB.verificationRequest.delete({
         where: { id: verificationCodeMatch.id },
       })
-
-      console.log({ verificationCodeDeleteResult })
 
       res.status(200).json({
         result: true,

@@ -3,7 +3,6 @@ import { isProduction } from "@/src/utils"
 import { DB } from "@/src/utils/db"
 import { randomNumber } from "@/src/utils/randomNumber"
 import { sendSMS } from "@/src/utils/sms"
-import { IdentifierType } from "@prisma/client"
 import { parsePhoneNumber } from "libphonenumber-js"
 import moment from "moment-timezone"
 
@@ -80,6 +79,9 @@ const registerHandler = async (
           expires: { gt: now },
           deletedAt: null,
         },
+        orderBy: {
+          createdAt: "desc",
+        },
         select: verificationRequestSelect,
       })
 
@@ -116,6 +118,8 @@ const registerHandler = async (
             message,
             to: identifier,
           })
+        } else {
+          console.log(message)
         }
       } catch (error) {
         console.log(error)
