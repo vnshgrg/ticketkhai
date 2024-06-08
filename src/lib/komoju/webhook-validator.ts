@@ -24,7 +24,6 @@ export const validateWebhook = async (headers, req) => {
     if (!signatureComparison) return null
     return JSON.parse(rawBody)
   } catch (error) {
-    console.log("Webhook Error:", error.message)
     return null
   }
 }

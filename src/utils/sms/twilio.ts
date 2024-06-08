@@ -18,7 +18,6 @@ export const sendSMS = async (number: string, message: string) => {
       return result
     }
   } catch (error) {
-    console.log(error)
     throw new Error(error.message)
   }
 }

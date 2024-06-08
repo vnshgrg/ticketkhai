@@ -145,6 +145,11 @@ const webhookHandler = async (
               })
             } catch (error) {
               console.log(error)
+              res.status(500).json({
+                result: false,
+                message: "Could not send verification code.",
+              })
+              return
             }
 
             res.status(200).json({ result: true, message: "Tickets issued." })

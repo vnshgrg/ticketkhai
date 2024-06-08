@@ -45,8 +45,6 @@ export const useChangeForgottenPassword = (identifier: string) => {
         alert(data.message)
       }
     } catch (error) {
-      console.log("Error:", error.response?.data || error)
-
       router.replace({
         pathname: `/forgot-password/change-password`,
         query: {

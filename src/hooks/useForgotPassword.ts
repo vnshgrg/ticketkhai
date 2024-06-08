@@ -35,7 +35,6 @@ export const useForgotPassword = () => {
         query: params,
       })
     } catch (error) {
-      console.log("Error:", error.response?.data || error)
       router.replace({
         pathname: "/login",
         query: { error: error.response?.data.message || "An error occurred." },

@@ -41,8 +41,6 @@ export const listAvailableTickets = async (userId) => {
       },
     })
 
-    console.log(transactions)
-
     const populatedTransactions = transactions.map((transaction) => {
       return {
         ...transaction,
@@ -63,7 +61,6 @@ export const listAvailableTickets = async (userId) => {
     })
     return populatedTransactions
   } catch (error) {
-    console.log(error)
     return []
   }
 }

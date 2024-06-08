@@ -17,8 +17,6 @@ const ChangePasswordPage = ({ identifier }) => {
 
   const { t } = useTranslation("common")
 
-  console.log(identifier)
-
   return (
     <Layout>
       <Seo title="Change password" />

@@ -14,7 +14,6 @@ export const searchCustomer = async (userId: string) => {
     }
     return null
   } catch (error) {
-    console.log(error)
     throw new Error(error.message || "Error while searching customer.")
   }
 }
@@ -30,7 +29,6 @@ export const createCustomer = async (userId, { name, mobile }) => {
     })
     return customer
   } catch (error) {
-    console.log(error)
     throw new Error(error.message || "Error while creating customer.")
   }
 }
@@ -40,7 +38,6 @@ export const getCustomerById = async (customerId: string) => {
     const customer = await stripe.customers.retrieve(customerId)
     return customer
   } catch (error) {
-    console.log(error)
     throw new Error(error.message || "Error while retrieving customer.")
   }
 }

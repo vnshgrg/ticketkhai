@@ -75,7 +75,6 @@ export const useVerify = ({ defaultValues, type }) => {
       }
       reset()
     } catch (error) {
-      console.log("Error:", error.response?.data || error)
     } finally {
       setLoading(false)
     }
