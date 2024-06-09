@@ -31,7 +31,7 @@ export default function IndexPage(props) {
                 <Button
                   variant="subtle"
                   onClick={() => {
-                    router.push("/user/my-tickets")
+                    router.push("/user/tickets")
                   }}
                 >
                   {t("purchase-view-ticket")}

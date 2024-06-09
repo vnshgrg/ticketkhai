@@ -26,7 +26,7 @@ const navigation = [
   { name: "home", href: "/", icon: HomeIcon, current: false },
   {
     name: "my-tickets",
-    href: "/user/my-tickets",
+    href: "/user/tickets",
     icon: BriefcaseIcon,
     current: false,
   },
