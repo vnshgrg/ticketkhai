@@ -46,7 +46,7 @@ export const LoginButton = () => {
           <DropdownMenuItem
             className="cursor-pointer"
             onClick={() => {
-              router.push("/user/my-tickets")
+              router.push("/user/tickets")
             }}
           >
             <Contact className="mr-2 h-4 w-4" />
