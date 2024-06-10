@@ -294,7 +294,7 @@ export const demoEvents: Event[] = [
           ? "price_1PMXMiBE6fqNwbhoN5ZK5nFC"
           : "price_1PMXJiBE6fqNwbhoR464Cnue",
         available: true,
-        maximumNumberOfTicketsAvailable: 100,
+        maximumNumberOfTicketsAvailable: 1000,
         dateTicketSalesStart: getTimestamp("2024-04-14 00:00:00"),
       },
       // {
