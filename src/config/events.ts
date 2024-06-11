@@ -276,7 +276,7 @@ export const demoEvents: Event[] = [
     dateTicketSalesStart: getTimestamp("2024-05-01 00:00:00"),
     maximumNumberOfTicketsAvailable: 1000,
     photo: "/images/1974-ad-kyoto.jpg",
-    notices: ["Early birds tickets sold out!"],
+    notices: ["Regular tickets now on sale!"],
     confirmPurchase: {
       title: "1974AD Live in Kyoto",
       subtitle: "Kyoto",
