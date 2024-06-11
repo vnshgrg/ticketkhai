@@ -276,7 +276,7 @@ export const demoEvents: Event[] = [
     dateTicketSalesStart: getTimestamp("2024-05-01 00:00:00"),
     maximumNumberOfTicketsAvailable: 1000,
     photo: "/images/1974-ad-kyoto.jpg",
-    notices: ["Early birds tickets sold out!"],
+    notices: ["Regular tickets now on sale!"],
     confirmPurchase: {
       title: "1974AD Live in Kyoto",
       subtitle: "Kyoto",
@@ -297,32 +297,32 @@ export const demoEvents: Event[] = [
         maximumNumberOfTicketsAvailable: 1000,
         dateTicketSalesStart: getTimestamp("2024-04-14 00:00:00"),
       },
-      // {
-      //   id: "ticket024",
-      //   title: "Standard",
-      //   description: "General ticket for single person entry",
-      //   price: 4000,
-      //   numberOfTickets: 1,
-      //   stripePriceId: isProduction
-      //     ? "price_1PMXLyBE6fqNwbhofXnkQalY"
-      //     : "price_1PMXJGBE6fqNwbhofSieZDGp",
-      //   available: true,
-      //   maximumNumberOfTicketsAvailable: 1000,
-      //   dateTicketSalesStart: getTimestamp("2024-04-14 00:00:00"),
-      // },
-      // {
-      //   id: "ticket025",
-      //   title: "VIP",
-      //   description: "Special tickets for single person entry",
-      //   price: 10000,
-      //   numberOfTickets: 1,
-      //   stripePriceId: isProduction
-      //     ? "price_1PMXMtBE6fqNwbhoKzaCLtn3"
-      //     : "price_1PMXK8BE6fqNwbhotC2opWkJ",
-      //   available: true,
-      //   maximumNumberOfTicketsAvailable: 1000,
-      //   dateTicketSalesStart: getTimestamp("2024-04-14 00:00:00"),
-      // },
+      {
+        id: "ticket024",
+        title: "Standard",
+        description: "General ticket for single person entry",
+        price: 5000,
+        numberOfTickets: 1,
+        stripePriceId: isProduction
+          ? "price_1PHaDcBE6fqNwbhonOxrekhx"
+          : "price_1PHa1CBE6fqNwbho3Y2fG9CB",
+        available: true,
+        maximumNumberOfTicketsAvailable: 200,
+        dateTicketSalesStart: getTimestamp("2024-04-14 00:00:00"),
+      },
+      {
+        id: "ticket025",
+        title: "Couple",
+        description: "Discounted ticket for couples",
+        price: 9000,
+        numberOfTickets: 1,
+        stripePriceId: isProduction
+          ? "price_1PHaDcBE6fqNwbhoFKmUMUmN"
+          : "price_1PHa1CBE6fqNwbhofcjg69Xm",
+        available: true,
+        maximumNumberOfTicketsAvailable: 100,
+        dateTicketSalesStart: getTimestamp("2024-04-14 00:00:00"),
+      },
     ],
   },
 ]
