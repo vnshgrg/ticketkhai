@@ -276,7 +276,7 @@ export const demoEvents: Event[] = [
     dateTicketSalesStart: getTimestamp("2024-05-01 00:00:00"),
     maximumNumberOfTicketsAvailable: 1000,
     photo: "/images/1974-ad-kyoto.jpg",
-    notices: ["Early birds on sale till June 11th!"],
+    notices: ["Early birds tickets sold out!"],
     confirmPurchase: {
       title: "1974AD Live in Kyoto",
       subtitle: "Kyoto",
@@ -293,7 +293,7 @@ export const demoEvents: Event[] = [
         stripePriceId: isProduction
           ? "price_1PMXMiBE6fqNwbhoN5ZK5nFC"
           : "price_1PMXJiBE6fqNwbhoR464Cnue",
-        available: true,
+        available: false,
         maximumNumberOfTicketsAvailable: 1000,
         dateTicketSalesStart: getTimestamp("2024-04-14 00:00:00"),
       },
