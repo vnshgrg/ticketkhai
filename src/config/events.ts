@@ -300,7 +300,8 @@ export const demoEvents: Event[] = [
       {
         id: "ticket024",
         title: "Standard",
-        description: "General ticket for single person entry",
+        description:
+          "General ticket for single person entry with two free drinks",
         price: 5000,
         numberOfTickets: 1,
         stripePriceId: isProduction
@@ -313,7 +314,7 @@ export const demoEvents: Event[] = [
       {
         id: "ticket025",
         title: "Couple",
-        description: "Discounted ticket for couples",
+        description: "Discounted ticket for couples with three free drinks",
         price: 9000,
         numberOfTickets: 1,
         stripePriceId: isProduction
