@@ -300,13 +300,12 @@ export const demoEvents: Event[] = [
       {
         id: "ticket024",
         title: "Standard",
-        description:
-          "General ticket for single person entry with two free drinks",
+        description: "General ticket for single person with two free drinks",
         price: 5000,
         numberOfTickets: 1,
         stripePriceId: isProduction
-          ? "price_1PHaDcBE6fqNwbhonOxrekhx"
-          : "price_1PHa1CBE6fqNwbho3Y2fG9CB",
+          ? "price_1PR3FqBE6fqNwbhoVQ4Kgzfu"
+          : "price_1PR3EeBE6fqNwbhoaMU87Y0a",
         available: true,
         maximumNumberOfTicketsAvailable: 200,
         dateTicketSalesStart: getTimestamp("2024-04-14 00:00:00"),
@@ -318,8 +317,8 @@ export const demoEvents: Event[] = [
         price: 9000,
         numberOfTickets: 1,
         stripePriceId: isProduction
-          ? "price_1PHaDcBE6fqNwbhoFKmUMUmN"
-          : "price_1PHa1CBE6fqNwbhofcjg69Xm",
+          ? "price_1PR3G5BE6fqNwbhoZz8glluZ"
+          : "price_1PR3FKBE6fqNwbhoMxRjwpLe",
         available: true,
         maximumNumberOfTicketsAvailable: 100,
         dateTicketSalesStart: getTimestamp("2024-04-14 00:00:00"),
