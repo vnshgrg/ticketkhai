@@ -227,7 +227,7 @@ export const demoEvents: Event[] = [
         stripePriceId: isProduction
           ? "price_1PHaDcBE6fqNwbhoFKmUMUmN"
           : "price_1PHa1CBE6fqNwbhofcjg69Xm",
-        available: true,
+        available: false,
         maximumNumberOfTicketsAvailable: 1000,
         dateTicketSalesStart: getTimestamp("2024-04-14 00:00:00"),
       },
