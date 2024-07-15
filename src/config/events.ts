@@ -170,8 +170,8 @@ export const demoEvents: Event[] = [
     dateGateOpen: getTimestamp("2024-07-27 15:00:00"),
     dateTicketSalesStart: getTimestamp("2024-05-01 00:00:00"),
     maximumNumberOfTicketsAvailable: 1000,
-    photo: "/images/1974-ad.jpg",
-    notices: ["Regular tickets are on sale now!"],
+    photo: "/images/1974-ad-sold.jpg",
+    notices: ["All general tickets sold out!"],
     confirmPurchase: {
       title: "1974AD Live in Tokyo",
       subtitle: "Tokyo",
@@ -214,7 +214,7 @@ export const demoEvents: Event[] = [
         stripePriceId: isProduction
           ? "price_1PHaDcBE6fqNwbhonOxrekhx"
           : "price_1PHa1CBE6fqNwbho3Y2fG9CB",
-        available: true,
+        available: false,
         maximumNumberOfTicketsAvailable: 1000,
         dateTicketSalesStart: getTimestamp("2024-04-14 00:00:00"),
       },
