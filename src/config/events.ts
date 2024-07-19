@@ -382,7 +382,7 @@ export const demoEvents: Event[] = [
         stripePriceId: isProduction
           ? "price_1PeGesBE6fqNwbhoadTRxt0x"
           : "price_1PeGb0BE6fqNwbhoYDS4GqxE",
-        available: false,
+        available: true,
         maximumNumberOfTicketsAvailable: 500,
         dateTicketSalesStart: getTimestamp("2024-08-20 00:00:00"),
       },
@@ -395,7 +395,7 @@ export const demoEvents: Event[] = [
         stripePriceId: isProduction
           ? "price_1PeGesBE6fqNwbhoQoWTmW03"
           : "price_1PeGb0BE6fqNwbhoQCZKgjEq",
-        available: false,
+        available: true,
         maximumNumberOfTicketsAvailable: 300,
         dateTicketSalesStart: getTimestamp("2024-08-20 00:00:00"),
       },
@@ -408,7 +408,7 @@ export const demoEvents: Event[] = [
         stripePriceId: isProduction
           ? "price_1PeGesBE6fqNwbhojxaLIipH"
           : "price_1PeGb0BE6fqNwbhoqXdvSfuM",
-        available: false,
+        available: true,
         maximumNumberOfTicketsAvailable: 200,
         dateTicketSalesStart: getTimestamp("2024-08-20 00:00:00"),
       },
