@@ -1,5 +1,4 @@
 import Head from "next/head"
-import { GoogleTagManager } from "@next/third-parties/google"
 import useTranslation from "next-translate/useTranslation"
 
 import { siteConfig } from "../config/site"
@@ -27,7 +26,6 @@ export const Seo = ({ title, description, image }: SeoProps) => {
       <meta property="og:description" content={seo.description} />
       <meta property="og:image" content={seo.image} />
       <meta property="og:locale" content={seo.locale} />
-      <GoogleTagManager gtmId="GTM-KNDQPG8S" />
     </Head>
   )
 }

@@ -1,5 +1,4 @@
 import Link from "next/link"
-import { GoogleAnalytics } from "@next/third-parties/google"
 import useTranslation from "next-translate/useTranslation"
 
 import { SiteHeader } from "@/src/components/site-header"
@@ -24,7 +23,6 @@ export function Layout({ children }: LayoutProps) {
         </p>
         <p>&copy; copyright 2023. Ticketkhai.com</p>
       </footer>
-      <GoogleAnalytics gaId="G-2ZQQ1M6LP3" />
     </>
   )
 }
