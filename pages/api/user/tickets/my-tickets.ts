@@ -3,7 +3,7 @@ import { DB } from "@/src/utils/db"
 import { eventById, ticketById } from "@/src/utils/temp"
 import { getServerSession } from "next-auth/next"
 
-import { demoEvents } from "@/src/config/events"
+import { events } from "@/src/config/events"
 import { authOptions } from "../../auth/[...nextauth]"
 
 export interface BuyTicketParams {
@@ -30,7 +30,7 @@ const myTicektsHandler = async (
         }
 
         const { user } = session
-        const activeEvents = demoEvents.map(({ id }) => id)
+        const activeEvents = events.map(({ id }) => id)
 
         const { tickets } = await DB.user.findUnique({
           where: { id: user.id },

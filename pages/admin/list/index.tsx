@@ -1,12 +1,10 @@
-import Head from "next/head"
 import Link from "next/link"
 import { authOptions } from "@/pages/api/auth/[...nextauth]"
 import { Layout, Seo, UserLayout } from "@/src/components"
 import { getServerSession } from "next-auth/next"
 
 import { isEventAdmin } from "@/src/config/admins"
-import { demoEvents } from "@/src/config/events"
-import { siteConfig } from "@/src/config/site"
+import { events } from "@/src/config/events"
 
 const AdminPage = ({ events }) => {
   return (
@@ -35,9 +33,9 @@ export async function getServerSideProps(context) {
   const session = await getServerSession(context.req, context.res, authOptions)
   const userId = session.user.id
 
-  const events = demoEvents.filter((event) => isEventAdmin(event, userId))
+  const availableEvents = events.filter((event) => isEventAdmin(event, userId))
 
   return {
-    props: { events, session }, // will be passed to the page component as props
+    props: { events: availableEvents, session }, // will be passed to the page component as props
   }
 }

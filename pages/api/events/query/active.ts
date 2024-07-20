@@ -1,13 +1,12 @@
 import type { NextApiRequest, NextApiResponse } from "next"
-
-import { demoEvents } from "@/src/config/events"
+import { activeEvents } from "@/src/utils/temp"
 
 export interface VerifyParams {
   page: number
   filters: any
 }
 
-const registerHandler = async (
+const activeEventsHandler = async (
   req: NextApiRequest,
   res: NextApiResponse<any>
 ) => {
@@ -18,7 +17,9 @@ const registerHandler = async (
       try {
         const { page }: Partial<VerifyParams> = body
 
-        res.status(200).json({ result: true, message: "", data: demoEvents })
+        res
+          .status(200)
+          .json({ result: true, message: "", data: activeEvents() })
       } catch (error) {}
 
       break
@@ -30,4 +31,4 @@ const registerHandler = async (
   }
 }
 
-export default registerHandler
+export default activeEventsHandler
