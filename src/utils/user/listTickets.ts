@@ -2,12 +2,12 @@ import { KomojuStatus } from "@prisma/client"
 import _ from "lodash"
 import moment from "moment"
 
-import { demoEvents } from "@/src/config/events"
+import { events } from "@/src/config/events"
 import { DB } from "../db"
 import { eventById, ticketById } from "../temp"
 
 export const listAvailableTickets = async (userId) => {
-  const activeEvents = demoEvents.map(({ id }) => id)
+  const activeEvents = events.map(({ id }) => id)
   try {
     const transactions = await DB.transaction.findMany({
       where: {

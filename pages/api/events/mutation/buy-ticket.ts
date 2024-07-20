@@ -1,13 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from "next"
 import { createCustomer, searchCustomer } from "@/src/lib"
-import { isProduction } from "@/src/utils"
 import { DB } from "@/src/utils/db"
 import { KomojuStatus } from "@prisma/client"
 import { getServerSession } from "next-auth/next"
 import Stripe from "stripe"
 
-import { demoEvents } from "@/src/config/events"
-import { siteConfig } from "@/src/config/site"
+import { events } from "@/src/config/events"
 import { authOptions } from "../../auth/[...nextauth]"
 
 const stripe = new Stripe(process.env.STRIPE_SK, {
@@ -63,7 +61,7 @@ const buyTicketHandler = async (
           return
         }
 
-        const event = demoEvents.find((event) => event.id === eventId)
+        const event = events.find((event) => event.id === eventId)
         const ticket = event.tickets.find((ticket) => ticket.id === ticketId)
 
         if (!ticket.available) {

@@ -1,10 +1,8 @@
-import { Event, demoEvents } from "@/src/config/events"
+import { Event, events } from "@/src/config/events"
 
 export const eventById = (eventId: string): Event => {
   try {
-    const filteredDemoEvent = demoEvents.filter(
-      (event) => eventId === event.id
-    )[0]
+    const filteredDemoEvent = events.filter((event) => eventId === event.id)[0]
     if (!filteredDemoEvent) {
       // throw new Error("No even found")
       return null
@@ -17,9 +15,7 @@ export const eventById = (eventId: string): Event => {
 
 export const eventBySlug = (slug: string): Event => {
   try {
-    const filteredDemoEvent = demoEvents.filter(
-      (event) => slug === event.slug
-    )[0]
+    const filteredDemoEvent = events.filter((event) => slug === event.slug)[0]
     if (!filteredDemoEvent) {
       // throw new Error("No even found")
       return null

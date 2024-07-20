@@ -4,7 +4,6 @@ import { DB } from "@/src/utils/db"
 import { sendSMS } from "@/src/utils/sms"
 import { KomojuStatus, TicketStatus } from "@prisma/client"
 
-import { demoEvents } from "@/src/config/events"
 import { siteConfig } from "@/src/config/site"
 
 export interface VerifyParams {
