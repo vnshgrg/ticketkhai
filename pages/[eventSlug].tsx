@@ -120,9 +120,10 @@ export default function EventPage({ event }: { event: Event }) {
   }
 
   const sharePage = async () => {
+    const title = `${event.title}${event.subtitle && ` ${event.subtitle}`}`
     const shareData: ShareData = {
-      title: `${event.title}${event.subtitle && ` ${event.subtitle}`}`,
-      text: event.description,
+      title,
+      text: title,
       url: window.location.href,
     }
     if (canShare) {
