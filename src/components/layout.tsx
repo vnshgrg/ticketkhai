@@ -13,7 +13,7 @@ export function Layout({ children }: LayoutProps) {
   return (
     <>
       <SiteHeader />
-      <main className="flex flex-1 flex-col pt-12 md:pt-16">{children}</main>
+      <main className="flex flex-1 flex-col mt-16">{children}</main>
       <footer className="mt-10 border-t border-slate-100 py-6 text-center text-sm text-slate-600">
         <p className="mb-4 space-x-10">
           <Link href="/">{t("nav-home")}</Link>
