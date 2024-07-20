@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { GoogleTagManager } from "@next/third-parties/google"
 import useTranslation from "next-translate/useTranslation"
 
 import { SiteHeader } from "@/src/components/site-header"
@@ -22,6 +23,7 @@ export function Layout({ children }: LayoutProps) {
           <Link href="/compliance/contact">{t("nav-contact")}</Link>
         </p>
         <p>&copy; copyright 2023. Ticketkhai.com</p>
+        <GoogleTagManager gtmId="GTM-KNDQPG8S" />
       </footer>
     </>
   )

@@ -31,7 +31,6 @@ export default function App({
         <title>{siteConfig.name}</title>
         <meta name="description" content={siteConfig.description} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <GoogleTagManager gtmId="GTM-KNDQPG8S" />
       </Head>
       <SessionProvider session={session}>
         <ThemeProvider attribute="class" defaultTheme="light">
