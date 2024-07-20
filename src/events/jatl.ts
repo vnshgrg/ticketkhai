@@ -70,7 +70,7 @@ export const jatlFukuoka: Event = {
       title: "Couple ticket",
       description: "Discounted ticket for two people",
       price: 9000,
-      numberOfTickets: 1,
+      numberOfTickets: 2,
       stripePriceId: isProduction
         ? "price_1PeGesBE6fqNwbhoQoWTmW03"
         : "price_1PeGb0BE6fqNwbhoQCZKgjEq",
