@@ -15,6 +15,56 @@
 table#ticket-details tr {
   @apply [&>*:first-child]:text-right [&>*:first-child]:font-medium;
 }
+
 table#ticket-details tr td {
   @apply py-2 px-3;
+}
+
+:root {
+  --hero-height: 300px;
+}
+
+.hero-wrapper {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: var(--hero-height);
+}
+
+.hero {
+  position: relative;
+  width: 100%;
+  height: var(--hero-height);
+  background: linear-gradient(
+    120deg,
+    #ffc0ad,
+    #f8c7ff 37.79%,
+    #d2ccff 75.81%,
+    #c2d1ff
+  );
+  background-size: 400% 400%;
+  animation: backgroundGradient 12s ease infinite;
+  animation-play-state: running;
+}
+
+.hero .hero-mask {
+  inset: 0;
+  position: absolute;
+  background: radial-gradient(
+    100% 140% at 60% -10%,
+    #fff0,
+    rgb(249 250 251 / var(--tw-bg-opacity)) 75%
+  );
+}
+
+@keyframes backgroundGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }

@@ -16,7 +16,7 @@ export default function IndexPage({ events }) {
       <Seo />
       <div className="mx-auto w-full max-w-4xl">
         <div className="flex flex-col space-y-5 sm:space-y-8 p-5 sm:py-8">
-          <div className="bg-slate-200 border border-slate-300 rounded-xl p-3">
+          <div className="bg-white/40 border border-white/50 rounded-xl p-3">
             <UserContent />
           </div>
           <EventList events={events} />

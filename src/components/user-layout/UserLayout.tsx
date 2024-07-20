@@ -212,7 +212,7 @@ export function UserLayout({ children }: LayoutProps) {
         <div className="w-full lg:pl-64">
           <div className="lg:px-6">
             <div className="mx-auto flex flex-col lg:max-w-3xl">
-              <div className="sticky top-0 z-10 flex flex-row shrink-0 h-12 mt-4 -ml-3">
+              <div className="sm:hidden flex top-0 z-10 flex-row shrink-0 h-12 mt-4 -ml-3">
                 <button
                   type="button"
                   className="p-3 rounded-lg text-slate-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-slate-500 lg:hidden"
@@ -222,8 +222,7 @@ export function UserLayout({ children }: LayoutProps) {
                   <Bars3Icon className="h-6 w-6" aria-hidden="true" />
                 </button>
               </div>
-
-              <main className="flex-1">{children}</main>
+              <main className="flex-1 pt-0 sm:pt-8">{children}</main>
             </div>
           </div>
         </div>
