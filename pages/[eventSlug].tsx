@@ -12,7 +12,7 @@ import {
   LockClosedIcon,
   MapIcon,
   MapPinIcon,
-  MegaphoneIcon,
+  ShareIcon,
   TicketIcon,
 } from "@heroicons/react/24/outline"
 import { useSession } from "next-auth/react"
@@ -26,6 +26,8 @@ import { Button, buttonVariants } from "@/src/components/ui/button"
 
 export default function EventPage({ event }: { event: Event }) {
   const [isLoading, setIsLoading] = useState(false)
+  const [canShare, setCanShare] = useState(false)
+
   const { purchaseTicket, ticketPurchaseLoading } = useEvents()
   const {
     register,
@@ -33,12 +35,15 @@ export default function EventPage({ event }: { event: Event }) {
     watch,
     incrementTicketCount,
     decrementTicketCount,
-    setValue,
   } = useBuyTicket()
   const { status } = useSession()
   const router = useRouter()
   const { t } = useTranslation("common")
   const { lang } = useTranslation()
+
+  useEffect(() => {
+    setCanShare(() => Boolean(navigator.share))
+  }, [])
 
   const ticketTypesRadioItem: RadioItem[] = event.tickets
     .filter((ticket) => ticket.available)
@@ -114,6 +119,21 @@ export default function EventPage({ event }: { event: Event }) {
     })
   }
 
+  const sharePage = async () => {
+    const shareData: ShareData = {
+      title: `${event.title}${event.subtitle && ` ${event.subtitle}`}`,
+      text: event.description,
+      url: window.location.href,
+    }
+    if (canShare) {
+      try {
+        await navigator.share(shareData)
+      } catch (error) {
+        console.log("Could not share!")
+      }
+    }
+  }
+
   return (
     <Layout>
       <Seo
@@ -122,7 +142,7 @@ export default function EventPage({ event }: { event: Event }) {
         image={event.ogImage ? event.ogImage : event.photo}
       />
       <div className="mx-auto w-full md:min-w-[28rem] max-w-2xl">
-        <div className="flex flex-col space-y-4 md:space-y-6 px-5 py-10">
+        <div className="flex flex-col space-y-4 md:space-y-6 px-5 py-6 sm:py-8">
           <div className="flex flex-row items-center space-x-5">
             <div>
               <div className="bg-slate-800 text-white text-center py-2 w-16 rounded-lg">
@@ -261,6 +281,14 @@ export default function EventPage({ event }: { event: Event }) {
               </div>
             )}
           </div>
+
+          {canShare && (
+            <div className="w-full flex flex-row justify-end">
+              <Button variant="subtle" onClick={sharePage}>
+                <ShareIcon className="w-4 h-4 mr-2" /> Share with friends
+              </Button>
+            </div>
+          )}
 
           {ticketsAvailable && (
             <div className={styles.box}>
