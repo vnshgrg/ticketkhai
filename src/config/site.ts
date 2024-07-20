@@ -28,8 +28,8 @@ export const siteConfig: SiteConfig = {
       href: "/",
     },
     {
-      title: "My Page",
-      key: "nav-mypage",
+      title: "My Tickets",
+      key: "nav-mytickets",
       href: "/user/tickets",
     },
     {

@@ -1,5 +1,5 @@
 import { useRouter } from "next/router"
-import { EventList, Seo } from "@/src/components"
+import { EventList, Seo, Skeleton } from "@/src/components"
 import { activeEvents } from "@/src/utils/temp"
 import { getServerSession } from "next-auth/next"
 import { useSession } from "next-auth/react"
@@ -9,67 +9,17 @@ import { Layout } from "@/src/components/layout"
 import { Button, buttonVariants } from "@/src/components/ui/button"
 
 export default function IndexPage({ events }) {
-  const { data: sessionData } = useSession()
-  const router = useRouter()
   const { t } = useTranslation("common")
-  let content = (
-    <div className="flex gap-x-4">
-      <Button
-        onClick={() => {
-          router.push("/login")
-        }}
-        className={buttonVariants({ variant: "subtle", size: "lg" })}
-      >
-        {t("auth-login")}
-      </Button>
-      <Button
-        onClick={() => {
-          router.push("/register")
-        }}
-        className={buttonVariants({ variant: "subtle", size: "lg" })}
-      >
-        {t("auth-register")}
-      </Button>
-    </div>
-  )
-
-  if (sessionData) {
-    const { user, expires } = sessionData
-    const { name, mobile } = user
-    content = (
-      <div className="flex flex-row items-baseline justify-between space-y-2">
-        <p className="font-medium">
-          {t("welcome")} {name},
-        </p>
-        <Button
-          type="button"
-          onClick={() => {
-            router.push("/user/tickets")
-          }}
-        >
-          {t("nav-mytickets")}
-        </Button>
-      </div>
-    )
-  }
 
   return (
     <Layout>
       <Seo />
       <div className="mx-auto w-full max-w-4xl">
-        <div className="flex flex-col space-y-4 px-5 py-10">
-          <div className="hidden sm:block">
-            <h1 className="grow text-lg font-extrabold leading-tight tracking-tighter text-slate-800 dark:text-slate-200 sm:text-xl md:text-2xl lg:text-3xl">
-              {t("site-name")}
-            </h1>
-            <p className="grow text-lg text-slate-700 dark:text-slate-400 sm:text-lg">
-              {t("site-subtitle")}
-            </p>
+        <div className="flex flex-col space-y-5 sm:space-y-8 p-5 sm:py-8">
+          <div className="bg-slate-200 border border-slate-300 rounded-xl p-3">
+            <UserContent />
           </div>
-          <div className="pb-4">{content}</div>
-          <div className="">
-            <EventList events={events} />
-          </div>
+          <EventList events={events} />
         </div>
       </div>
     </Layout>
@@ -81,4 +31,75 @@ export async function getStaticProps() {
   return {
     props: { events },
   }
+}
+
+const UserContentLoadingSkeleton = () => {
+  return (
+    <Skeleton>
+      <div className="flex flex-col space-y-4 sm:space-y-0 sm:flex-row items-start sm:items-center justify-between">
+        <div className="rounded bg-slate-200 w-60 sm:w-96 h-6" />
+        <div className="flex flex-row space-x-4">
+          <div className="rounded bg-slate-200 w-20 h-10" />
+          <div className="rounded bg-slate-200 w-20 h-10" />
+        </div>
+      </div>
+    </Skeleton>
+  )
+}
+
+const UserContent = () => {
+  const { data, status } = useSession()
+  const router = useRouter()
+  const { t } = useTranslation("common")
+
+  if (status === "loading") {
+    return <UserContentLoadingSkeleton />
+  }
+
+  if (status === "unauthenticated") {
+    return (
+      <div className="flex flex-col space-y-4 sm:space-y-0 sm:flex-row items-baseline justify-between">
+        <p>Get started by registering an account.</p>
+        <div className="flex flex-row space-x-4">
+          <Button
+            type="button"
+            onClick={() => {
+              router.push("/login")
+            }}
+            className={buttonVariants({ variant: "link" })}
+          >
+            {t("auth-login")}
+          </Button>
+          <Button
+            type="button"
+            onClick={() => {
+              router.push("/register")
+            }}
+            className={buttonVariants({ variant: "default" })}
+          >
+            {t("auth-register")}
+          </Button>
+        </div>
+      </div>
+    )
+  }
+
+  const {
+    user: { name },
+  } = data
+  return (
+    <div className="flex flex-col sm:flex-row items-baseline justify-between space-y-3 sm:space-y-0">
+      <p className="font-medium">
+        {t("welcome")} {name},
+      </p>
+      <Button
+        type="button"
+        onClick={() => {
+          router.push("/user/tickets")
+        }}
+      >
+        {t("nav-mytickets")}
+      </Button>
+    </div>
+  )
 }

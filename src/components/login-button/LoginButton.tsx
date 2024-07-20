@@ -25,9 +25,9 @@ import { Skeleton } from "../skeleton"
 const LoginButtonLoadingSkeleton = () => {
   return (
     <Skeleton>
-      <div className="flex">
-        <div className="h-5 w-5 sm:mr-2 rounded-full bg-slate-200" />
-        <div className="hidden sm:inline w-20 rounded bg-slate-200" />
+      <div className="flex items-center">
+        <div className="h-8 w-8 ml-1 sm:mr-2 rounded-full bg-slate-200" />
+        <div className="hidden sm:inline w-20 h-6 rounded bg-slate-200" />
       </div>
     </Skeleton>
   )
@@ -44,12 +44,10 @@ export const LoginButton = () => {
 
   if (sessionStatus === "unauthenticated") {
     return (
-      <>
-        <Button variant="ghost" size="sm" onClick={() => signIn()}>
-          <LogIn className="mr-2 h-5 w-5" />
-          <span>{t("auth-login")}</span>
-        </Button>
-      </>
+      <Button variant="ghost" size="sm" onClick={() => signIn()}>
+        <LogIn className="mr-2 h-5 w-5" />
+        <span>{t("auth-login")}</span>
+      </Button>
     )
   }
 
