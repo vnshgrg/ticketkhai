@@ -86,7 +86,7 @@ export const EventItem = ({ event }: { event: Event }) => {
                 <span
                   className={`${buttonVariants({ variant: "default" })} w-full`}
                 >
-                  {t("buy-tickets")}
+                  {t("details")}
                 </span>
               </Link>
             </div>

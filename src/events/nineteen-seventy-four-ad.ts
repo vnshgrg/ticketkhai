@@ -30,7 +30,7 @@ export const nineteenSeventyFourAdTokyo: Event = {
   dateTicketSalesStart: getTimestamp("2024-05-01 00:00:00"),
   maximumNumberOfTicketsAvailable: 1000,
   photo: "/images/1974-ad-sold.jpg",
-  notices: [],
+  notices: ["Sold out!"],
   confirmPurchase: {
     title: "1974AD Live in Tokyo",
     subtitle: "Tokyo",
@@ -100,7 +100,7 @@ export const nineteenSeventyFourAdTokyo: Event = {
       stripePriceId: isProduction
         ? "price_1PHaDcBE6fqNwbhopGmlyEg6"
         : "price_1PHa1CBE6fqNwbhockSeOhrO",
-      available: true,
+      available: false,
       maximumNumberOfTicketsAvailable: 1000,
       dateTicketSalesStart: getTimestamp("2024-04-14 00:00:00"),
     },
