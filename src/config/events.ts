@@ -1,5 +1,5 @@
 import { farkiFarki } from "../events/farki-farki"
-import { jatlFukuoka } from "../events/jatl-fukuoka"
+import { jatlFukuoka } from "../events/jatl"
 import {
   nineteenSeventyFourAdKyoto,
   nineteenSeventyFourAdTokyo,
