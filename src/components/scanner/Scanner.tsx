@@ -44,9 +44,7 @@ export const Scanner = (): React.ReactElement => {
           data: { result, data },
         } = await axios.get(`/api/admin/ticket?id=${currentScanResult}`)
         if (result) {
-          data.status === "available"
-            ? playAudio(successAudio)
-            : playAudio(errorAudio)
+          playAudio(successAudio)
           setTicket(data)
         }
       } catch (err) {
@@ -105,7 +103,7 @@ export const Scanner = (): React.ReactElement => {
           ></div>
         </div>
         {currentScanResult && (
-          <div className="absolute inset-0 p-8 bg-white/90 z-10 backdrop-blur-xl ">
+          <div className="absolute inset-0 pt-8 px-4 h-full bg-white z-20 backdrop-blur-xl">
             <div className="flex items-center justify-center">
               {loading && (
                 <div className="animate mx-auto mb-4 inline-block animate-pulse rounded-lg bg-slate-200 px-4 py-2 text-center text-slate-600">
@@ -119,67 +117,76 @@ export const Scanner = (): React.ReactElement => {
               )}
             </div>
             {ticket && (
-              <div className="mb-4 w-full rounded-lg border border-slate-200 bg-slate-100 py-4">
-                <table id="ticket-details" className="w-full text-sm">
-                  <tbody>
-                    <tr>
-                      <td>Ticket</td>
-                      <td className="uppercase">{ticket.id}</td>
-                    </tr>
-                    <tr>
-                      <td>Type</td>
-                      <td>
-                        <span
-                          className={`text-white uppercase px-3 py-1 rounded font-bold ${
-                            ticket.title === "Couple"
-                              ? `bg-red-800`
-                              : `bg-slate-800`
-                          }`}
-                        >
-                          {ticket.title}
-                        </span>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Price</td>
-                      <td>{formatJPY(ticket.price)}</td>
-                    </tr>
-                    <tr>
-                      <td>User</td>
-                      <td>{ticket.user.name}</td>
-                    </tr>
-                    <tr>
-                      <td>Transaction</td>
-                      <td className="uppercase">
-                        {ticket.transaction.id} / QTY{" "}
-                        {ticket.transaction.quantity} /{" "}
-                        {ticket.transaction.status}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Purchase date time</td>
-                      <td>
-                        {moment(ticket.createdAt).format(
-                          "YYYY年MM月DD日 HH:mm"
-                        )}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Event</td>
-                      <td>
-                        {ticket.event.title} - {ticket.event.subtitle}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Event date</td>
-                      <td>
-                        {moment(ticket.event.dateStart * 1000).format(
-                          "YYYY年MM月DD日"
-                        )}
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+              <div className="mb-4 w-full max-w-xl mx-auto rounded-lg border border-green-400 bg-white p-4 space-y-4">
+                <div className="">
+                  <dt className="text-xs font-bold uppercase text-slate-500">
+                    Ticket
+                  </dt>
+                  <dd className="uppercase">{ticket.id}</dd>
+                </div>
+                <div className="">
+                  <dt className="text-xs font-bold uppercase text-slate-500">
+                    Type
+                  </dt>
+                  <dd>
+                    <span
+                      className={`text-white uppercase px-3 py-1 rounded font-bold text-lg ${
+                        ticket.title === "Couple"
+                          ? `bg-red-600`
+                          : `bg-slate-800`
+                      }`}
+                    >
+                      {ticket.title}
+                    </span>
+                  </dd>
+                </div>
+                <div className="">
+                  <dt className="text-xs font-bold uppercase text-slate-500">
+                    Price
+                  </dt>
+                  <dd>{formatJPY(ticket.price)}</dd>
+                </div>
+                <div className="">
+                  <dt className="text-xs font-bold uppercase text-slate-500">
+                    User
+                  </dt>
+                  <dd>{ticket.user.name}</dd>
+                </div>
+                <div className="">
+                  <dt className="text-xs font-bold uppercase text-slate-500">
+                    Transaction
+                  </dt>
+                  <dd className="uppercase">
+                    {ticket.transaction.id} / QTY {ticket.transaction.quantity}{" "}
+                    / {ticket.transaction.status}
+                  </dd>
+                </div>
+                <div className="">
+                  <dt className="text-xs font-bold uppercase text-slate-500">
+                    Purchase date time
+                  </dt>
+                  <dd>
+                    {moment(ticket.createdAt).format("YYYY年MM月DD日 HH:mm")}
+                  </dd>
+                </div>
+                <div className="">
+                  <dt className="text-xs font-bold uppercase text-slate-500">
+                    Event
+                  </dt>
+                  <dd>
+                    {ticket.event.title} - {ticket.event.subtitle}
+                  </dd>
+                </div>
+                <div className="">
+                  <dt className="text-xs font-bold uppercase text-slate-500">
+                    Event date
+                  </dt>
+                  <dd>
+                    {moment(ticket.event.dateStart * 1000).format(
+                      "YYYY年MM月DD日"
+                    )}
+                  </dd>
+                </div>
               </div>
             )}
             <div className="mt-4 flex items-center justify-center space-x-4">
