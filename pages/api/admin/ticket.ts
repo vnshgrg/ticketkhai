@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next"
+import { isToday } from "@/src/utils"
 import { DB } from "@/src/utils/db"
 import { eventById, ticketById } from "@/src/utils/temp"
 import { TicketStatus } from "@prisma/client"
@@ -46,41 +47,26 @@ const myTicektsHandler = async (
           return
         }
 
-        const populatedTickets = {
-          ...ticket,
-          event: eventById(ticket.eventId),
-          ...ticketById(ticket.eventId, ticket.ticketTypeId),
-          id,
-        }
+        const event = eventById(ticket.eventId)
+        const eventDateInMs = event.dateStart * 1000
 
-        res
-          .status(200)
-          .json({ result: true, message: "success", data: populatedTickets })
-        return
-      } catch (error) {
-        res.status(500).json({
-          result: false,
-          error: error?.message || "An unknown error occurred.",
-        })
-        return
-      }
-
-      break
-
-    case "PATCH":
-      try {
-        // check if ticket is available
-        const { status } = await DB.ticket.findUnique({
-          where: { id: id as string },
-          select: { status: true },
-        })
-
-        if (status !== "available") {
-          res.status(401).end(`Ticket already used!`)
+        if (!isToday(eventDateInMs)) {
+          res.status(401).json({
+            result: false,
+            message: `Ticket is not valid for today's event!`,
+          })
           return
         }
 
-        const ticket = await DB.ticket.update({
+        if (ticket.status !== "available") {
+          res.status(401).json({
+            result: false,
+            message: `Ticket already used!`,
+          })
+          return
+        }
+
+        await DB.ticket.update({
           where: {
             id: id as string,
           },
@@ -88,12 +74,11 @@ const myTicektsHandler = async (
             status: TicketStatus.used,
             upatedAt: new Date(),
           },
-          include: { user: true, transaction: true },
         })
 
         const populatedTickets = {
           ...ticket,
-          event: eventById(ticket.eventId),
+          event,
           ...ticketById(ticket.eventId, ticket.ticketTypeId),
           id,
         }
@@ -105,7 +90,7 @@ const myTicektsHandler = async (
       } catch (error) {
         res.status(500).json({
           result: false,
-          error: error?.message || "An unknown error occurred.",
+          message: error?.message || "An unknown error occurred.",
         })
         return
       }

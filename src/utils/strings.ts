@@ -52,3 +52,8 @@ export const getTimestamp = (date: MomentInput) => {
 export const classNames = (...classes) => {
   return classes.filter(Boolean).join(" ")
 }
+
+export const isToday = (date: MomentInput) => {
+  console.log(date)
+  return moment.tz(date, "Asia/Tokyo").isSame(moment(), "day")
+}
