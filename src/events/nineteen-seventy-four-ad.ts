@@ -182,5 +182,18 @@ export const nineteenSeventyFourAdKyoto: Event = {
       maximumNumberOfTicketsAvailable: 100,
       dateTicketSalesStart: getTimestamp("2024-04-14 00:00:00"),
     },
+    {
+      id: "ticket0255",
+      title: "VIP",
+      description: "VIP tag with a front row seat, T-shirt & 2 Drinks",
+      price: 10000,
+      numberOfTickets: 1,
+      stripePriceId: isProduction
+        ? "price_1PMXMtBE6fqNwbhoKzaCLtn3"
+        : "price_1PMXK8BE6fqNwbhotC2opWkJ",
+      available: true,
+      maximumNumberOfTicketsAvailable: 200,
+      dateTicketSalesStart: getTimestamp("2024-04-14 00:00:00"),
+    },
   ],
 }
