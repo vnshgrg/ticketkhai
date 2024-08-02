@@ -135,7 +135,10 @@ export const nineteenSeventyFourAdKyoto: Event = {
   dateTicketSalesStart: getTimestamp("2024-05-01 00:00:00"),
   maximumNumberOfTicketsAvailable: 1000,
   photo: "/images/1974-ad-kyoto.jpg",
-  notices: [],
+  notices: [
+    "Online ticket sale ended.",
+    "Limited door tickets available on the day.",
+  ],
   confirmPurchase: {
     title: "1974AD Live in Kyoto",
     subtitle: "Kyoto",
@@ -165,7 +168,7 @@ export const nineteenSeventyFourAdKyoto: Event = {
       stripePriceId: isProduction
         ? "price_1PR3FqBE6fqNwbhoVQ4Kgzfu"
         : "price_1PR3EeBE6fqNwbhoaMU87Y0a",
-      available: true,
+      available: false,
       maximumNumberOfTicketsAvailable: 200,
       dateTicketSalesStart: getTimestamp("2024-04-14 00:00:00"),
     },
@@ -178,7 +181,7 @@ export const nineteenSeventyFourAdKyoto: Event = {
       stripePriceId: isProduction
         ? "price_1PR3G5BE6fqNwbhoZz8glluZ"
         : "price_1PR3FKBE6fqNwbhoMxRjwpLe",
-      available: true,
+      available: false,
       maximumNumberOfTicketsAvailable: 100,
       dateTicketSalesStart: getTimestamp("2024-04-14 00:00:00"),
     },
@@ -191,7 +194,7 @@ export const nineteenSeventyFourAdKyoto: Event = {
       stripePriceId: isProduction
         ? "price_1PMXMtBE6fqNwbhoKzaCLtn3"
         : "price_1PMXK8BE6fqNwbhotC2opWkJ",
-      available: true,
+      available: false,
       maximumNumberOfTicketsAvailable: 200,
       dateTicketSalesStart: getTimestamp("2024-04-14 00:00:00"),
     },
