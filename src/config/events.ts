@@ -1,5 +1,5 @@
 import { farkiFarki } from "../events/farki-farki"
-import { jatlFukuoka } from "../events/jatl"
+import { jatlFukuoka, jatlOsaka } from "../events/jatl"
 import {
   nineteenSeventyFourAdKyoto,
   nineteenSeventyFourAdTokyo,
@@ -76,6 +76,7 @@ export type Ticket = {
 const pastEvents: Event[] = [farkiFarki]
 const currentEvents: Event[] = [
   jatlFukuoka,
+  jatlOsaka,
   nineteenSeventyFourAdKyoto,
   nineteenSeventyFourAdTokyo,
 ]

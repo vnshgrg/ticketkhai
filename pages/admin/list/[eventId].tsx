@@ -1,5 +1,4 @@
 import React from "react"
-import Head from "next/head"
 import { authOptions } from "@/pages/api/auth/[...nextauth]"
 import { Layout, Seo, UserLayout } from "@/src/components"
 import { classNames, dateFromUtc, formatJPY } from "@/src/utils"
@@ -21,7 +20,6 @@ import { getServerSession } from "next-auth/next"
 
 import { isEventAdmin } from "@/src/config/admins"
 import { Event, Ticket } from "@/src/config/events"
-import { siteConfig } from "@/src/config/site"
 
 export type TransactionRow = Pick<
   Transaction,
