@@ -138,7 +138,7 @@ export default function EventPage({ event }: { event: Event }) {
   return (
     <Layout>
       <Seo
-        title={event.title}
+        title={`${event.title}${event.subtitle && ` - ${event.subtitle}`}`}
         description={event.description}
         image={event.ogImage ? event.ogImage : event.photo}
       />
