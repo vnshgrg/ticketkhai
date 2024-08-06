@@ -151,7 +151,7 @@ const buyTicketHandler = async (
             ],
             payment_method_options: {
               konbini: {
-                expires_after_days: 7,
+                expires_after_days: 2, // Konbini payment expires after 2 days
               },
               customer_balance: {
                 funding_type: "bank_transfer",

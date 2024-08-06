@@ -9,7 +9,7 @@ export const jatlFukuoka: Event = {
   title: "John & The Locals",
   subtitle: "Live in Fukuoka",
   description:
-    "John & The Locals for the first time in Japan with their Manai Dekhin 2024 World Tour.",
+    "John & The Locals for the first time in Japan with their Mutu Dekhin 2024 World Tour.",
   venue: {
     id: "venue006",
     title: "UNITEDLAB",
@@ -101,7 +101,7 @@ export const jatlOsaka: Event = {
   title: "John & The Locals",
   subtitle: "Live in Osaka",
   description:
-    "John & The Locals for the first time in Japan with their Manai Dekhin 2024 World Tour.",
+    "John & The Locals for the first time in Japan with their Mutu Dekhin 2024 World Tour.",
   venue: {
     id: "venue007",
     title: "Daito Bunka Hall",
