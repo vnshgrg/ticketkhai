@@ -14,12 +14,19 @@ const AdminPage = ({ events }) => {
         <h1 className="flex items-center justify-between text-lg font-medium tracking-tight text-slate-900 sm:text-xl">
           Your events
         </h1>
-        <div className="mt-4 space-y-2">
+        <div className="mt-4 space-y-5">
           {events.map(({ id, title, subtitle }) => (
-            <div key={id} className="font-medium">
-              <Link href={`/admin/list/${id}`}>
-                {title} - {subtitle}
-              </Link>
+            <div key={id} className="flex flex-row justify-between font-medium">
+              <div>
+                <Link href={`/admin/list/${id}`}>
+                  {title} - {subtitle}
+                </Link>
+              </div>
+              <div>
+                <Link href={`/admin/list/${id}`}>
+                  View report
+                </Link>
+              </div>
             </div>
           ))}
         </div>
