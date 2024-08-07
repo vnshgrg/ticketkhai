@@ -97,7 +97,7 @@ export const jatlFukuoka: Event = {
 export const jatlOsaka: Event = {
   id: "event010",
   slug: "jatl-osaka",
-  admin: [admins.avinash],
+  admin: [admins.avinash, admins.biraj],
   title: "John & The Locals",
   subtitle: "Live in Osaka",
   description:
