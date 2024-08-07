@@ -5,7 +5,7 @@ import { getTimestamp, isProduction } from "../utils"
 export const jatlFukuoka: Event = {
   id: "event009",
   slug: "jatl-fukuoka",
-  admin: [admins.avinash],
+  admin: [admins.avinash, admins.jivan],
   title: "John & The Locals",
   subtitle: "Live in Fukuoka",
   description:

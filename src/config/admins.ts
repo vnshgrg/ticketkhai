@@ -8,6 +8,7 @@ const productionAdmins = {
   asim: "clwy879kz0000lc0c2ty7fq0y",
   samil: "clwve0usb0000mf0ckqcps2k1",
   biraj: "clzj7v5f70000l90chxbr09pb", // JATL Osaka
+  jivan: "clywwaiky0000mc0cmfpsrjdd",
 }
 
 const devAdmins = {
@@ -17,6 +18,7 @@ const devAdmins = {
   asim: "clfy7d1o400027ap7l0qyepin", // could not find dev user ID
   samil: "clfy7d1o400027ap7l0qyepin", // could not find dev user ID
   biraj: "clzj7v5f70000l90chxbr09pb", // JATL Osaka / could not find dev user ID
+  jivan: "clywwaiky0000mc0cmfpsrjdd", // could not find dev user ID
 }
 
 export const admins = isProduction ? productionAdmins : devAdmins
