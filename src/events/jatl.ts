@@ -31,7 +31,7 @@ export const jatlFukuoka: Event = {
   maximumNumberOfTicketsAvailable: 1500,
   photo: "/images/jatl/jatl-fukuoka.jpg",
   ogImage: "/images/jatl/jatl-fukuoka-og.jpg",
-  notices: ["Early birds tickets sould out!"],
+  notices: ["Early birds tickets sold out!"],
   confirmPurchase: {
     title: "John & The Locals Live in Fukuoka",
     subtitle: "Fukuoka",
@@ -123,7 +123,7 @@ export const jatlOsaka: Event = {
   maximumNumberOfTicketsAvailable: 1500,
   photo: "/images/jatl/jatl-osaka.jpg",
   ogImage: "/images/jatl/jatl-osaka-og.jpg",
-  notices: ["Early birds tickets sould out!"],
+  notices: ["Early birds tickets sold out!"],
   confirmPurchase: {
     title: "John & The Locals Live in Osaka",
     subtitle: "Osaka",
@@ -166,6 +166,99 @@ export const jatlOsaka: Event = {
       stripePriceId: isProduction
         ? "price_1PkOlBBE6fqNwbhoYGiU0RyQ"
         : "price_1PkOdTBE6fqNwbhokY4r7FpH",
+      available: true,
+      maximumNumberOfTicketsAvailable: 300,
+      dateTicketSalesStart: getTimestamp("2024-08-20 00:00:00"),
+    },
+  ],
+}
+
+export const jatlTokyo: Event = {
+  id: "event011",
+  slug: "jatl-tokyo",
+  admin: [admins.avinash, admins.dipesh],
+  title: "John & The Locals",
+  subtitle: "Live in Tokyo",
+  description:
+    "John & The Locals for the first time in Japan with their Mutu Dekhin 2024 World Tour.",
+  venue: {
+    id: "venue004",
+    title: "GARDEN新木場FACTORY",
+    description: "",
+
+    address: {
+      id: "address004",
+      postalCode: "136-0082",
+      prefecture: "Tokyo",
+      city: "Koto-ku",
+      addressLine1: "Shinkiba 2-8-2",
+      mapLink: "https://maps.app.goo.gl/HV9K9iFey9HPDXk26",
+    },
+    access: "16 minute walk from Shinkiba Station",
+  },
+  dateStart: getTimestamp("2024-09-14 17:00:00"),
+  dateEnd: getTimestamp("2024-09-14 22:00:00"),
+  dateGateOpen: getTimestamp("2024-09-14 15:00:00"),
+  dateTicketSalesStart: getTimestamp("2024-08-20 00:00:00"),
+  maximumNumberOfTicketsAvailable: 1500,
+  photo: "/images/jatl/jatl-tokyo.jpg",
+  ogImage: "/images/jatl/jatl-tokyo-og.jpg",
+  notices: ["Early birds tickets on sale!"],
+  confirmPurchase: {
+    title: "John & The Locals Live in Tokyo",
+    subtitle: "Tokyo",
+    description:
+      "The ticket you are trying to purchase is for TOKYO show. Are you sure you want to continue with your order?",
+  },
+  tickets: [
+    {
+      id: "ticket040",
+      title: "Early birds ticket",
+      description: "Limited discounted price ticket",
+      price: 5000,
+      numberOfTickets: 1,
+      stripePriceId: isProduction
+        ? "price_1Pm9bqBE6fqNwbhoba66FjXG"
+        : "price_1Pm9biBE6fqNwbhoeQVay5Tb",
+      available: true,
+      maximumNumberOfTicketsAvailable: 500,
+      dateTicketSalesStart: getTimestamp("2024-08-20 00:00:00"),
+    },
+    {
+      id: "ticket041",
+      title: "Standard ticket",
+      description: "General ticket for single person",
+      price: 6000,
+      numberOfTickets: 1,
+      stripePriceId: isProduction
+        ? "price_1Pm9bqBE6fqNwbhoGHPufAMq"
+        : "price_1Pm9biBE6fqNwbhoujAmZEgr",
+      available: true,
+      maximumNumberOfTicketsAvailable: 500,
+      dateTicketSalesStart: getTimestamp("2024-08-20 00:00:00"),
+    },
+    {
+      id: "ticket042",
+      title: "Couple ticket",
+      description: "Discounted ticket for two people",
+      price: 11000,
+      numberOfTickets: 2,
+      stripePriceId: isProduction
+        ? "price_1Pm9bqBE6fqNwbho2yWZrN2q"
+        : "price_1Pm9biBE6fqNwbhoVzxlbK58",
+      available: true,
+      maximumNumberOfTicketsAvailable: 300,
+      dateTicketSalesStart: getTimestamp("2024-08-20 00:00:00"),
+    },
+    {
+      id: "ticket043",
+      title: "VIP ticket",
+      description: "VIP ticket including dinner with John & the Locals",
+      price: 15000,
+      numberOfTickets: 1,
+      stripePriceId: isProduction
+        ? "price_1Pm9bqBE6fqNwbhoykOOYk2R"
+        : "price_1Pm9biBE6fqNwbhoNEpLeSm6",
       available: true,
       maximumNumberOfTicketsAvailable: 300,
       dateTicketSalesStart: getTimestamp("2024-08-20 00:00:00"),
