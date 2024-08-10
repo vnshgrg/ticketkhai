@@ -220,7 +220,7 @@ export const jatlTokyo: Event = {
       stripePriceId: isProduction
         ? "price_1Pm9bqBE6fqNwbhoba66FjXG"
         : "price_1Pm9biBE6fqNwbhoeQVay5Tb",
-      available: false,
+      available: true,
       maximumNumberOfTicketsAvailable: 500,
       dateTicketSalesStart: getTimestamp("2024-08-20 00:00:00"),
     },
