@@ -221,7 +221,7 @@ export const jatlTokyo: Event = {
         ? "price_1Pm9bqBE6fqNwbhoba66FjXG"
         : "price_1Pm9biBE6fqNwbhoeQVay5Tb",
       available: true,
-      maximumNumberOfTicketsAvailable: 500,
+      maximumNumberOfTicketsAvailable: 100,
       dateTicketSalesStart: getTimestamp("2024-08-20 00:00:00"),
     },
     {
