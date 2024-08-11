@@ -265,3 +265,122 @@ export const jatlTokyo: Event = {
     },
   ],
 }
+
+export const jatlNagoya: Event = {
+  id: "event012",
+  slug: "jatl-nagoya",
+  admin: [admins.avinash, admins.dipesh],
+  title: "John & The Locals",
+  subtitle: "Live in Nagoya",
+  description:
+    "John & The Locals for the first time in Japan with their Mutu Dekhin 2024 World Tour.",
+  venue: {
+    id: "venue008",
+    title: "Diamond Hall",
+    description: "",
+
+    address: {
+      id: "address008",
+      postalCode: "460-0007",
+      prefecture: "Aichi",
+      city: "Nagoya, Naka-ku",
+      addressLine1: "Shinsakae 2-1-9 雲竜フレックスビル西館5F",
+      mapLink: "https://maps.app.goo.gl/wpj3Rh7vjeYXBg3YA",
+    },
+    access: "2 minutes walk from Exit 2 of Shin-Eimachi Station",
+  },
+  dateStart: getTimestamp("2024-09-11 17:00:00"),
+  dateEnd: getTimestamp("2024-09-11 22:00:00"),
+  dateGateOpen: getTimestamp("2024-09-11 15:00:00"),
+  dateTicketSalesStart: getTimestamp("2024-08-20 00:00:00"),
+  maximumNumberOfTicketsAvailable: 1500,
+  photo: "/images/jatl/jatl-nagoya.jpg",
+  ogImage: "/images/jatl/jatl-nagoya-og.jpg",
+  notices: ["Early birds tickets on sale!"],
+  confirmPurchase: {
+    title: "John & The Locals Live in Nagoya",
+    subtitle: "Nagoya",
+    description:
+      "The ticket you are trying to purchase is for NAGOYA show. Are you sure you want to continue with your order?",
+  },
+  tickets: [
+    {
+      id: "ticket050",
+      title: "Early birds ticket",
+      description: "Limited discounted price ticket",
+      price: 4000,
+      numberOfTickets: 1,
+      stripePriceId: isProduction
+        ? "price_1PmdCkBE6fqNwbhooePzPU8V"
+        : "price_1PmdCdBE6fqNwbhoT2xI1qY9",
+      available: true,
+      maximumNumberOfTicketsAvailable: 500,
+      dateTicketSalesStart: getTimestamp("2024-08-20 00:00:00"),
+    },
+    {
+      id: "ticket051",
+      title: "Standard ticket",
+      description: "General ticket for single person",
+      price: 4500,
+      numberOfTickets: 1,
+      stripePriceId: isProduction
+        ? "price_1PmdCkBE6fqNwbhoDpskddIJ"
+        : "price_1PmdCdBE6fqNwbhoNEmMhn8M",
+      available: true,
+      maximumNumberOfTicketsAvailable: 500,
+      dateTicketSalesStart: getTimestamp("2024-08-20 00:00:00"),
+    },
+    {
+      id: "ticket052",
+      title: "Couple ticket",
+      description: "Discounted ticket for two people",
+      price: 8000,
+      numberOfTickets: 2,
+      stripePriceId: isProduction
+        ? "price_1PmdCkBE6fqNwbho4tmiqEyT"
+        : "price_1PmdCdBE6fqNwbhodpPiHTUm",
+      available: true,
+      maximumNumberOfTicketsAvailable: 300,
+      dateTicketSalesStart: getTimestamp("2024-08-20 00:00:00"),
+    },
+    {
+      id: "ticket053",
+      title: "Special ticket",
+      description: "Standard ticket including dinner with John & the Locals",
+      price: 15000,
+      numberOfTickets: 1,
+      stripePriceId: isProduction
+        ? "price_1PmdCkBE6fqNwbhobe1chVa1"
+        : "price_1PmdCdBE6fqNwbhowEOGJq0a",
+      available: true,
+      maximumNumberOfTicketsAvailable: 300,
+      dateTicketSalesStart: getTimestamp("2024-08-20 00:00:00"),
+    },
+    {
+      id: "ticket054",
+      title: "VIP ticket",
+      description: "VIP ticket with front seat, soft-drink & T-shirt",
+      price: 10000,
+      numberOfTickets: 1,
+      stripePriceId: isProduction
+        ? "price_1PmdCkBE6fqNwbho54ezNutR"
+        : "price_1PmdCdBE6fqNwbho33VvhUO3",
+      available: true,
+      maximumNumberOfTicketsAvailable: 300,
+      dateTicketSalesStart: getTimestamp("2024-08-20 00:00:00"),
+    },
+    {
+      id: "ticket054",
+      title: "VVIP ticket",
+      description: "VIP ticket including dinner with John & the Locals",
+      price: 15000,
+      numberOfTickets: 1,
+      stripePriceId: isProduction
+        ? "price_1PmdCkBE6fqNwbhon9rOTTdf"
+        : "price_1PmdCdBE6fqNwbhoBhIGSA4O",
+      available: true,
+      maximumNumberOfTicketsAvailable: 300,
+      dateTicketSalesStart: getTimestamp("2024-08-20 00:00:00"),
+    },
+  ],
+}
