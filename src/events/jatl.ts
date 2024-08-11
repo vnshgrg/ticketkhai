@@ -370,7 +370,7 @@ export const jatlNagoya: Event = {
       dateTicketSalesStart: getTimestamp("2024-08-20 00:00:00"),
     },
     {
-      id: "ticket054",
+      id: "ticket055",
       title: "VVIP ticket",
       description: "VIP ticket including dinner with John & the Locals",
       price: 15000,
