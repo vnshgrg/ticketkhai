@@ -347,7 +347,7 @@ export const jatlNagoya: Event = {
       id: "ticket053",
       title: "Special ticket",
       description: "Standard ticket including dinner with John & the Locals",
-      price: 15000,
+      price: 8000,
       numberOfTickets: 1,
       stripePriceId: isProduction
         ? "price_1PmdCkBE6fqNwbhobe1chVa1"
