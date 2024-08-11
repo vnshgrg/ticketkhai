@@ -221,7 +221,7 @@ export const jatlTokyo: Event = {
         ? "price_1Pm9bqBE6fqNwbhoba66FjXG"
         : "price_1Pm9biBE6fqNwbhoeQVay5Tb",
       available: true,
-      maximumNumberOfTicketsAvailable: 500,
+      maximumNumberOfTicketsAvailable: 100,
       dateTicketSalesStart: getTimestamp("2024-08-20 00:00:00"),
     },
     {
@@ -347,7 +347,7 @@ export const jatlNagoya: Event = {
       id: "ticket053",
       title: "Special ticket",
       description: "Standard ticket including dinner with John & the Locals",
-      price: 15000,
+      price: 8000,
       numberOfTickets: 1,
       stripePriceId: isProduction
         ? "price_1PmdCkBE6fqNwbhobe1chVa1"
