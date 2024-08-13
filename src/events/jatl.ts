@@ -203,7 +203,7 @@ export const jatlTokyo: Event = {
   maximumNumberOfTicketsAvailable: 1500,
   photo: "/images/jatl/jatl-tokyo.jpg",
   ogImage: "/images/jatl/jatl-tokyo-og.jpg",
-  notices: ["Early birds tickets on sale!"],
+  notices: ["Early birds tickets sold out!"],
   confirmPurchase: {
     title: "John & The Locals Live in Tokyo",
     subtitle: "Tokyo",
@@ -220,7 +220,7 @@ export const jatlTokyo: Event = {
       stripePriceId: isProduction
         ? "price_1Pm9bqBE6fqNwbhoba66FjXG"
         : "price_1Pm9biBE6fqNwbhoeQVay5Tb",
-      available: true,
+      available: false,
       maximumNumberOfTicketsAvailable: 100,
       dateTicketSalesStart: getTimestamp("2024-08-20 00:00:00"),
     },
