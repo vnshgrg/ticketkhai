@@ -79,13 +79,15 @@ export const issueTicket: IssueTicket = async ({
 
       const event = eventById(eventId)
       const ticket = ticketById(eventId, ticketTypeId)
+      const numberOfTickets = ticket.numberOfTickets ?? 1 // Couple ticket has 2 tickets per purchase, defaults to 1
+      const reportingQuantity = quantity / numberOfTickets
 
       await sendSlackMessage(
         formatTicketSoldSlackMessage({
           transactionId,
           event,
           ticket,
-          quantity: quantity,
+          quantity: reportingQuantity,
         })
       )
     } catch (error) {
