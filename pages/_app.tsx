@@ -6,7 +6,7 @@ import { ThemeProvider } from "next-themes"
 
 import "@/src/styles/globals.css"
 import Head from "next/head"
-import { GoogleTagManager } from "@next/third-parties/google"
+import { FacebookPixel } from "@/src/components"
 
 import { siteConfig } from "@/src/config/site"
 
@@ -32,6 +32,7 @@ export default function App({
         <meta name="description" content={siteConfig.description} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
+      <FacebookPixel />
       <SessionProvider session={session}>
         <ThemeProvider attribute="class" defaultTheme="light">
           <Component {...pageProps} />
