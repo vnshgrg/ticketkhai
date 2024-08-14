@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { useRouter } from "next/router"
 import { Layout, RadioGroup, RadioItem, Seo } from "@/src/components"
 import { useBuyTicket, useEvents } from "@/src/hooks"
-import { dateFromUtc, formatJPY, readableAddress } from "@/src/utils"
+import { dateFromUtc, formatJPY, pixel, readableAddress } from "@/src/utils"
 import { activeEvents, eventBySlug } from "@/src/utils/temp"
 import {
   BanknotesIcon,
@@ -43,6 +43,15 @@ export default function EventPage({ event }: { event: Event }) {
 
   useEffect(() => {
     setCanShare(() => Boolean(navigator.share))
+    pixel.event("ViewContent", {
+      content_name: event.title,
+      content_category: "Event > Concert",
+      content_ids: event.tickets
+        .filter((ticket) => ticket.available)
+        .map((ticket) => ticket.id),
+      content_type: "product",
+      currency: "JPY",
+    })
   }, [])
 
   const ticketTypesRadioItem: RadioItem[] = event.tickets
@@ -112,6 +121,15 @@ export default function EventPage({ event }: { event: Event }) {
 
   const buyTickets = async () => {
     setIsLoading(true)
+
+    // Pixel InitiateCheckout
+    pixel.event("InitiateCheckout", {
+      content_ids: [currentTicket.id],
+      num_items: currentNoOfTickets,
+      value: currentTotal,
+      currency: "JPY",
+    })
+
     await purchaseTicket({
       eventId: event.id,
       ticketId: watch("ticketType"),
