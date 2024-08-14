@@ -29,13 +29,11 @@ export async function sendSlackMessage(message: any) {
 type TicketSoldSlackNotificationPayload = {
   event: Event
   quantity: number
-  transactionId: string
   ticket: Ticket
 }
 export function formatTicketSoldSlackMessage({
   event,
   quantity,
-  transactionId,
   ticket,
 }: TicketSoldSlackNotificationPayload) {
   return {
@@ -48,14 +46,7 @@ export function formatTicketSoldSlackMessage({
             elements: [
               {
                 type: "text",
-                text: "Ticket sold: ",
-              },
-              {
-                type: "text",
                 text: `${event.title} - ${event.subtitle}`,
-                style: {
-                  bold: true,
-                },
               },
             ],
           },
@@ -75,25 +66,7 @@ export function formatTicketSoldSlackMessage({
                 elements: [
                   {
                     type: "text",
-                    text: `Transaction ID: ${transactionId}`,
-                  },
-                ],
-              },
-              {
-                type: "rich_text_section",
-                elements: [
-                  {
-                    type: "text",
-                    text: `Type: ${ticket.title}`,
-                  },
-                ],
-              },
-              {
-                type: "rich_text_section",
-                elements: [
-                  {
-                    type: "text",
-                    text: `Price: ${formatJPY(ticket.price)}`,
+                    text: `Type: ${ticket.title} (${formatJPY(ticket.price)})`,
                   },
                 ],
               },

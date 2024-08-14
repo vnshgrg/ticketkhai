@@ -84,7 +84,6 @@ export const issueTicket: IssueTicket = async ({
 
       await sendSlackMessage(
         formatTicketSoldSlackMessage({
-          transactionId,
           event,
           ticket,
           quantity: reportingQuantity,
