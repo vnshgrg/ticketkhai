@@ -6,6 +6,8 @@ import { parsePhoneNumber } from "libphonenumber-js"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { z } from "zod"
 
+import { pixel } from "../utils"
+
 const verify = z
   .object({
     mobile: z.string().min(1, { message: "Mobile number is required." }),
@@ -64,6 +66,7 @@ export const useVerify = ({ defaultValues, type }) => {
         code,
       })
       if (data.result) {
+        pixel.event("Lead")
         router.replace({
           pathname: "/login",
           query: {
