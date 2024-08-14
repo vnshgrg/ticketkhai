@@ -359,7 +359,7 @@ export const jatlNagoya: Event = {
     {
       id: "ticket054",
       title: "VIP ticket",
-      description: "VIP ticket with front seat, soft-drink & T-shirt",
+      description: "VIP ticket with front seat",
       price: 10000,
       numberOfTickets: 1,
       stripePriceId: isProduction
