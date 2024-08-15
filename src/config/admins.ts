@@ -9,6 +9,7 @@ const productionAdmins = {
   samil: "clwve0usb0000mf0ckqcps2k1", // 74AD Kyoto
   biraj: "clzj7v5f70000l90chxbr09pb", // JATL Osaka
   jivan: "clywwaiky0000mc0cmfpsrjdd", // JATL Fukuoka
+  santosh: "clzo7zhvn0000l30cyx9d4hog", // JATL Nagoya
 }
 
 const devAdmins = {
@@ -19,6 +20,7 @@ const devAdmins = {
   samil: "clfy7d1o400027ap7l0qyepin", // 74AD Kyoto / could not find dev user ID
   biraj: "clzj7v5f70000l90chxbr09pb", // JATL Osaka / could not find dev user ID
   jivan: "clywwaiky0000mc0cmfpsrjdd", // JATL Fukuoka / could not find dev user ID
+  santosh: "clzo7zhvn0000l30cyx9d4hog", // JATL Nagoya / could not find dev user ID
 }
 
 export const admins = isProduction ? productionAdmins : devAdmins
