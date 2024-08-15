@@ -269,7 +269,7 @@ export const jatlTokyo: Event = {
 export const jatlNagoya: Event = {
   id: "event012",
   slug: "jatl-nagoya",
-  admin: [admins.avinash, admins.dipesh],
+  admin: [admins.avinash, admins.santosh],
   title: "John & The Locals",
   subtitle: "Live in Nagoya",
   description:
