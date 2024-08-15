@@ -44,7 +44,7 @@ export default function EventPage({ event }: { event: Event }) {
   useEffect(() => {
     setCanShare(() => Boolean(navigator.share))
     pixel.event("ViewContent", {
-      content_name: event.title,
+      content_name: `${event.title}${event.subtitle && ` - ${event.subtitle}`}`,
       content_category: "Event > Concert",
       content_ids: event.tickets
         .filter((ticket) => ticket.available)
