@@ -3,6 +3,7 @@ import { GoogleTagManager } from "@next/third-parties/google"
 import useTranslation from "next-translate/useTranslation"
 
 import { SiteHeader } from "@/src/components/site-header"
+import { FacebookPixel } from "@/src/components"
 
 interface LayoutProps {
   children: React.ReactNode
@@ -31,6 +32,7 @@ export function Layout({ children }: LayoutProps) {
         </p>
         <p>&copy; copyright 2023. Ticketkhai.com</p>
         <GoogleTagManager gtmId="GTM-KNDQPG8S" />
+        <FacebookPixel />
       </footer>
     </>
   )
