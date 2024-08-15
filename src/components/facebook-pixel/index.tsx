@@ -18,7 +18,7 @@ export const FacebookPixel = () => {
       <Script
         id="fb-pixel"
         src="/scripts/pixel.js"
-        strategy="beforeInactive"
+        strategy="beforeInteractive"
         onLoad={() => setLoaded(true)}
         data-pixel-id={FB_PIXEL_ID}
       />
