@@ -313,7 +313,7 @@ export const jatlNagoya: Event = {
       stripePriceId: isProduction
         ? "price_1PmdCkBE6fqNwbhooePzPU8V"
         : "price_1PmdCdBE6fqNwbhoT2xI1qY9",
-      available: true,
+      available: false,
       maximumNumberOfTicketsAvailable: 500,
       dateTicketSalesStart: getTimestamp("2024-08-20 00:00:00"),
     },
