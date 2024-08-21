@@ -31,7 +31,7 @@ export const jatlFukuoka: Event = {
   maximumNumberOfTicketsAvailable: 1500,
   photo: "/images/jatl/jatl-fukuoka.jpg",
   ogImage: "/images/jatl/jatl-fukuoka-og.jpg",
-  notices: ["Early birds tickets sold out!"],
+  notices: [],
   confirmPurchase: {
     title: "John & The Locals Live in Fukuoka",
     subtitle: "Fukuoka",
@@ -123,7 +123,7 @@ export const jatlOsaka: Event = {
   maximumNumberOfTicketsAvailable: 1500,
   photo: "/images/jatl/jatl-osaka.jpg",
   ogImage: "/images/jatl/jatl-osaka-og.jpg",
-  notices: ["Early birds tickets sold out!"],
+  notices: [],
   confirmPurchase: {
     title: "John & The Locals Live in Osaka",
     subtitle: "Osaka",
@@ -203,7 +203,7 @@ export const jatlTokyo: Event = {
   maximumNumberOfTicketsAvailable: 1500,
   photo: "/images/jatl/jatl-tokyo.jpg",
   ogImage: "/images/jatl/jatl-tokyo-og.jpg",
-  notices: ["Early birds tickets sold out!"],
+  notices: ["Couple tickets are sold out!"],
   confirmPurchase: {
     title: "John & The Locals Live in Tokyo",
     subtitle: "Tokyo",
@@ -246,7 +246,7 @@ export const jatlTokyo: Event = {
       stripePriceId: isProduction
         ? "price_1Pm9bqBE6fqNwbho2yWZrN2q"
         : "price_1Pm9biBE6fqNwbhoVzxlbK58",
-      available: true,
+      available: false,
       maximumNumberOfTicketsAvailable: 300,
       dateTicketSalesStart: getTimestamp("2024-08-20 00:00:00"),
     },
@@ -296,7 +296,7 @@ export const jatlNagoya: Event = {
   maximumNumberOfTicketsAvailable: 1500,
   photo: "/images/jatl/jatl-nagoya.jpg",
   ogImage: "/images/jatl/jatl-nagoya-og.jpg",
-  notices: ["Early birds tickets on sale!"],
+  notices: [],
   confirmPurchase: {
     title: "John & The Locals Live in Nagoya",
     subtitle: "Nagoya",
