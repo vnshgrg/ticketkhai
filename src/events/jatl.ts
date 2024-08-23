@@ -123,7 +123,7 @@ export const jatlOsaka: Event = {
   maximumNumberOfTicketsAvailable: 1500,
   photo: "/images/jatl/jatl-osaka.jpg",
   ogImage: "/images/jatl/jatl-osaka-og.jpg",
-  notices: [],
+  notices: ["Couple tickets are sold out!"],
   confirmPurchase: {
     title: "John & The Locals Live in Osaka",
     subtitle: "Osaka",
@@ -166,7 +166,7 @@ export const jatlOsaka: Event = {
       stripePriceId: isProduction
         ? "price_1PkOlBBE6fqNwbhoYGiU0RyQ"
         : "price_1PkOdTBE6fqNwbhokY4r7FpH",
-      available: true,
+      available: false,
       maximumNumberOfTicketsAvailable: 300,
       dateTicketSalesStart: getTimestamp("2024-08-20 00:00:00"),
     },
