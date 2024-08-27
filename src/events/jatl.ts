@@ -123,7 +123,7 @@ export const jatlOsaka: Event = {
   maximumNumberOfTicketsAvailable: 1500,
   photo: "/images/jatl/jatl-osaka.jpg",
   ogImage: "/images/jatl/jatl-osaka-og.jpg",
-  notices: ["Couple tickets are sold out!"],
+  notices: [],
   confirmPurchase: {
     title: "John & The Locals Live in Osaka",
     subtitle: "Osaka",
@@ -203,7 +203,7 @@ export const jatlTokyo: Event = {
   maximumNumberOfTicketsAvailable: 1500,
   photo: "/images/jatl/jatl-tokyo.jpg",
   ogImage: "/images/jatl/jatl-tokyo-og.jpg",
-  notices: ["Couple tickets are sold out!"],
+  notices: [],
   confirmPurchase: {
     title: "John & The Locals Live in Tokyo",
     subtitle: "Tokyo",
@@ -296,7 +296,7 @@ export const jatlNagoya: Event = {
   maximumNumberOfTicketsAvailable: 1500,
   photo: "/images/jatl/jatl-nagoya.jpg",
   ogImage: "/images/jatl/jatl-nagoya-og.jpg",
-  notices: [],
+  notices: ["Early birds ticket sold out!"],
   confirmPurchase: {
     title: "John & The Locals Live in Nagoya",
     subtitle: "Nagoya",
