@@ -170,6 +170,19 @@ export const jatlOsaka: Event = {
       maximumNumberOfTicketsAvailable: 300,
       dateTicketSalesStart: getTimestamp("2024-08-20 00:00:00"),
     },
+    {
+      id: "ticket033",
+      title: "VIP ticket",
+      description: "VIP ticket for one person",
+      price: 10000,
+      numberOfTickets: 1,
+      stripePriceId: isProduction
+        ? "price_1PkOlBBE6fqNwbhoqrZHXtar"
+        : "price_1PkOdTBE6fqNwbhocKS91Yux",
+      available: true,
+      maximumNumberOfTicketsAvailable: 300,
+      dateTicketSalesStart: getTimestamp("2024-08-20 00:00:00"),
+    },
   ],
 }
 
