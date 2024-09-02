@@ -31,7 +31,7 @@ export const jatlFukuoka: Event = {
   maximumNumberOfTicketsAvailable: 1500,
   photo: "/images/jatl/jatl-fukuoka.jpg",
   ogImage: "/images/jatl/jatl-fukuoka-og.jpg",
-  notices: [],
+  notices: ["Couple tickets sold out!"],
   confirmPurchase: {
     title: "John & The Locals Live in Fukuoka",
     subtitle: "Fukuoka",
@@ -74,7 +74,7 @@ export const jatlFukuoka: Event = {
       stripePriceId: isProduction
         ? "price_1PeGesBE6fqNwbhoQoWTmW03"
         : "price_1PeGb0BE6fqNwbhoQCZKgjEq",
-      available: true,
+      available: false,
       maximumNumberOfTicketsAvailable: 300,
       dateTicketSalesStart: getTimestamp("2024-08-20 00:00:00"),
     },
@@ -167,6 +167,19 @@ export const jatlOsaka: Event = {
         ? "price_1PkOlBBE6fqNwbhoYGiU0RyQ"
         : "price_1PkOdTBE6fqNwbhokY4r7FpH",
       available: false,
+      maximumNumberOfTicketsAvailable: 300,
+      dateTicketSalesStart: getTimestamp("2024-08-20 00:00:00"),
+    },
+    {
+      id: "ticket033",
+      title: "VIP ticket",
+      description: "VIP ticket for one person",
+      price: 10000,
+      numberOfTickets: 1,
+      stripePriceId: isProduction
+        ? "price_1PkOlBBE6fqNwbhoqrZHXtar"
+        : "price_1PkOdTBE6fqNwbhocKS91Yux",
+      available: true,
       maximumNumberOfTicketsAvailable: 300,
       dateTicketSalesStart: getTimestamp("2024-08-20 00:00:00"),
     },
@@ -296,7 +309,7 @@ export const jatlNagoya: Event = {
   maximumNumberOfTicketsAvailable: 1500,
   photo: "/images/jatl/jatl-nagoya.jpg",
   ogImage: "/images/jatl/jatl-nagoya-og.jpg",
-  notices: ["Early birds ticket sold out!"],
+  notices: [],
   confirmPurchase: {
     title: "John & The Locals Live in Nagoya",
     subtitle: "Nagoya",
