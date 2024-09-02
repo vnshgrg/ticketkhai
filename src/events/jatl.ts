@@ -309,7 +309,7 @@ export const jatlNagoya: Event = {
   maximumNumberOfTicketsAvailable: 1500,
   photo: "/images/jatl/jatl-nagoya.jpg",
   ogImage: "/images/jatl/jatl-nagoya-og.jpg",
-  notices: ["Early birds ticket sold out!"],
+  notices: [],
   confirmPurchase: {
     title: "John & The Locals Live in Nagoya",
     subtitle: "Nagoya",
