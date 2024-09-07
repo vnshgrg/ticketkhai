@@ -31,7 +31,7 @@ export const jatlFukuoka: Event = {
   maximumNumberOfTicketsAvailable: 1500,
   photo: "/images/jatl/jatl-fukuoka.jpg",
   ogImage: "/images/jatl/jatl-fukuoka-og.jpg",
-  notices: ["Couple tickets sold out!"],
+  notices: [],
   confirmPurchase: {
     title: "John & The Locals Live in Fukuoka",
     subtitle: "Fukuoka",
@@ -61,7 +61,7 @@ export const jatlFukuoka: Event = {
       stripePriceId: isProduction
         ? "price_1PeGesBE6fqNwbhoadTRxt0x"
         : "price_1PeGb0BE6fqNwbhoYDS4GqxE",
-      available: true,
+      available: false,
       maximumNumberOfTicketsAvailable: 500,
       dateTicketSalesStart: getTimestamp("2024-08-20 00:00:00"),
     },
@@ -87,7 +87,7 @@ export const jatlFukuoka: Event = {
       stripePriceId: isProduction
         ? "price_1PeGesBE6fqNwbhojxaLIipH"
         : "price_1PeGb0BE6fqNwbhoqXdvSfuM",
-      available: true,
+      available: false,
       maximumNumberOfTicketsAvailable: 200,
       dateTicketSalesStart: getTimestamp("2024-08-20 00:00:00"),
     },
