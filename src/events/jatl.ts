@@ -339,7 +339,7 @@ export const jatlNagoya: Event = {
       stripePriceId: isProduction
         ? "price_1PmdCkBE6fqNwbhoDpskddIJ"
         : "price_1PmdCdBE6fqNwbhoNEmMhn8M",
-      available: true,
+      available: false,
       maximumNumberOfTicketsAvailable: 500,
       dateTicketSalesStart: getTimestamp("2024-08-20 00:00:00"),
     },
@@ -352,7 +352,7 @@ export const jatlNagoya: Event = {
       stripePriceId: isProduction
         ? "price_1PmdCkBE6fqNwbho4tmiqEyT"
         : "price_1PmdCdBE6fqNwbhodpPiHTUm",
-      available: true,
+      available: false,
       maximumNumberOfTicketsAvailable: 300,
       dateTicketSalesStart: getTimestamp("2024-08-20 00:00:00"),
     },
@@ -365,7 +365,7 @@ export const jatlNagoya: Event = {
       stripePriceId: isProduction
         ? "price_1PmdCkBE6fqNwbhobe1chVa1"
         : "price_1PmdCdBE6fqNwbhowEOGJq0a",
-      available: true,
+      available: false,
       maximumNumberOfTicketsAvailable: 300,
       dateTicketSalesStart: getTimestamp("2024-08-20 00:00:00"),
     },
@@ -378,7 +378,7 @@ export const jatlNagoya: Event = {
       stripePriceId: isProduction
         ? "price_1PmdCkBE6fqNwbho54ezNutR"
         : "price_1PmdCdBE6fqNwbho33VvhUO3",
-      available: true,
+      available: false,
       maximumNumberOfTicketsAvailable: 300,
       dateTicketSalesStart: getTimestamp("2024-08-20 00:00:00"),
     },
@@ -391,7 +391,7 @@ export const jatlNagoya: Event = {
       stripePriceId: isProduction
         ? "price_1PmdCkBE6fqNwbhon9rOTTdf"
         : "price_1PmdCdBE6fqNwbhoBhIGSA4O",
-      available: true,
+      available: false,
       maximumNumberOfTicketsAvailable: 300,
       dateTicketSalesStart: getTimestamp("2024-08-20 00:00:00"),
     },
